@@ -1,0 +1,89 @@
+
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Novo Cliente</ui:define>
+    <ui:define name="corpo">
+
+        <div style="margin-top: 20px; display:ruby-text-container;">
+            <div class="titulo-pagina">
+                <h1>Cadastro de Cliente</h1>            
+            </div>
+            <div style="float: right">
+                <h:form>
+                    <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
+                                     action="#{cadastroClienteBean.salvar()}"/>
+                    <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+                </h:form>
+            </div>    
+        </div>
+        <h:form>
+            
+            <p:messages autoUpdate="true"/>
+
+            <div style="width: 100%; margin-top: 15px">
+                <p:panel header="Dados Pessoais">
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Nome" for="nome"/>
+                            <p:inputText id="nome" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.nome_Cliente}"/>
+                            
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Data Nasc" for="nascimento"/>
+                            <p:inputText id="nascimento" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.nascimento_cliente}"/>
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="CPF" for="cpf"/>
+                            <p:inputText id="cpf" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.cpf_cliente}"/>
+                        </div>
+                    </div>
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Endereço" for="endereco"/>
+                            <p:inputText id="endereco" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.endereco_Cliente}"/>
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Bairro" for="bairro"/>
+                            <p:inputText id="bairro" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.bairro_cliente}"/>
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Cidade" for="cidade"/>
+                            <p:inputText id="cidade" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.cidade_cliente}"/>
+                        </div>
+                    </div>
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="UF" for="uf"/>
+                            <p:inputText id="uf" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.uf_cliente}"/>
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Telefone" for="telefone"/>
+                            <p:inputText id="telefone" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.telefone_Cliente}"/>
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Celular" for="celular"/>
+                            <p:inputText id="celular" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.celular_Cliente}"/>
+                        </div>
+                    </div>
+
+                </p:panel>
+
+            </div>
+            <div style="width: 100%">
+                <p:panel header="Anamnese">
+                    <p:inputTextarea style="width: 100%" rows="8" cols="40" value="#{cadastroClienteBean.cliente.anamnese_Cliente}"/>
+                </p:panel>
+            </div>
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

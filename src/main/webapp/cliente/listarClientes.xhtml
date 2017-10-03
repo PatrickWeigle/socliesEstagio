@@ -1,0 +1,64 @@
+
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="corpo">
+        <h1>Clientes</h1>
+        <p:toolbar style="margin-top: 15px">
+            <p:toolbarGroup >
+                <p:button value="Novo"/>
+<!--                <p:commandButton value="Editar" id="botaoEditar"/>-->
+            </p:toolbarGroup>
+            <p:toolbarGroup align="right">
+                
+            </p:toolbarGroup>
+        </p:toolbar>
+        <p:dataTable class="tabela" id="clienteTable" var="cliente" value="#{ClienteController.clientes}" rowKey="#{cliente.id_Cliente}" style="margin-bottom:0" rows="12" paginator="true" paginatorPosition="bottom">
+            <p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+
+            <p:column headerText="Codigo" style="text-align: left; width: 50px">
+                <h:outputText value="#{cliente.id_Cliente}" />
+            </p:column>
+            <p:column headerText="Nome" style="text-align: left; width: 250px">
+                <h:outputText value="#{cliente.nome_Cliente}" />
+            </p:column>
+            <p:column headerText="Telefone" style="text-align: left; width: 70px">
+                <h:outputText value="#{cliente.telefone_Cliente}" />
+            </p:column>
+            <p:column headerText="Função" style="text-align: left; width: 250px">
+                <h:outputText value="#{cliente.nascimento_cliente}" />
+            </p:column>
+            <p:column style="width:80px;text-align: center">
+                <p:commandButton style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
+
+                </p:commandButton>
+                <p:commandButton  icon="ui-icon-trash" title="Remover">
+
+                </p:commandButton>
+            </p:column>
+        </p:dataTable>
+
+        <!--        <p:dataTable id="clienteTable" var="cliente" style="margin-top: 15px" emptyMessage="Nenhum cliente encontrado" rows="15" paginator="true" paginatorPosition="bottom">
+                    <p:column headerText="Codigo" style="text-align: center; width: 50px">
+                        <h:outputText value="123"/>
+                    </p:column>
+                    <p:column headerText="Nome" style="text-align: center; width: 200px">
+                        <h:outputText value="Patrick"/>
+                    </p:column>
+                    <p:column headerText="Data Nasc." style="text-align: center; width: 150px">
+                        <h:outputText value="33343434"/>
+                    </p:column>
+                    <p:column headerText="CPF" style="text-align: center; width: 150px">
+                        <h:outputText value="33343434"/>
+                    </p:column>
+                    <p:column headerText="Telefone" style="text-align: center; width: 150px">
+                        <h:outputText value="33343434"/>
+                    </p:column>
+                    
+                </p:dataTable>-->
+    </ui:define>
+</ui:composition>
