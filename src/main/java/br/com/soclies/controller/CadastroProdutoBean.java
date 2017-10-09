@@ -5,8 +5,8 @@
  */
 package br.com.soclies.controller;
 
-import br.com.soclies.model.Cliente;
-import br.com.soclies.service.CadastroClienteService;
+import br.com.soclies.model.Produto;
+import br.com.soclies.service.CadastroProdutoService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
@@ -18,24 +18,24 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class CadastroClienteBean implements Serializable {
+public class CadastroProdutoBean implements Serializable{
 
     private static final long serialVersionUID = 1L;
     @Inject
-    private Cliente cliente;
+    private Produto produto;
     @Inject
-    private CadastroClienteService cadastroClienteService;
+    private CadastroProdutoService cadastroProdutoService;
 
-    public Cliente getCliente() {
-        return cliente;
+    public Produto getProduto() {
+        return produto;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public void salvar() {
-        this.cliente = cadastroClienteService.salvar(this.cliente);
-        System.out.println("Salvo com Sucesso");
+        this.produto = cadastroProdutoService.salvar(this.produto);
+        System.out.println("Salvo produto com Sucesso");
     }
 }

@@ -1,0 +1,54 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Novo Cliente</ui:define>
+    <ui:define name="corpo">
+
+        <div style="margin-top: 20px; display:ruby-text-container;">
+            <div class="titulo-pagina">
+                <h1>Cadastro de Cliente</h1>            
+            </div>
+
+        </div>
+        <h:form>
+
+            <p:messages autoUpdate="true"/>
+
+            <div style="float: right" >
+                <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
+                                 action="#{retiradaCaixaBean.salvar()}"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+            </div>    
+
+            <div style="width: 100%; margin-top: 15px">
+                <p:panel header="Dados Pessoais">
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Valor" for="valor"/>
+                            <p:inputText id="valor" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.valor_Entrada}" required="true"/>
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Entrada C/D" for="entrada"/>
+                            <p:inputText id="entrada" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.entrada_Caixa}" />
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Tipo Entrada" for="tEntrada"/>
+                            <p:inputText id="tEntrada" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.tipo_entrada_Caixa}"/>
+                        </div>
+                    </div>
+                    
+
+                </p:panel>
+
+            </div>
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

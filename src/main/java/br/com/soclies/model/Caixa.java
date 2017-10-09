@@ -75,7 +75,8 @@ public class Caixa implements Serializable {
     }
 
     public void setData_Caixa(Date data_Caixa) {
-        this.data_Caixa = data_Caixa;
+        Date date = new Date();
+        this.data_Caixa = date;
     }
 
     @Column(name = "valor_Entrada", nullable = false, precision = 10, scale = 2)
@@ -110,13 +111,7 @@ public class Caixa implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + this.id_Caixa;
-        hash = 37 * hash + Objects.hashCode(this.id_Pedido);
-        hash = 37 * hash + Objects.hashCode(this.id_Produto);
-        hash = 37 * hash + Objects.hashCode(this.data_Caixa);
-        hash = 37 * hash + Objects.hashCode(this.valor_Entrada);
-        hash = 37 * hash + Objects.hashCode(this.Tipo_entrada_Caixa);
-        hash = 37 * hash + Objects.hashCode(this.entrada_Caixa);
+        hash = 71 * hash + this.id_Caixa;
         return hash;
     }
 
@@ -133,24 +128,6 @@ public class Caixa implements Serializable {
         }
         final Caixa other = (Caixa) obj;
         if (this.id_Caixa != other.id_Caixa) {
-            return false;
-        }
-        if (!Objects.equals(this.id_Pedido, other.id_Pedido)) {
-            return false;
-        }
-        if (!Objects.equals(this.id_Produto, other.id_Produto)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_Caixa, other.data_Caixa)) {
-            return false;
-        }
-        if (!Objects.equals(this.valor_Entrada, other.valor_Entrada)) {
-            return false;
-        }
-        if (this.Tipo_entrada_Caixa != other.Tipo_entrada_Caixa) {
-            return false;
-        }
-        if (this.entrada_Caixa != other.entrada_Caixa) {
             return false;
         }
         return true;

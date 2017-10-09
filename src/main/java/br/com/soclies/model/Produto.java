@@ -38,7 +38,7 @@ public class Produto implements Serializable {
         this.id_produto = id_produto;
     }
 
-    @Column(name = "nome_Produto", nullable = false, length = 150)
+    @Column(name = "nome_Produto", nullable = true, length = 150)
     public String getNome_Produto() {
         return nome_Produto;
     }
@@ -47,7 +47,7 @@ public class Produto implements Serializable {
         this.nome_Produto = nome_Produto;
     }
 
-    @Column(name = "valor_Produto", precision = 10, scale = 2, nullable = false)
+    @Column(name = "valor_Produto", precision = 10, scale = 2, nullable = true)
     public BigDecimal getValor_Produto() {
         return valor_Produto;
     }
@@ -56,7 +56,7 @@ public class Produto implements Serializable {
         this.valor_Produto = valor_Produto;
     }
 
-    @Column(name = "quantidade_Produto", nullable = false)
+    @Column(name = "quantidade_Produto", nullable = true)
     public int getQuantidade_Produto() {
         return quantidade_Produto;
     }
@@ -67,11 +67,8 @@ public class Produto implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + this.id_produto;
-        hash = 29 * hash + Objects.hashCode(this.nome_Produto);
-        hash = 29 * hash + Objects.hashCode(this.valor_Produto);
-        hash = 29 * hash + this.quantidade_Produto;
+        int hash = 5;
+        hash = 71 * hash + this.id_produto;
         return hash;
     }
 
@@ -93,4 +90,5 @@ public class Produto implements Serializable {
         return true;
     }
 
+    
 }

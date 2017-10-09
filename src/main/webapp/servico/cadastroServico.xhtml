@@ -1,0 +1,48 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Novo Serviço</ui:define>
+    <ui:define name="corpo">
+
+        <div style="margin-top: 20px; display:ruby-text-container;">
+            <div class="titulo-pagina">
+                <h1>Cadastro de Serviço</h1>            
+            </div>
+
+        </div>
+        <h:form>
+
+            <p:messages autoUpdate="true"/>
+
+            <div style="float: right" >
+                <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
+                                 action="#{cadastroServicoBean.salvar()}"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+            </div>    
+
+            <div style="width: 100%; margin-top: 15px">
+                <p:panel header="Serviço">
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Servico" for="servico"/>
+                            <p:inputText id="servico" size="40" maxlength="100"  value="#{cadastroServicoBean.se}" required="true"/>
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Valor" for="valor"/>
+                            <p:inputText id="valor" size="40" maxlength="100" required="true" value="#{cadastroProdutoBean.produto.}"/>
+
+                        </div>
+                    </div>
+
+
+                </p:panel>
+
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

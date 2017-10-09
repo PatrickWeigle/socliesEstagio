@@ -1,0 +1,57 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Novo Produto</ui:define>
+    <ui:define name="corpo">
+
+        <div style="margin-top: 20px; display:ruby-text-container;">
+            <div class="titulo-pagina">
+                <h1>Cadastro de Produto</h1>            
+            </div>
+
+        </div>
+        <h:form>
+
+            <p:messages autoUpdate="true"/>
+
+            <div style="float: right" >
+                <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
+                                 action="#{cadastroProdutoBean.salvar()}"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+            </div>    
+
+            <div style="width: 100%; margin-top: 15px">
+                <p:panel header="Produto">
+                    <div class="coluna1-3">
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Produto" for="produto"/>
+                            <p:inputText id="produto" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.nome_Produto}" required="true"/>
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Quantidade" for="quantidade"/>
+                            <!--p:inputText id="quantidade" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.quantidade_Produto}" /-->
+                            <p:spinner id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" min="0" max="1000" size="46" maxlength="100" />
+
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Valor unitario" for="valorUnitario"/>
+                            <p:inputText id="valorUnitario" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.valor_Produto}"/>
+
+                        </div>
+                    </div>
+
+
+                </p:panel>
+
+            </div>
+
+
+
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,4 +1,3 @@
-
 <ui:composition template="/templates/LayoutPadrao.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://java.sun.com/jsf/html"
@@ -13,29 +12,35 @@
             <div class="titulo-pagina">
                 <h1>Cadastro de Cliente</h1>            
             </div>
-            <div style="float: right">
-                <h:form>
-                    <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                     action="#{cadastroClienteBean.salvar()}"/>
-                    <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
-                </h:form>
-            </div>    
+
         </div>
+        
+        <f:metadata>
+            <f:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>
+        </f:metadata>
         <h:form>
+
+           
             
             <p:messages autoUpdate="true"/>
+
+            <div style="float: right" >
+                <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
+                                 action="#{cadastroClienteBean.salvar()}"/>
+                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+            </div>    
 
             <div style="width: 100%; margin-top: 15px">
                 <p:panel header="Dados Pessoais">
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
                             <p:outputLabel value="Nome" for="nome"/>
-                            <p:inputText id="nome" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.nome_Cliente}"/>
-                            
+                            <p:inputText id="nome" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nome_Cliente}" required="true"/>
+
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Data Nasc" for="nascimento"/>
-                            <p:inputText id="nascimento" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.nascimento_cliente}"/>
+                            <p:inputMask id="nascimento" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nascimento_cliente}" mask="99/99/9999"/>
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="CPF" for="cpf"/>
@@ -45,31 +50,31 @@
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
                             <p:outputLabel value="Endereço" for="endereco"/>
-                            <p:inputText id="endereco" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.endereco_Cliente}"/>
+                            <p:inputText id="endereco" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.endereco_Cliente}"/>
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Bairro" for="bairro"/>
-                            <p:inputText id="bairro" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.bairro_cliente}"/>
+                            <p:inputText id="bairro" size="40" maxlength="100" value="#{cadastroClienteBean.cliente.bairro_cliente}"/>
 
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Cidade" for="cidade"/>
-                            <p:inputText id="cidade" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.cidade_cliente}"/>
+                            <p:inputText id="cidade" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.cidade_cliente}"/>
                         </div>
                     </div>
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
                             <p:outputLabel value="UF" for="uf"/>
-                            <p:inputText id="uf" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.uf_cliente}"/>
+                            <p:inputText id="uf" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.uf_cliente}"/>
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Telefone" for="telefone"/>
-                            <p:inputText id="telefone" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.telefone_Cliente}"/>
+                            <p:inputText id="telefone" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.telefone_Cliente}"/>
 
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Celular" for="celular"/>
-                            <p:inputText id="celular" size="40" maxlength="100" required="true" value="#{cadastroClienteBean.cliente.celular_Cliente}"/>
+                            <p:inputText id="celular" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.celular_Cliente}"/>
                         </div>
                     </div>
 

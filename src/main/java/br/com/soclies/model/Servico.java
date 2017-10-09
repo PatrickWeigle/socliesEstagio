@@ -57,10 +57,8 @@ public class Servico implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id_Servico;
-        hash = 53 * hash + Objects.hashCode(this.nome_Servico);
-        hash = 53 * hash + Objects.hashCode(this.valor_Servico);
+        int hash = 7;
+        hash = 41 * hash + this.id_Servico;
         return hash;
     }
 
@@ -79,13 +77,9 @@ public class Servico implements Serializable {
         if (this.id_Servico != other.id_Servico) {
             return false;
         }
-        if (!Objects.equals(this.nome_Servico, other.nome_Servico)) {
-            return false;
-        }
-        if (!Objects.equals(this.valor_Servico, other.valor_Servico)) {
-            return false;
-        }
         return true;
     }
+
+    
 
 }

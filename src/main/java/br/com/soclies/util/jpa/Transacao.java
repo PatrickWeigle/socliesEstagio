@@ -31,10 +31,10 @@ public class Transacao {
         cliente.setBairro_cliente("dsaasdas");
         cliente.setCelular_Cliente("3234223");
         cliente.setCidade_cliente("dasdasdas");
-        cliente.setCpf_cliente(312312312);
+        cliente.setCpf_cliente("dsadasdasda");
         cliente.setEmail_Cliente("asddasdas");
         cliente.setEndereco_Cliente("dsadasdasd");
-        cliente.setNascimento_cliente(new Date());
+      
         cliente.setTelefone_Cliente("dasdas");
         cliente.setUf_cliente("PR");
         

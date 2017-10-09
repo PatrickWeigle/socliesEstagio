@@ -33,7 +33,7 @@ public class Cliente implements Serializable{
     private String cidade_cliente;
     private String uf_cliente;
     private String anamnese_Cliente;
-    private long cpf_cliente;
+    private String cpf_cliente;
     private Date nascimento_cliente;
 
   
@@ -50,7 +50,7 @@ public class Cliente implements Serializable{
         this.id_Cliente = id_Cliente;
     }
 
-    @Column(name = "nome_Cliente", nullable = true, length = 150)
+    @Column(name = "nome_Cliente", nullable = false, length = 150)
     public String getNome_Cliente() {
         return nome_Cliente;
     }
@@ -105,11 +105,11 @@ public class Cliente implements Serializable{
     }
 
     @Column(name = "cpf_Cliente", unique = true)
-    public long getCpf_cliente() {
+    public String getCpf_cliente() {
         return cpf_cliente;
     }
 
-    public void setCpf_cliente(long cpf_cliente) {
+    public void setCpf_cliente(String cpf_cliente) {
         this.cpf_cliente = cpf_cliente;
     }
 
@@ -141,7 +141,7 @@ public class Cliente implements Serializable{
     }
 
     @Column(name = "nascimento_cliente")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(javax.persistence.TemporalType.DATE)
     public Date getNascimento_cliente() {
         return nascimento_cliente;
     }
@@ -152,19 +152,8 @@ public class Cliente implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + this.id_Cliente;
-        hash = 53 * hash + Objects.hashCode(this.nome_Cliente);
-        hash = 53 * hash + Objects.hashCode(this.email_Cliente);
-        hash = 53 * hash + Objects.hashCode(this.telefone_Cliente);
-        hash = 53 * hash + Objects.hashCode(this.celular_Cliente);
-        hash = 53 * hash + Objects.hashCode(this.endereco_Cliente);
-        hash = 53 * hash + Objects.hashCode(this.bairro_cliente);
-        hash = 53 * hash + Objects.hashCode(this.cidade_cliente);
-        hash = 53 * hash + Objects.hashCode(this.uf_cliente);
-        hash = 53 * hash + Objects.hashCode(this.anamnese_Cliente);
-        hash = 53 * hash + (int) (this.cpf_cliente ^ (this.cpf_cliente >>> 32));
-        hash = 53 * hash + Objects.hashCode(this.nascimento_cliente);
+        int hash = 5;
+        hash = 13 * hash + this.id_Cliente;
         return hash;
     }
 
@@ -183,41 +172,10 @@ public class Cliente implements Serializable{
         if (this.id_Cliente != other.id_Cliente) {
             return false;
         }
-        if (this.cpf_cliente != other.cpf_cliente) {
-            return false;
-        }
-        if (!Objects.equals(this.nome_Cliente, other.nome_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.email_Cliente, other.email_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.telefone_Cliente, other.telefone_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.celular_Cliente, other.celular_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.endereco_Cliente, other.endereco_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.bairro_cliente, other.bairro_cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.cidade_cliente, other.cidade_cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.uf_cliente, other.uf_cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.anamnese_Cliente, other.anamnese_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.nascimento_cliente, other.nascimento_cliente)) {
-            return false;
-        }
         return true;
     }
+
+   
 
     
    

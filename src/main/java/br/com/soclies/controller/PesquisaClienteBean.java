@@ -6,8 +6,9 @@
 package br.com.soclies.controller;
 
 import br.com.soclies.model.Cliente;
-import br.com.soclies.service.CadastroClienteService;
+import br.com.soclies.repository.Clientes;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,24 +19,37 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class CadastroClienteBean implements Serializable {
+public class PesquisaClienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Inject
-    private Cliente cliente;
-    @Inject
-    private CadastroClienteService cadastroClienteService;
 
-    public Cliente getCliente() {
-        return cliente;
+    @Inject
+    private Clientes clientes;
+
+    private List<Cliente> clientesBuscados;
+    
+    private Cliente cliente;
+
+    public void buscar() {
+        clientesBuscados = clientes.buscados();
+    }
+
+    public void setClientesBuscados(List<Cliente> clientesBuscados) {
+        this.clientesBuscados = clientesBuscados;
     }
 
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+    
+    
 
-    public void salvar() {
-        this.cliente = cadastroClienteService.salvar(this.cliente);
-        System.out.println("Salvo com Sucesso");
+    public Cliente getCliente() {
+        return cliente;
     }
+
+    public List<Cliente> getClientesBuscados() {
+        return clientesBuscados;
+    }
+
 }
