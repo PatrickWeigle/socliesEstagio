@@ -21,9 +21,10 @@ import javax.persistence.Temporal;
  */
 @Entity
 @Table(name = "tab_Cliente")
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    private int id_Cliente;
+    private Long id_Cliente;
     private String nome_Cliente;
     private String email_Cliente;
     private String telefone_Cliente;
@@ -36,17 +37,13 @@ public class Cliente implements Serializable{
     private String cpf_cliente;
     private Date nascimento_cliente;
 
-  
-    
-
-    
     @Id
     @GeneratedValue
-    public int getId_Cliente() {
+    public Long getId_Cliente() {
         return id_Cliente;
     }
 
-    public void setId_Cliente(int id_Cliente) {
+    public void setId_Cliente(Long id_Cliente) {
         this.id_Cliente = id_Cliente;
     }
 
@@ -152,8 +149,8 @@ public class Cliente implements Serializable{
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 13 * hash + this.id_Cliente;
+        int hash = 7;
+        hash = 37 * hash + (int) (this.id_Cliente ^ (this.id_Cliente >>> 32));
         return hash;
     }
 
@@ -177,9 +174,4 @@ public class Cliente implements Serializable{
 
    
 
-    
-   
- 
-    
-    
 }

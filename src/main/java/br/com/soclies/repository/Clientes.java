@@ -43,6 +43,10 @@ public class Clientes implements Serializable{
         
         return criteria.addOrder(Order.asc("nome_Cliente")).list();
     }
+    
+    public Cliente retornaPorID(long id){
+        return manager.find(Cliente.class, id);
+    }
    
     
 }

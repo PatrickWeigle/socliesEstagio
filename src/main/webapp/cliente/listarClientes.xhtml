@@ -9,6 +9,7 @@
 
         <f:metadata>
             <f:event listener="#{pesquisaClienteBean.buscar()}" type="preRenderView"/>
+            <f:viewParam name="clientes" value="#{pesquisaClienteBean.clientesBuscados}"/>
         </f:metadata>
         <h:form>
 
