@@ -22,7 +22,7 @@ public class ClienteConverter implements Converter {
     
     private Clientes clientes;
 
-    public ClienteConverter(Clientes clientes) {
+    public ClienteConverter() {
         this.clientes = CDIServiceLocator.getBean(Clientes.class);
     }
     
@@ -41,7 +41,7 @@ public class ClienteConverter implements Converter {
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
         if(o != null){
-            return ((Cliente) o).getId_Cliente().toString();
+            return ""+((Cliente) o).getId_Cliente();
         }
         return "";
     }

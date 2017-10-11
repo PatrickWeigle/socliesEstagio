@@ -149,8 +149,8 @@ public class Cliente implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + (int) (this.id_Cliente ^ (this.id_Cliente >>> 32));
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.id_Cliente);
         return hash;
     }
 
@@ -166,11 +166,13 @@ public class Cliente implements Serializable {
             return false;
         }
         final Cliente other = (Cliente) obj;
-        if (this.id_Cliente != other.id_Cliente) {
+        if (!Objects.equals(this.id_Cliente, other.id_Cliente)) {
             return false;
         }
         return true;
     }
+
+   
 
    
 

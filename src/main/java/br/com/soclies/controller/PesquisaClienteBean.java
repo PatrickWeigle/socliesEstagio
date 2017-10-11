@@ -28,6 +28,7 @@ public class PesquisaClienteBean implements Serializable {
 
     private List<Cliente> clientesBuscados;
     
+    @Inject
     private Cliente cliente;
 
     public void buscar() {
