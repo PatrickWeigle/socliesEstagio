@@ -23,9 +23,9 @@
 
                 </p:toolbarGroup>
             </p:toolbar>
-            <p:dataTable class="tabela" id="clienteTable" var="cliente" 
-                         value="#{pesquisaClienteBean.clientesBuscados}"
-                         style="margin-bottom:0" rows="12" paginator="true" paginatorPosition="bottom">
+           <p:dataTable class="tabela" id="clienteTable" var="cliente" 
+                        value="#{pesquisaClienteBean.clientes}" rowKey="#{cliente.id_Cliente}" 
+                        rows="12" paginator="true" paginatorPosition="bottom">
                 <p:column headerText="Codigo" style="text-align: left; width: 50px">
                     <h:outputText value="#{cliente.id_Cliente}" />
                 </p:column>
@@ -47,25 +47,6 @@
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-
-            <!--        <p:dataTable id="clienteTable" var="cliente" style="margin-top: 15px" emptyMessage="Nenhum cliente encontrado" rows="15" paginator="true" paginatorPosition="bottom">
-                        <p:column headerText="Codigo" style="text-align: center; width: 50px">
-                            <h:outputText value="123"/>
-                        </p:column>
-                        <p:column headerText="Nome" style="text-align: center; width: 200px">
-                            <h:outputText value="Patrick"/>
-                        </p:column>
-                        <p:column headerText="Data Nasc." style="text-align: center; width: 150px">
-                            <h:outputText value="33343434"/>
-                        </p:column>
-                        <p:column headerText="CPF" style="text-align: center; width: 150px">
-                            <h:outputText value="33343434"/>
-                        </p:column>
-                        <p:column headerText="Telefone" style="text-align: center; width: 150px">
-                            <h:outputText value="33343434"/>
-                        </p:column>
-                        
-                    </p:dataTable>-->
         </h:form>
     </ui:define>
 </ui:composition>

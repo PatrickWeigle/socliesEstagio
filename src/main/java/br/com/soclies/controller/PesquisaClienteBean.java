@@ -24,33 +24,31 @@ public class PesquisaClienteBean implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private Clientes clientes;
+    private Clientes repositorioClientes;
 
-    private List<Cliente> clientesBuscados;
-    
     @Inject
     private Cliente cliente;
 
+    private List<Cliente> clientes;
+
     public void buscar() {
-        clientesBuscados = clientes.buscados();
+        clientes = repositorioClientes.buscados();
     }
-
-    public void setClientesBuscados(List<Cliente> clientesBuscados) {
-        this.clientesBuscados = clientesBuscados;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-    
-    
 
     public Cliente getCliente() {
         return cliente;
     }
 
-    public List<Cliente> getClientesBuscados() {
-        return clientesBuscados;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public List<Cliente> getClientes() {
+        return clientes;
+    }
+
+    public void setClientes(List<Cliente> clientes) {
+        this.clientes = clientes;
     }
 
 }

@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Soclies"/>
+<Context path="/Soclies">
+    <Resource auth="Container" 
+              factory="org.jboss.weld.resources.ManagerObjectFactory" 
+              name="BeaniManager" 
+              type="javax.enterprise.inject.spi.BeanManager"/>
+</Context>
