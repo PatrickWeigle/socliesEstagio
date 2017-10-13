@@ -23,18 +23,18 @@ import javax.persistence.Table;
 public class Produto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id_produto;
+    private Long id_produto;
     private String nome_Produto;
     private BigDecimal valor_Produto;
     private int quantidade_Produto;
 
     @Id
     @GeneratedValue
-    public int getId_produto() {
+    public Long getId_produto() {
         return id_produto;
     }
 
-    public void setId_produto(int id_produto) {
+    public void setId_produto(Long id_produto) {
         this.id_produto = id_produto;
     }
 
@@ -68,7 +68,7 @@ public class Produto implements Serializable {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 71 * hash + this.id_produto;
+        hash = 29 * hash + Objects.hashCode(this.id_produto);
         return hash;
     }
 
@@ -84,11 +84,13 @@ public class Produto implements Serializable {
             return false;
         }
         final Produto other = (Produto) obj;
-        if (this.id_produto != other.id_produto) {
+        if (!Objects.equals(this.id_produto, other.id_produto)) {
             return false;
         }
         return true;
     }
+
+   
 
     
 }

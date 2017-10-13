@@ -6,8 +6,9 @@
 package br.com.soclies.controller;
 
 import br.com.soclies.model.Servico;
-import br.com.soclies.service.CadastroServicoService;
+import br.com.soclies.repository.Servicos;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,13 +19,21 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class CadastroServicoBean implements Serializable {
+public class PesquisaServicoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Inject
+    private Servicos repoServicos;
+
     @Inject
     private Servico servico;
-    @Inject
-    private CadastroServicoService cadastroServicoService;
+
+    private List<Servico> servicos;
+
+    public void buscar() {
+        servicos = repoServicos.getbuscados();
+    }
 
     public Servico getServico() {
         return servico;
@@ -34,14 +43,14 @@ public class CadastroServicoBean implements Serializable {
         this.servico = servico;
     }
 
-    
+    public List<Servico> getServicos() {
+        return servicos;
+    }
 
-    public void salvar() {
-        this.servico = cadastroServicoService.salvar(this.servico);
-        System.out.println("Salvo com Sucesso");
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
     }
-    
-        public void excluir(Servico servico){
-        cadastroServicoService.excluir(servico);
-    }
+
+
+
 }

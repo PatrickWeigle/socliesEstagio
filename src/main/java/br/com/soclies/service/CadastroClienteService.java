@@ -14,11 +14,18 @@ import javax.inject.Inject;
  *
  * @author patrickweigle
  */
-public class CadastroClienteService implements Serializable{
+public class CadastroClienteService implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private Clientes clientes;
-    public Cliente salvar(Cliente cliente){
-        return clientes.guardar(cliente);    }
+
+    public Cliente salvar(Cliente cliente) {
+        return clientes.guardar(cliente);
+    }
+    
+        public void excluir(Cliente cliente) {
+        clientes.remover(cliente);
+    }
 }

@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -65,7 +66,7 @@ public class Cliente implements Serializable {
         this.email_Cliente = email_Cliente;
     }
 
-    @Column(name = "telefone_Cliente", length = 20, nullable = true)
+    @Column(name = "telefone_Cliente", length = 20, nullable = false)
     public String getTelefone_Cliente() {
         return telefone_Cliente;
     }
@@ -83,7 +84,7 @@ public class Cliente implements Serializable {
         this.celular_Cliente = celular_Cliente;
     }
 
-    @Column(name = "endereco_Cliente", length = 150)
+    @Column(name = "endereco_Cliente", length = 150, nullable = false)
     public String getEndereco_Cliente() {
         return endereco_Cliente;
     }
@@ -110,7 +111,7 @@ public class Cliente implements Serializable {
         this.cpf_cliente = cpf_cliente;
     }
 
-    @Column(name = "bairro_cliente", length = 100)
+    @Column(name = "bairro_cliente", length = 100, nullable = false)
     public String getBairro_cliente() {
         return bairro_cliente;
     }
@@ -119,7 +120,7 @@ public class Cliente implements Serializable {
         this.bairro_cliente = bairro_cliente;
     }
 
-    @Column(name = "cidade_cliente", length = 50)
+    @Column(name = "cidade_cliente", length = 50, nullable = false)
     public String getCidade_cliente() {
         return cidade_cliente;
     }
@@ -138,7 +139,7 @@ public class Cliente implements Serializable {
     }
 
     @Column(name = "nascimento_cliente")
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(TemporalType.DATE)
     public Date getNascimento_cliente() {
         return nascimento_cliente;
     }

@@ -14,14 +14,14 @@
             </div>
 
         </div>
-        
+
         <f:metadata>
             <f:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>
         </f:metadata>
         <h:form>
 
-           
-            
+
+
             <p:messages autoUpdate="true"/>
 
             <div style="float: right" >
@@ -39,12 +39,16 @@
 
                         </div>
                         <div class="campo-cadastro">
-                            <p:outputLabel value="Data Nasc" for="nascimento"/>
+                            <p:outputLabel value="Data de Nascimento" for="nascimento"/>
                             <p:inputMask id="nascimento" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nascimento_cliente}" mask="99/99/9999"/>
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="CPF" for="cpf"/>
                             <p:inputText id="cpf" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.cpf_cliente}"/>
+                        </div>
+                        <div class="campo-cadastro">
+                            <p:outputLabel value="Email" for="email"/>
+                            <p:inputText id="email" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.email_Cliente}"/>
                         </div>
                     </div>
                     <div class="coluna1-3">

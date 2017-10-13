@@ -14,11 +14,18 @@ import javax.inject.Inject;
  *
  * @author patrickweigle
  */
-public class CadastroProdutoService implements Serializable{
-     private static final long serialVersionUID = 1L;
-    
+public class CadastroProdutoService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
     @Inject
     private Produtos produtos;
-    public Produto salvar(Produto produto){
-        return produtos.guardar(produto);    }
+
+    public Produto salvar(Produto produto) {
+        return produtos.guardar(produto);
+    }
+    
+    public void excluir(Produto produto){
+        produtos.remover(produto);
+    }
 }

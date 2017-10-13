@@ -10,7 +10,6 @@ import br.com.soclies.repository.Servicos;
 import java.io.Serializable;
 import javax.inject.Inject;
 
-
 /**
  *
  * @author patrickweigle
@@ -18,10 +17,15 @@ import javax.inject.Inject;
 public class CadastroServicoService implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Inject
     private Servicos servicos;
 
     public Servico salvar(Servico servico) {
         return servicos.guardar(servico);
+    }
+    
+        public void excluir(Servico servico) {
+        servicos.remover(servico);
     }
 }

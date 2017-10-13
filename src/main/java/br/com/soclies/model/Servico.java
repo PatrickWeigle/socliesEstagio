@@ -23,17 +23,17 @@ import javax.persistence.Table;
 public class Servico implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id_Servico;
+    private Long id_Servico;
     private String nome_Servico;
     private BigDecimal valor_Servico;
 
     @Id
     @GeneratedValue
-    public int getId_Servico() {
+    public Long getId_Servico() {
         return id_Servico;
     }
 
-    public void setId_Servico(int id_Servico) {
+    public void setId_Servico(Long id_Servico) {
         this.id_Servico = id_Servico;
     }
 
@@ -57,8 +57,8 @@ public class Servico implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + this.id_Servico;
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.id_Servico);
         return hash;
     }
 
@@ -74,11 +74,13 @@ public class Servico implements Serializable {
             return false;
         }
         final Servico other = (Servico) obj;
-        if (this.id_Servico != other.id_Servico) {
+        if (!Objects.equals(this.id_Servico, other.id_Servico)) {
             return false;
         }
         return true;
     }
+
+   
 
     
 

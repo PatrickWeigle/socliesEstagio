@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-    <ui:define name="titulo">Novo Serviço</ui:define>
+    <ui:define name="titulo">Serviço</ui:define>
     <ui:define name="corpo">
 
         <div style="margin-top: 20px; display:ruby-text-container;">
@@ -14,7 +14,13 @@
             </div>
 
         </div>
+
+        <f:metadata>
+            <f:viewParam name="servico" value="#{cadastroServicoBean.servico}"/>
+        </f:metadata>
         <h:form>
+
+
 
             <p:messages autoUpdate="true"/>
 
@@ -28,21 +34,22 @@
                 <p:panel header="Serviço">
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
-                            <p:outputLabel value="Servico" for="servico"/>
-                            <p:inputText id="servico" size="40" maxlength="100"  value="#{cadastroServicoBean.se}" required="true"/>
-
+                            <p:outputLabel value="Serviço" for="nome"/>
+                            <p:inputText id="nome" size="40" maxlength="100"  
+                                         value="#{cadastroServicoBean.servico.nome_Servico}" 
+                                         required="true"/>
                         </div>
                         <div class="campo-cadastro">
-                            <p:outputLabel value="Valor" for="valor"/>
-                            <p:inputText id="valor" size="40" maxlength="100" required="true" value="#{cadastroProdutoBean.produto.}"/>
-
+                            <p:outputLabel value="Valor" for="valorServico"/>
+                            <p:inputText id="valorServico" size="40" maxlength="100"  
+                                         value="#{cadastroServicoBean.servico.valor_Servico}" 
+                                         required="true"/>
                         </div>
-                    </div>
 
+                    </div>
 
                 </p:panel>
 
-            </div>
-        </h:form>
+            </div> </h:form>
     </ui:define>
 </ui:composition>

@@ -7,9 +7,13 @@ package br.com.soclies.repository;
 
 import br.com.soclies.model.Produto;
 import java.io.Serializable;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 
 /**
  *
@@ -27,5 +31,27 @@ public class Produtos implements Serializable {
         produto = manager.merge(produto);
         transa.commit();
         return produto;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Produto> getbuscados(){
+        Session session = manager.unwrap(Session.class);
+        Criteria criteria = session.createCriteria(Produto.class);
+        
+        return criteria.addOrder(Order.asc("nome_Produto")).list();
+    }
+    
+        public void remover(Produto produto) {
+        EntityTransaction et = manager.getTransaction();
+        et.begin();
+
+        produto = manager.find(Produto.class, produto.getId_produto());
+        manager.remove(produto);
+
+        et.commit();
+    }
+
+    public Produto retornaPorID(Long id) {
+        return manager.find(Produto.class, id);
     }
 }

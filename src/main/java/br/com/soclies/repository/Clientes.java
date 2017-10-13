@@ -13,40 +13,48 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Restrictions;
 
 /**
  *
  * @author patrickweigle
  */
-public class Clientes implements Serializable{
+public class Clientes implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private EntityManager manager;
-    
-    public Cliente guardar(Cliente cliente){
+
+    public Cliente guardar(Cliente cliente) {
         EntityTransaction transa = manager.getTransaction();
         transa.begin();
-        cliente= manager.merge(cliente);
+        cliente = manager.merge(cliente);
         transa.commit();
         return cliente;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Cliente> buscados() {
+    public List<Cliente> getbuscados() {
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Cliente.class);
 //        criteria.add(Restrictions.ilike("nome_Cliente", cliente.getNome_Cliente(),MatchMode.ANYWHERE));
-        
+
         return criteria.addOrder(Order.asc("nome_Cliente")).list();
     }
-    
-    public Cliente retornaPorID(long id){
+
+    public void remover(Cliente cliente) {
+        EntityTransaction et = manager.getTransaction();
+        et.begin();
+
+        cliente = manager.find(Cliente.class, cliente.getId_Cliente());
+        manager.remove(cliente);
+
+        et.commit();
+    }
+
+    public Cliente retornaPorID(Long id) {
         return manager.find(Cliente.class, id);
     }
-   
-    
+
 }

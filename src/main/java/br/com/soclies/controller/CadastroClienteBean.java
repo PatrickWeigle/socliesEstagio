@@ -38,4 +38,8 @@ public class CadastroClienteBean implements Serializable {
         this.cliente = cadastroClienteService.salvar(this.cliente);
         System.out.println("Salvo com Sucesso");
     }
+    
+        public void excluir(Cliente cliente){
+        cadastroClienteService.excluir(cliente);
+    }
 }

@@ -14,6 +14,10 @@
             </div>
 
         </div>
+
+        <f:metadata>
+            <f:viewParam name="cliente" value="#{cadastroProdutoBean.produto}"/>
+        </f:metadata>
         <h:form>
 
             <p:messages autoUpdate="true"/>
@@ -34,8 +38,7 @@
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Quantidade" for="quantidade"/>
-                            <!--p:inputText id="quantidade" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.quantidade_Produto}" /-->
-                            <p:spinner id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" min="0" max="1000" size="46" maxlength="100" />
+                            <p:inputText id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" size="40" maxlength="100" />
 
                         </div>
                         <div class="campo-cadastro">

@@ -8,7 +8,7 @@ body {
 }
 
 .coluna1-3{
-    display: inline-block;
+    display: inline-grid;
     width: 33%;
     margin-bottom: 15px;
 

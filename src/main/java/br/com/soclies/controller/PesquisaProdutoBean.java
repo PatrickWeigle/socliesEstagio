@@ -6,8 +6,9 @@
 package br.com.soclies.controller;
 
 import br.com.soclies.model.Produto;
-import br.com.soclies.service.CadastroProdutoService;
+import br.com.soclies.repository.Produtos;
 import java.io.Serializable;
+import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,15 +17,24 @@ import javax.inject.Named;
  *
  * @author patrickweigle
  */
+
 @Named
 @SessionScoped
-public class CadastroProdutoBean implements Serializable {
+public class PesquisaProdutoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    @Inject
+    private Produtos repoProdutos;
+
     @Inject
     private Produto produto;
-    @Inject
-    private CadastroProdutoService cadastroProdutoService;
+
+    private List<Produto> listProdutos;
+    
+    public void buscar(){
+        listProdutos = repoProdutos.getbuscados();
+    }
 
     public Produto getProduto() {
         return produto;
@@ -34,12 +44,12 @@ public class CadastroProdutoBean implements Serializable {
         this.produto = produto;
     }
 
-    public void salvar() {
-        this.produto = cadastroProdutoService.salvar(this.produto);
-        System.out.println("Salvo produto com Sucesso");
+    public List<Produto> getListProdutos() {
+        return listProdutos;
     }
 
-    public void excluir(Produto produto) {
-        cadastroProdutoService.excluir(produto);
+    public void setListProdutos(List<Produto> listProdutos) {
+        this.listProdutos = listProdutos;
     }
+
 }

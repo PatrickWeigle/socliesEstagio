@@ -6,8 +6,8 @@
 package br.com.soclies.converter;
 
 import br.com.soclies.cdi.CDIServiceLocator;
-import br.com.soclies.model.Cliente;
-import br.com.soclies.repository.Clientes;
+import br.com.soclies.model.Produto;
+import br.com.soclies.repository.Produtos;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -18,13 +18,13 @@ import javax.faces.convert.FacesConverter;
  *
  * @author patrickweigle
  */
-@FacesConverter(forClass = Cliente.class)
-public class ClienteConverter implements Converter {
+@FacesConverter(forClass = Produto.class)
+public class ProdutoConverter implements Converter {
 
-    private Clientes repoclientes;
+    private Produtos repoProdutos;
 
-    public ClienteConverter() {
-        this.repoclientes = CDIServiceLocator.getBean(Clientes.class);
+    public ProdutoConverter() {
+        this.repoProdutos = CDIServiceLocator.getBean(Produtos.class);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ClienteConverter implements Converter {
         }
 
         Long id = new Long(value);
-        return repoclientes.retornaPorID(id);
+        return repoProdutos.retornaPorID(id);
     }
 
     @Override
@@ -47,11 +47,11 @@ public class ClienteConverter implements Converter {
             return null;
         }
 
-        if (!(o instanceof Cliente)) {
+        if (!(o instanceof Produto)) {
             throw new ConverterException("Esse valor não é uma Pessoa Válida: " + o);
         }
 
-        Long id = ((Cliente) o).getId_Cliente();
+        Long id = ((Produto) o).getId_produto();
         return (id != null) ? String.valueOf(id) : null;
     }
 }

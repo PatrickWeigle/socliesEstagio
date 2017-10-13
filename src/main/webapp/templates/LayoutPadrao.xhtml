@@ -33,29 +33,19 @@ and open the template in the editor.
                 <h:form style="display: inline-block">
 
                     <p:menubar styleClass="menu-sistema" style="float:left;line-height: 90px">
-                        <p:submenu label="File" style="margin-right: 3px">
-                            <p:submenu label="New" icon="ui-icon-contact">
-                                <p:menuitem value="Project" url="#" />
-                                <p:menuitem value="Other" url="#" />
-                            </p:submenu>
-                            <p:menuitem value="Open" url="#" />
-                            <p:separator />
-                            <p:menuitem value="Quit" url="#" />
+                        <p:submenu label="Clientes" style="margin-right: 3px">
+                            <p:menuitem value="Novo Cliente" outcome="/cliente/cadastroCliente" />
+                            <p:menuitem value="Listar Clientes" outcome="/cliente/listarClientes" />
                         </p:submenu>
 
-                        <p:submenu label="Edit" style="margin-right: 3px" >
-                            <p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-                            <p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+                        <p:submenu label="Produtos" style="margin-right: 3px" >
+                            <p:menuitem value="Novo Produto" outcome="/produto/cadastroProduto" />
+                            <p:menuitem value="Listar Produtos" outcome="/produto/listarProdutos" />
                         </p:submenu>
 
-                        <p:submenu label="Help" style="margin-right: 3px">
-                            <p:menuitem value="Contents" url="#" />
-                            <p:submenu label="Search" icon="ui-icon-search">
-                                <p:submenu label="Text">
-                                    <p:menuitem value="Workspace" url="#" />
-                                </p:submenu>
-                                <p:menuitem value="File" url="#" />
-                            </p:submenu>
+                        <p:submenu label="Servicos" style="margin-right: 3px">
+                            <p:menuitem value="Novo Servico" outcome="/servico/cadastroServico" />
+                            <p:menuitem value="Listar Servicos" outcome="/servico/listarServicos"/>
                         </p:submenu>
 
                         <p:submenu label="Actions" style="margin-right: 3px">

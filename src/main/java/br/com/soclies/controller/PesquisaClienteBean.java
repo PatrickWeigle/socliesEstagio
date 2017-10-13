@@ -32,7 +32,7 @@ public class PesquisaClienteBean implements Serializable {
     private List<Cliente> clientes;
 
     public void buscar() {
-        clientes = repositorioClientes.buscados();
+        clientes = repositorioClientes.getbuscados();
     }
 
     public Cliente getCliente() {
