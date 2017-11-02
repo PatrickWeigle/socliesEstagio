@@ -9,72 +9,38 @@
 
     <name>Soclies</name>
 
+    <!-- propriedades do projeto - Codificação UTF-8 -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <!-- dependencias do projeto -->   
     <dependencies>
         
-        <!-- Mojarra (implementação do JSF 2) -->
+        <!-- Implementacao do Bean Validation -->
         <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.faces</artifactId>
-            <version>2.2.8-18</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>5.0.1.Final</version>
             <scope>compile</scope>
         </dependency>
-        <!-- PrimeFaces (biblioteca de componentes) -->
-        <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>3.5</version>
-            <scope>compile</scope>
-        </dependency>
-     
-        <!-- https://mvnrepository.com/artifact/org.primefaces.extensions/all-themes -->
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <version>1.0.10</version>
-        </dependency>
         
-        <!-- https://mvnrepository.com/artifact/org.webjars/font-awesome -->
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>font-awesome</artifactId>
-            <version>4.7.0</version>
-        </dependency>
-        
-        <!-- API de Servelet -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
-            <scope>provided</scope>
-        </dependency>
-   
-        
-        <!-- Framework Hibernate -->
+        <!-- Núcleo do Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.0.Final</version>
+            <version>4.2.3.Final</version>
             <scope>compile</scope>
         </dependency>
-        
+
         <!-- Implementação do JPA (EntityManager) -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.2.0.Final</version>
+            <version>4.2.3.Final</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet</artifactId>
-            <version>1.1.10.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        
-        <!-- Driver JDBC para conexão MySQL-->
+
+        <!-- Driver JDBC do MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -82,20 +48,39 @@
             <scope>compile</scope>
         </dependency>
         
-        <!-- https://mvnrepository.com/artifact/com.liferay/org.apache.commons.fileupload -->
+        <!-- PrimeFaces (biblioteca de componentes) -->
         <dependency>
-            <groupId>com.liferay</groupId>
-            <artifactId>org.apache.commons.fileupload</artifactId>
-            <version>1.2.2.LIFERAY-PATCHED-1</version>
+            <groupId>org.primefaces</groupId>
+            <artifactId>primefaces</artifactId>
+            <version>3.5</version>
+            <scope>compile</scope>
         </dependency>
         
+        <!-- Mojarra (implementação do JSF 2) -->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>2.1.21</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Weld (implementação do CDI) -->
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>1.1.10.Final</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Log4J -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
             <scope>compile</scope>
         </dependency>
-        
+
+        <!-- Commons Logging (abstrai a implementação de logging) -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -103,6 +88,7 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- Commons Lang (utilidades) -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
@@ -110,11 +96,34 @@
             <scope>compile</scope>
         </dependency>
         
+        <!-- API de Servlets -->
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.0.1.Final</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-web-api</artifactId>
+            <version>7.0</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- biblioteca do OmminiFaces -->
+        <dependency>
+            <groupId>org.omnifaces</groupId>
+            <artifactId>omnifaces</artifactId>
+            <version>1.5</version>
             <scope>compile</scope>
+        </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/org.primefaces.extensions/all-themes -->
+        <dependency>
+            <groupId>org.primefaces.themes</groupId>
+            <artifactId>all-themes</artifactId>
+            <version>1.0.10</version>
         </dependency>
               
     </dependencies>

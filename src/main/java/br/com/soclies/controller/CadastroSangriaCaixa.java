@@ -9,7 +9,7 @@ import br.com.soclies.model.Caixa;
 import br.com.soclies.model.TipoEntrada;
 import br.com.soclies.service.CadastroSangriaCaixaService;
 import java.io.Serializable;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 

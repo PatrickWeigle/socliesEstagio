@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -71,7 +70,7 @@ public class Cliente implements Serializable {
         this.email_Cliente = email_Cliente;
     }
 
-    @NotNull @Size(max = 20)
+    @NotBlank @Size(max = 20)
     @Column(name = "telefone_Cliente", length = 20, nullable = false)
     public String getTelefone_Cliente() {
         return telefone_Cliente;
@@ -91,7 +90,7 @@ public class Cliente implements Serializable {
         this.celular_Cliente = celular_Cliente;
     }
 
-    @NotNull @Size(max = 150)
+    @NotBlank @Size(max = 150)
     @Column(name = "endereco_Cliente", length = 150, nullable = false)
     public String getEndereco_Cliente() {
         return endereco_Cliente;
@@ -121,7 +120,7 @@ public class Cliente implements Serializable {
         this.cpf_cliente = cpf_cliente;
     }
 
-    @NotNull @Size(max = 100)
+    @NotBlank @Size(max = 100)
     @Column(name = "bairro_cliente", length = 100, nullable = false)
     public String getBairro_cliente() {
         return bairro_cliente;
@@ -131,7 +130,7 @@ public class Cliente implements Serializable {
         this.bairro_cliente = bairro_cliente;
     }
 
-    @NotNull @Size(max = 50)
+    @NotBlank @Size(max = 50)
     @Column(name = "cidade_cliente", length = 50, nullable = false)
     public String getCidade_cliente() {
         return cidade_cliente;
@@ -141,7 +140,7 @@ public class Cliente implements Serializable {
         this.cidade_cliente = cidade_cliente;
     }
     
-    @NotNull @Size(max = 2)
+    @NotBlank @Size(max = 2)
     @Column(name = "uf_cliente", length = 2, nullable = false)
     public String getUf_cliente() {
         return uf_cliente;

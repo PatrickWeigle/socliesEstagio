@@ -10,7 +10,7 @@ import br.com.soclies.repository.Clientes;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 

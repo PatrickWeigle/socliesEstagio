@@ -9,9 +9,7 @@ import br.com.soclies.model.Cliente;
 import br.com.soclies.service.CadastroClienteService;
 import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 

@@ -8,8 +8,7 @@ package br.com.soclies.controller;
 import br.com.soclies.model.Servico;
 import br.com.soclies.service.CadastroServicoService;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 

@@ -19,7 +19,7 @@
                     <p:button outcome="/cliente/cadastroCliente" value="Novo Cliente" icon="ui-icon-plusthick"/>
                 </f:facet>
                 <f:facet name="right">
-                    <p:inputText id="clientePesquisado" placeholder="Pesquisar" 
+                    <p:inputText id="clientePesquisado"  
                                  value="#{pesquisaClienteBean.nomePesquisado}">
                         <p:ajax event="keyup" listener="#{pesquisaClienteBean.buscar()}" 
                                 update="clienteTable" />
