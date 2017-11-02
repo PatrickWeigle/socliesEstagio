@@ -7,6 +7,7 @@ package br.com.soclies.controller;
 
 import br.com.soclies.model.Cliente;
 import br.com.soclies.service.CadastroClienteService;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -28,6 +29,12 @@ public class CadastroClienteBean implements Serializable {
     @Inject
     private CadastroClienteService cadastroClienteService;
 
+    public CadastroClienteBean() {
+        limparCampos();
+    }
+    
+    
+
     public Cliente getCliente() {
         return cliente;
     }
@@ -38,10 +45,15 @@ public class CadastroClienteBean implements Serializable {
 
     public void salvar() {
         this.cliente = cadastroClienteService.salvar(this.cliente);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente Salvo com sucesso", ""));
+        FacesUtil.addInfoMessage("Cliente adicionado com sucesso");
+        limparCampos();
     }
     
         public void excluir(Cliente cliente){
         cadastroClienteService.excluir(cliente);
+    }
+        
+    private void limparCampos(){
+        this.cliente = new Cliente();
     }
 }

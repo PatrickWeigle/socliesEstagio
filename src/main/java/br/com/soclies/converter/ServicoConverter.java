@@ -5,7 +5,7 @@
  */
 package br.com.soclies.converter;
 
-import br.com.soclies.cdi.CDIServiceLocator;
+import br.com.soclies.util.cdi.CDIServiceLocator;
 import br.com.soclies.model.Servico;
 import br.com.soclies.repository.Servicos;
 import javax.faces.component.UIComponent;

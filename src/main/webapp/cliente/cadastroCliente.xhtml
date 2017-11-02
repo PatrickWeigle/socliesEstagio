@@ -18,24 +18,25 @@
         <f:metadata>
             <f:viewParam name="cliente" value="#{cadastroClienteBean.cliente}"/>
         </f:metadata>
-        <h:form>
+        <h:form id="frm">
 
 
 
-            <p:messages autoUpdate="true" closable="true"/>
+            <p:messages autoUpdate="false"  id="mensagemCliente" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                 action="#{cadastroClienteBean.salvar()}"/>
+                                 action="#{cadastroClienteBean.salvar()}" update="frm mensagemCliente" process="@this inclusaoClientePanel"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">
+                <h:panelGroup id="inclusaoClientePanel">
                 <p:panel header="Dados Pessoais">
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
                             <p:outputLabel value="Nome" for="nome"/>
-                            <p:inputText id="nome" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nome_Cliente}" required="true"/>
+                            <p:inputText id="nome" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nome_Cliente}" />
 
                         </div>
                         <div class="campo-cadastro">
@@ -85,6 +86,7 @@
                     </div>
 
                 </p:panel>
+                </h:panelGroup>
 
             </div>
             <div style="width: 100%">

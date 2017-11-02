@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.soclies.cdi;
+package br.com.soclies.util.cdi;
 
 import java.util.Set;
 import javax.enterprise.context.spi.CreationalContext;

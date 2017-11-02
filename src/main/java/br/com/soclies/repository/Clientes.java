@@ -29,10 +29,7 @@ public class Clientes implements Serializable {
     private EntityManager manager;
 
     public Cliente guardar(Cliente cliente) {
-        EntityTransaction transa = manager.getTransaction();
-        transa.begin();
         cliente = manager.merge(cliente);
-        transa.commit();
         return cliente;
     }
 

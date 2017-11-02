@@ -6,7 +6,6 @@
 package br.com.soclies.controller;
 
 import br.com.soclies.model.Caixa;
-import br.com.soclies.model.EntradaCaixa;
 import br.com.soclies.model.TipoEntrada;
 import br.com.soclies.service.CadastroSangriaCaixaService;
 import java.io.Serializable;
@@ -39,12 +38,15 @@ public class CadastroSangriaCaixa implements Serializable{
     
     public void salvar(){
         caixa.setTipo_entrada_Caixa(TipoEntrada.SANGRIA);
-        caixa.setEntrada_Caixa(EntradaCaixa.DEBITO);
         this.caixa = cadastroSangriaCaixaService.salvar(caixa);
         System.out.println("SALVO COM SUCESSO");
     }
     
     public void excluir(){
         cadastroSangriaCaixaService.excluir(caixa);
+    }
+    
+    public void teste(){
+        throw new RuntimeException("ERRO DE EXCEÇÂO");
     }
 }

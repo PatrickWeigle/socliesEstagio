@@ -158,7 +158,7 @@ public class Pedido implements Serializable {
         Servico servico = new Servico();
         Servico_Pedido item = new Servico_Pedido();
         item.setId_Servico(servico);
-        item.setId_Pedido(this);
+        item.setPedido(this);
         this.getItensPedido().add(0,item);
     }
 

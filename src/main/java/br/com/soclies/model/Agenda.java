@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -24,34 +25,35 @@ import javax.persistence.Temporal;
 @Entity
 @Table(name = "tab_Agenda")
 public class Agenda {
-    private int id_Agenda;
-    private Cliente id_Cliente;
+
+    private Long id_Agenda;
+    private Cliente cliente;
     private Date horario_Agenda;
     private String observacao_agenda;
 
-    
     @Id
     @GeneratedValue
-    public int getId_Agenda() {
+    public Long getId_Agenda() {
         return id_Agenda;
     }
 
-    public void setId_Agenda(int id_Agenda) {
+    public void setId_Agenda(Long id_Agenda) {
         this.id_Agenda = id_Agenda;
     }
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_Cliente", nullable = false)
-    public Cliente getId_Cliente() {
-        return id_Cliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setId_Cliente(Cliente id_Cliente) {
-        this.id_Cliente = id_Cliente;
+    public void setCliente(Cliente id_Cliente) {
+        this.cliente = id_Cliente;
     }
 
-   
-    @Column(name = "horario_Agenda",nullable = false)
+    @NotNull
+    @Column(name = "horario_Agenda", nullable = false)
     @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     public Date getHorario_Agenda() {
         return horario_Agenda;
@@ -61,6 +63,7 @@ public class Agenda {
         this.horario_Agenda = horario_Agenda;
     }
 
+    @Column(name = "observacao_Agenda",  columnDefinition = "text")
     public String getObservacao_agenda() {
         return observacao_agenda;
     }
@@ -71,11 +74,8 @@ public class Agenda {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 59 * hash + this.id_Agenda;
-        hash = 59 * hash + Objects.hashCode(this.id_Cliente);
-        hash = 59 * hash + Objects.hashCode(this.horario_Agenda);
-        hash = 59 * hash + Objects.hashCode(this.observacao_agenda);
+        int hash = 5;
+        hash = 83 * hash + Objects.hashCode(this.id_Agenda);
         return hash;
     }
 
@@ -91,24 +91,10 @@ public class Agenda {
             return false;
         }
         final Agenda other = (Agenda) obj;
-        if (this.id_Agenda != other.id_Agenda) {
-            return false;
-        }
-        if (!Objects.equals(this.observacao_agenda, other.observacao_agenda)) {
-            return false;
-        }
-        if (!Objects.equals(this.id_Cliente, other.id_Cliente)) {
-            return false;
-        }
-        if (!Objects.equals(this.horario_Agenda, other.horario_Agenda)) {
+        if (!Objects.equals(this.id_Agenda, other.id_Agenda)) {
             return false;
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
+
 }

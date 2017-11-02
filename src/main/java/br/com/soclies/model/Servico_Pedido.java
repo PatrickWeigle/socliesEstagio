@@ -50,12 +50,12 @@ public class Servico_Pedido implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "pedido", nullable = false)
-    public Pedido getId_Pedido() {
+    @JoinColumn(name = "pedido_id", nullable = false)
+    public Pedido getPedido() {
         return pedido;
     }
 
-    public void setId_Pedido(Pedido pedido) {
+    public void setPedido(Pedido pedido) {
         this.pedido = pedido;
     }
 

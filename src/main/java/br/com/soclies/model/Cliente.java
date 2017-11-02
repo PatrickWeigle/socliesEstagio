@@ -15,6 +15,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -48,6 +51,7 @@ public class Cliente implements Serializable {
         this.id_Cliente = id_Cliente;
     }
 
+    @NotBlank @Size(max = 150)
     @Column(name = "nome_Cliente", nullable = false, length = 150)
     public String getNome_Cliente() {
         return nome_Cliente;
@@ -57,6 +61,7 @@ public class Cliente implements Serializable {
         this.nome_Cliente = nome_Cliente;
     }
 
+    @Size(max = 100)
     @Column(name = "email_Cliente", length = 100)
     public String getEmail_Cliente() {
         return email_Cliente;
@@ -66,6 +71,7 @@ public class Cliente implements Serializable {
         this.email_Cliente = email_Cliente;
     }
 
+    @NotNull @Size(max = 20)
     @Column(name = "telefone_Cliente", length = 20, nullable = false)
     public String getTelefone_Cliente() {
         return telefone_Cliente;
@@ -75,6 +81,7 @@ public class Cliente implements Serializable {
         this.telefone_Cliente = telefone_Cliente;
     }
 
+    @Size(max = 20)
     @Column(name = "celular_Cliente", length = 20)
     public String getCelular_Cliente() {
         return celular_Cliente;
@@ -84,6 +91,7 @@ public class Cliente implements Serializable {
         this.celular_Cliente = celular_Cliente;
     }
 
+    @NotNull @Size(max = 150)
     @Column(name = "endereco_Cliente", length = 150, nullable = false)
     public String getEndereco_Cliente() {
         return endereco_Cliente;
@@ -93,6 +101,7 @@ public class Cliente implements Serializable {
         this.endereco_Cliente = endereco_Cliente;
     }
 
+    
     @Column(name = "anamnese_Cliente", columnDefinition = "text")
     public String getAnamnese_Cliente() {
         return anamnese_Cliente;
@@ -101,6 +110,7 @@ public class Cliente implements Serializable {
     public void setAnamnese_Cliente(String anamnese_Cliente) {
         this.anamnese_Cliente = anamnese_Cliente;
     }
+
 
     @Column(name = "cpf_Cliente", unique = true)
     public String getCpf_cliente() {
@@ -111,6 +121,7 @@ public class Cliente implements Serializable {
         this.cpf_cliente = cpf_cliente;
     }
 
+    @NotNull @Size(max = 100)
     @Column(name = "bairro_cliente", length = 100, nullable = false)
     public String getBairro_cliente() {
         return bairro_cliente;
@@ -120,6 +131,7 @@ public class Cliente implements Serializable {
         this.bairro_cliente = bairro_cliente;
     }
 
+    @NotNull @Size(max = 50)
     @Column(name = "cidade_cliente", length = 50, nullable = false)
     public String getCidade_cliente() {
         return cidade_cliente;
@@ -128,8 +140,9 @@ public class Cliente implements Serializable {
     public void setCidade_cliente(String cidade_cliente) {
         this.cidade_cliente = cidade_cliente;
     }
-
-    @Column(name = "uf_cliente", length = 2)
+    
+    @NotNull @Size(max = 2)
+    @Column(name = "uf_cliente", length = 2, nullable = false)
     public String getUf_cliente() {
         return uf_cliente;
     }

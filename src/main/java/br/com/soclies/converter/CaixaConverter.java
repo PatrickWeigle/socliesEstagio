@@ -5,7 +5,7 @@
  */
 package br.com.soclies.converter;
 
-import br.com.soclies.cdi.CDIServiceLocator;
+import br.com.soclies.util.cdi.CDIServiceLocator;
 import br.com.soclies.model.Caixa;
 import br.com.soclies.repository.SangriasCaixa;
 import javax.faces.component.UIComponent;
