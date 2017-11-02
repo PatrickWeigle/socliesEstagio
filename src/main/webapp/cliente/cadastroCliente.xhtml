@@ -22,7 +22,7 @@
 
 
 
-            <p:messages autoUpdate="true"/>
+            <p:messages autoUpdate="true" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
@@ -40,7 +40,9 @@
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="Data de Nascimento" for="nascimento"/>
-                            <p:inputMask id="nascimento" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nascimento_cliente}" mask="99/99/9999"/>
+                            <p:inputMask id="nascimento" size="40" maxlength="100"  value="#{cadastroClienteBean.cliente.nascimento_cliente}" mask="99/99/9999">
+                                <f:convertDateTime pattern="dd/MM/yyyy"/>
+                            </p:inputMask>
                         </div>
                         <div class="campo-cadastro">
                             <p:outputLabel value="CPF" for="cpf"/>

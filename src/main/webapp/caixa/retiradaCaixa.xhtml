@@ -20,7 +20,7 @@
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                 action="#{retiradaCaixaBean.salvar()}"/>
+                                 action="#{cadastroSangriaCaixa.salvar()}"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
             </div>    
 
@@ -29,17 +29,10 @@
                     <div class="coluna1-3">
                         <div class="campo-cadastro">
                             <p:outputLabel value="Valor" for="valor"/>
-                            <p:inputText id="valor" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.valor_Entrada}" required="true"/>
+                            <p:inputText id="valor" size="40" maxlength="100"  value="#{cadastroSangriaCaixa.caixa.valor_Entrada}" required="true"/>
 
                         </div>
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Entrada C/D" for="entrada"/>
-                            <p:inputText id="entrada" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.entrada_Caixa}" />
-                        </div>
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Tipo Entrada" for="tEntrada"/>
-                            <p:inputText id="tEntrada" size="40" maxlength="100"  value="#{retiradaCaixaBean.caixa.tipo_entrada_Caixa}"/>
-                        </div>
+        
                     </div>
                     
 

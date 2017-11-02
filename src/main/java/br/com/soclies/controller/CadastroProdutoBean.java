@@ -9,6 +9,7 @@ import br.com.soclies.model.Produto;
 import br.com.soclies.service.CadastroProdutoService;
 import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +18,7 @@ import javax.inject.Named;
  * @author patrickweigle
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class CadastroProdutoBean implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -149,6 +149,13 @@ public class Cliente implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Cliente{" + "id_Cliente=" + id_Cliente + ", nome_Cliente=" + nome_Cliente + ", email_Cliente=" + email_Cliente + ", telefone_Cliente=" + telefone_Cliente + '}';
+    }
+    
+    
+
+    @Override
     public int hashCode() {
         int hash = 5;
         hash = 43 * hash + Objects.hashCode(this.id_Cliente);

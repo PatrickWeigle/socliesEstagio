@@ -30,7 +30,7 @@ import javax.persistence.Temporal;
 public class Caixa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id_Caixa;
+    private Long id_Caixa;
     private Pedido id_Pedido;
     private Produto id_Produto;
     private Date data_Caixa;
@@ -40,11 +40,11 @@ public class Caixa implements Serializable {
 
     @Id
     @GeneratedValue
-    public int getId_Caixa() {
+    public Long getId_Caixa() {
         return id_Caixa;
     }
 
-    public void setId_Caixa(int id_Caixa) {
+    public void setId_Caixa(Long id_Caixa) {
         this.id_Caixa = id_Caixa;
     }
 
@@ -111,7 +111,7 @@ public class Caixa implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 71 * hash + this.id_Caixa;
+        hash = 19 * hash + Objects.hashCode(this.id_Caixa);
         return hash;
     }
 
@@ -127,10 +127,12 @@ public class Caixa implements Serializable {
             return false;
         }
         final Caixa other = (Caixa) obj;
-        if (this.id_Caixa != other.id_Caixa) {
+        if (!Objects.equals(this.id_Caixa, other.id_Caixa)) {
             return false;
         }
         return true;
     }
+
+   
 
 }

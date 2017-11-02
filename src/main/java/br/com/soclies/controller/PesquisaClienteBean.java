@@ -10,6 +10,7 @@ import br.com.soclies.repository.Clientes;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -18,10 +19,12 @@ import javax.inject.Named;
  * @author patrickweigle
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class PesquisaClienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
+    private String nomePesquisado;
 
     @Inject
     private Clientes repositorioClientes;
@@ -32,7 +35,16 @@ public class PesquisaClienteBean implements Serializable {
     private List<Cliente> clientes;
 
     public void buscar() {
-        clientes = repositorioClientes.getbuscados();
+        clientes = repositorioClientes.getbuscados(nomePesquisado);
+    }
+    
+
+    public String getNomePesquisado() {
+        return nomePesquisado;
+    }
+
+    public void setNomePesquisado(String nomePesquisado) {
+        this.nomePesquisado = nomePesquisado;
     }
 
     public Cliente getCliente() {

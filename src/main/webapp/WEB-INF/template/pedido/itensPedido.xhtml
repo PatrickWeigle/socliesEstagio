@@ -1,0 +1,39 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+
+    <p:dataTable var="item" id="tabelaItem">
+        <p:column headerText="ID" style="text-align: center; width: 100px">
+            <h:outputText value="50"/>
+            <p:inputText size="8" label="id"/>
+        </p:column>
+        <p:column headerText="Serviço" >
+            <h:outputText value="50"/>
+            <p:autoComplete var="servico" />
+        </p:column>
+        <p:column headerText="Valor Unitário" >
+            <h:outputText value="50"/>
+        </p:column>
+        <p:column headerText="Quantidade" >
+            <p:inputText size="8"/>
+        </p:column>
+        <p:column headerText="Valor Total" >
+            <h:outputText value="50"/>
+        </p:column>
+        <p:columnGroup type="footer">
+            <p:row>
+                <p:column colspan="4" footerText="SubTotal" style="text-align: right; font-weight: bold"/>
+                <p:column style="text-align: right">
+                    <f:facet name="footer">
+                    <h:outputText value="50"/>
+                    </f:facet>
+                </p:column>
+            </p:row>
+
+        </p:columnGroup>
+
+    </p:dataTable>   
+</ui:composition>

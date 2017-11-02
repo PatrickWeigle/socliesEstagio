@@ -25,8 +25,8 @@ public class Servico_Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private int id_Servico_Pedido;
-    private Servico id_Servico;
-    private Pedido id_Pedido;
+    private Servico servico;
+    private Pedido pedido;
     private int quantidade_Servico;
 
     @Id
@@ -40,23 +40,23 @@ public class Servico_Pedido implements Serializable {
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_Servico", nullable = false)
+    @JoinColumn(name = "servico", nullable = false)
     public Servico getId_Servico() {
-        return id_Servico;
+        return servico;
     }
 
-    public void setId_Servico(Servico id_Servico) {
-        this.id_Servico = id_Servico;
+    public void setId_Servico(Servico servico) {
+        this.servico = servico;
     }
 
     @ManyToOne
-    @JoinColumn(name = "id_Pedido", nullable = false)
+    @JoinColumn(name = "pedido", nullable = false)
     public Pedido getId_Pedido() {
-        return id_Pedido;
+        return pedido;
     }
 
-    public void setId_Pedido(Pedido id_Pedido) {
-        this.id_Pedido = id_Pedido;
+    public void setId_Pedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     @Column(name = "quantidade_Servico")
@@ -72,8 +72,8 @@ public class Servico_Pedido implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id_Servico_Pedido;
-        hash = 67 * hash + Objects.hashCode(this.id_Servico);
-        hash = 67 * hash + Objects.hashCode(this.id_Pedido);
+        hash = 67 * hash + Objects.hashCode(this.servico);
+        hash = 67 * hash + Objects.hashCode(this.pedido);
         hash = 67 * hash + this.quantidade_Servico;
         return hash;
     }
@@ -96,10 +96,10 @@ public class Servico_Pedido implements Serializable {
         if (this.quantidade_Servico != other.quantidade_Servico) {
             return false;
         }
-        if (!Objects.equals(this.id_Servico, other.id_Servico)) {
+        if (!Objects.equals(this.servico, other.servico)) {
             return false;
         }
-        if (!Objects.equals(this.id_Pedido, other.id_Pedido)) {
+        if (!Objects.equals(this.pedido, other.pedido)) {
             return false;
         }
         return true;

@@ -8,7 +8,9 @@ package br.com.soclies.controller;
 import br.com.soclies.model.Cliente;
 import br.com.soclies.service.CadastroClienteService;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -17,7 +19,7 @@ import javax.inject.Named;
  * @author patrickweigle
  */
 @Named
-@SessionScoped
+@ViewScoped
 public class CadastroClienteBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -36,7 +38,7 @@ public class CadastroClienteBean implements Serializable {
 
     public void salvar() {
         this.cliente = cadastroClienteService.salvar(this.cliente);
-        System.out.println("Salvo com Sucesso");
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Cliente Salvo com sucesso", ""));
     }
     
         public void excluir(Cliente cliente){

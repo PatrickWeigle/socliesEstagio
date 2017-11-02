@@ -6,7 +6,7 @@
 package br.com.soclies.service;
 
 import br.com.soclies.model.Caixa;
-import br.com.soclies.repository.RetiradasCaixa;
+import br.com.soclies.repository.SangriasCaixa;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -14,12 +14,17 @@ import javax.inject.Inject;
  *
  * @author patrickweigle
  */
-public class RetiradaCaixaService implements Serializable{
+public class CadastroSangriaCaixaService implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject
-    private RetiradasCaixa retiradasCaixa;
+    SangriasCaixa sangriasCaixa;
+    
     public Caixa salvar(Caixa caixa){
-        return retiradasCaixa.guardar(caixa);
+        return sangriasCaixa.guardar(caixa);
+    }
+    
+    public void excluir(Caixa caixa){
+        sangriasCaixa.remover(caixa);
     }
 }

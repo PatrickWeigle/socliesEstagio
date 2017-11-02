@@ -5,28 +5,22 @@
  */
 package br.com.soclies.repository;
 
-import br.com.soclies.model.Caixa;
+import br.com.soclies.model.Pedido;
 import java.io.Serializable;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 /**
  *
  * @author patrickweigle
  */
-public class RetiradasCaixa implements Serializable{
-    
-    private static final long serialVersionUID = 1L;
-    
+public class Pedidos implements Serializable{
+
     @Inject
     private EntityManager manager;
     
-    public Caixa guardar(Caixa caixa){
-        EntityTransaction transa = manager.getTransaction();
-        transa.begin();
-        caixa= manager.merge(caixa);
-        transa.commit();
-        return caixa;
+    public Pedido guardar(Pedido pedido){
+        return this.manager.merge(pedido);
     }
+    
 }

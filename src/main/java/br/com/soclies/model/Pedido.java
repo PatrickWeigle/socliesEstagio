@@ -11,10 +11,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,6 +25,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 
 /**
  *
@@ -33,21 +36,22 @@ import javax.persistence.Temporal;
 public class Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id_Pedido;
+    private Long id_Pedido;
     private BigDecimal total_Pedido;
     private BigDecimal desconto_Pedido;
     private String observacao_Pedido;
     private Date data_pedido;
     private FormaDePagamento pagamento_Pedido;
     private Cliente id_cliente;
+    private List<Servico_Pedido> itensPedido = new ArrayList<>();
 
     @Id
     @GeneratedValue
-    public int getId_Pedido() {
+    public Long getId_Pedido() {
         return id_Pedido;
     }
 
-    public void setId_Pedido(int id_Pedido) {
+    public void setId_Pedido(Long id_Pedido) {
         this.id_Pedido = id_Pedido;
     }
 
@@ -61,6 +65,16 @@ public class Pedido implements Serializable {
         this.id_cliente = id_cliente;
     }
 
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    public List<Servico_Pedido> getItensPedido() {
+        return itensPedido;
+    }
+
+    public void setItensPedido(List<Servico_Pedido> itensPedido) {
+        this.itensPedido = itensPedido;
+    }
+
+    
     @Column(name = "total_pedido", precision = 10, scale = 2)
     public BigDecimal getTotal_Pedido() {
         return total_Pedido;
@@ -110,14 +124,8 @@ public class Pedido implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 89 * hash + this.id_Pedido;
-        hash = 89 * hash + Objects.hashCode(this.total_Pedido);
-        hash = 89 * hash + Objects.hashCode(this.desconto_Pedido);
-        hash = 89 * hash + Objects.hashCode(this.observacao_Pedido);
-        hash = 89 * hash + Objects.hashCode(this.data_pedido);
-        hash = 89 * hash + Objects.hashCode(this.pagamento_Pedido);
-        hash = 89 * hash + Objects.hashCode(this.id_cliente);
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.id_Pedido);
         return hash;
     }
 
@@ -133,28 +141,25 @@ public class Pedido implements Serializable {
             return false;
         }
         final Pedido other = (Pedido) obj;
-        if (this.id_Pedido != other.id_Pedido) {
-            return false;
-        }
-        if (!Objects.equals(this.observacao_Pedido, other.observacao_Pedido)) {
-            return false;
-        }
-        if (!Objects.equals(this.total_Pedido, other.total_Pedido)) {
-            return false;
-        }
-        if (!Objects.equals(this.desconto_Pedido, other.desconto_Pedido)) {
-            return false;
-        }
-        if (!Objects.equals(this.data_pedido, other.data_pedido)) {
-            return false;
-        }
-        if (this.pagamento_Pedido != other.pagamento_Pedido) {
-            return false;
-        }
-        if (!Objects.equals(this.id_cliente, other.id_cliente)) {
+        if (!Objects.equals(this.id_Pedido, other.id_Pedido)) {
             return false;
         }
         return true;
+    }
+
+   
+
+    @Transient
+    public boolean isNovo() {
+        return getId_Pedido() == null;
+    }
+
+    public void adicionarItemVazio() {
+        Servico servico = new Servico();
+        Servico_Pedido item = new Servico_Pedido();
+        item.setId_Servico(servico);
+        item.setId_Pedido(this);
+        this.getItensPedido().add(0,item);
     }
 
 }

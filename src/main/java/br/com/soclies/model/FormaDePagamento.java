@@ -10,5 +10,18 @@ package br.com.soclies.model;
  * @author patrickweigle
  */
 public enum FormaDePagamento {
-    DINHEIRO, CARTAO_CREDITO, CARTAO_DEBITO, DUPLICATA, CHEQUE
+    DINHEIRO("dinheiro"), CARTAO_CREDITO("Cartão de Crédito"), CARTAO_DEBITO("Cartão de Débito"),
+    DUPLICATA("Duplicata"), CHEQUE("Cheque");
+
+    private String descricao;
+
+    private FormaDePagamento(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+    
+    
 }

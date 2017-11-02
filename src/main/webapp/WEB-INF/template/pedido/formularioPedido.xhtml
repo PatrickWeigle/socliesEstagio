@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <p:panelGrid columns="4" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo, rotulo, campo">
+
+        <p:outputLabel value="Nº Pedido"/>
+        <h:outputText value="#{cadastroPedidoBean.pedido.id_Pedido}"/>
+        <p:outputLabel value="Data do Pedido"/>
+        <h:outputText value="#{cadastroPedidoBean.pedido.data_pedido}">
+            <f:convertDateTime pattern="dd/MM/yyyy"/>
+        </h:outputText>
+        <p:outputLabel value="Cliente" for="cliente"/>
+        <p:autoComplete id="cliente" dropdown="true" size="40" value="#{cadastroPedidoBean.pedido.id_cliente}" 
+                        completeMethod="#{cadastroPedidoBean.completarCliente}" var="cliente" itemLabel="#{cliente.nome_Cliente}"
+                        itemValue="#{cliente}" forceSelection="true"/>
+        <p:outputLabel value="Forma de Pagamento" for="formaPagamento"/>
+        <p:selectOneMenu id="formaPagamento" value="#{cadastroPedidoBean.pedido.pagamento_Pedido}" >
+            <f:selectItem itemLabel="Forma de Pagamento"/>
+            <f:selectItems value="#{cadastroPedidoBean.formaPagamento}" var="formaPagamento"
+                           itemValue="#{formaPagamento}" itemLabel="#{formaPagamento.descricao}"/>
+        </p:selectOneMenu>
+        <p:outputLabel value="Desconto:" for="valorDesconto"/>
+        <p:inputText id="valorDesconto" size="15" maxlength="15" value="#{cadastroPedidoBean.pedido.desconto_Pedido}"/>
+        <p:outputLabel value="Total"/>
+        <h:outputText value="#{cadastroPedidoBean.pedido.total_Pedido}"/>
+
+    </p:panelGrid>
+</ui:composition>

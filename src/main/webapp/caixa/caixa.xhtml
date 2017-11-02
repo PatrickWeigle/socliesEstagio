@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-    <ui:define name="titulo">Clientes</ui:define>
+    <ui:define name="titulo">Caixa</ui:define>
     <ui:define name="corpo">
 
         <f:metadata>
@@ -13,37 +13,38 @@
         </f:metadata>
         <h:form>
 
-            <h1>Clientes</h1>
-            <p:toolbar style="margin-top: 15px">
-                <f:facet name="left">
-                    <p:button outcome="/cliente/cadastroCliente" value="Novo Cliente" icon="ui-icon-plusthick"/>
-                </f:facet>
+
+            <h1>Caixa</h1>
+            <p:panelGrid columns="2" id="panel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo">
+                <p:outputLabel value="Cliente:" for="cliente"/>
+                <p:inputText id="cliente" size="80"/>
+            </p:panelGrid>
+            <p:panelGrid columns="2" id="panel2" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo">
+                <p:outputLabel value="Serviço:" for="servico"/>
+                <p:inputText id="servico" size="80"/>
+            </p:panelGrid>
+            <p:toolbar style="margin-top: 15px" >
                 <f:facet name="right">
-                    <p:inputText id="clientePesquisado" placeholder="Pesquisar" 
-                                 value="#{pesquisaClienteBean.nomePesquisado}">
-                        <p:ajax event="keyup" listener="#{pesquisaClienteBean.buscar()}" 
-                                update="clienteTable" />
-                    </p:inputText>
-                    <p:commandButton icon="ui-icon-search" title="Pesquisar" class="botaopesquisa" 
-                                     actionListener="#{pesquisaClienteBean.buscar()}" 
-                                     update="clienteTable"/>
+                    <p:button outcome="/cliente/cadastroCliente" value="Salvar" icon="ui-icon-plusthick"/>
                 </f:facet>
+
+
             </p:toolbar>
             <p:dataTable class="tabela" id="clienteTable" var="cliente" 
                          value="#{pesquisaClienteBean.clientes}" rowKey="#{cliente.id_Cliente}" 
                          rows="12" paginator="true" paginatorPosition="bottom">
-                <p:column headerText="Codigo" style="text-align: left; width: 50px">
+                <p:column headerText="Data" style="text-align: left; width: 50px">
                     <h:outputText value="#{cliente.id_Cliente}" />
                 </p:column>
-                <p:column headerText="Nome" style="text-align: left; width: 250px">
+                <p:column headerText="Operação" style="text-align: left; width: 250px">
                     <h:outputText value="#{cliente.nome_Cliente}" />
                 </p:column>
-                <p:column headerText="Telefone" style="text-align: left; width: 70px">
+                <p:column headerText="Valor" style="text-align: left; width: 70px">
                     <h:outputText value="#{cliente.telefone_Cliente}" />
                 </p:column>
-                <p:column headerText="Email" style="text-align: left; width: 250px">
-                    <h:outputText value="#{cliente.email_Cliente}" />
-                </p:column>
+
                 <p:column style="width:80px;text-align: center">
                     <p:button outcome="/cliente/cadastroCliente" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
                         <f:param name="cliente" value="#{cliente.id_Cliente}"/>
