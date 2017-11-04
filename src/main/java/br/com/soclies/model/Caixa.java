@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -36,6 +37,7 @@ public class Caixa implements Serializable {
     private Date data_Caixa;
     private BigDecimal valor_Entrada;
     private TipoEntrada Tipo_entrada_Caixa;
+    private String observacao;
 
     @Id
     @GeneratedValue
@@ -68,7 +70,7 @@ public class Caixa implements Serializable {
         this.data_Caixa = date;
     }
 
-    @NotNull
+    @NotNull @DecimalMin("00.00")
     @Column(name = "valor_Entrada", nullable = false, precision = 10, scale = 2)
     public BigDecimal getValor_Entrada() {
         return valor_Entrada;
@@ -88,6 +90,17 @@ public class Caixa implements Serializable {
     public void setTipo_entrada_Caixa(TipoEntrada Tipo_entrada_Caixa) {
         this.Tipo_entrada_Caixa = Tipo_entrada_Caixa;
     }
+
+    @Column(name = "observacao_Caixa", columnDefinition = "text")
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+    
+    
 
 
     @Override

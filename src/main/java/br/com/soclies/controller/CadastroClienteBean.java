@@ -43,7 +43,7 @@ public class CadastroClienteBean implements Serializable {
 
     public void salvar() {
         this.cliente = cadastroClienteService.salvar(this.cliente);
-        FacesUtil.addInfoMessage("Cliente adicionado com sucesso");
+        FacesUtil.addInfoMessage("Cliente salvo com sucesso");
         limparCampos();
     }
         

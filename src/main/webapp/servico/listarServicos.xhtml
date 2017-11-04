@@ -11,40 +11,69 @@
         <f:metadata>
             <f:event listener="#{pesquisaServicoBean.buscar()}" type="preRenderView"/>
         </f:metadata>
-        <h:form>
+        <h:form id="frmConsultaServico">
 
             <h1>Serviços</h1>
-            <p:toolbar style="margin-top: 15px">
+            
+             <p:messages autoUpdate="true" closable="true" />
+             
+            <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup >
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{pesquisaServicoBean.buscar()}"
+                                     update="@form"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
                     <p:button outcome="/servico/cadastroServico" value="Novo Serviço" icon="ui-icon-plusthick"/>
                     
                 </p:toolbarGroup>
-                <p:toolbarGroup align="right">
-
-                </p:toolbarGroup>
+                
             </p:toolbar>
-           <p:dataTable class="tabela" id="servicoTable" var="servico" 
-                        value="#{pesquisaServicoBean.servicos}" rowKey="#{servico.id_Servico}" 
-                        rows="12" paginator="true" paginatorPosition="bottom">
-                <p:column headerText="Codigo" style="text-align: left; width: 50px">
+             
+             <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+
+                <p:outputLabel value="Serviço" for="servico"/>
+                <p:inputText id="servico" size="20" value="#{pesquisaServicoBean.filtroServico.servico}" />
+                
+            </p:panelGrid>
+             
+             <p:dataTable id="servicoTable" value="#{pesquisaServicoBean.servicosPesquisados}"
+                          var="servico" style="margin-top: 25px" emptyMessage="Nenhum Servico encontrado"
+                          rows="10" paginator="true" paginatorAlwaysVisible="false"
+                          paginatorPosition="bottom">
+                 
+                <p:column headerText="Codigo" style="text-align: left; width: 25px">
                     <h:outputText value="#{servico.id_Servico}" />
                 </p:column>
+                 
                 <p:column headerText="Serviço" style="text-align: left; width: 250px">
                     <h:outputText value="#{servico.nome_Servico}" />
                 </p:column>
+                 
                 <p:column headerText="Valor" style="text-align: left; width: 70px">
                     <h:outputText value="#{servico.valor_Servico}" />
                 </p:column>
-                <p:column style="width:80px;text-align: center">
+                 
+                <p:column style="width:25px; text-align: center">
                     <p:button outcome="/servico/cadastroServico" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
                         <f:param name="servico" value="#{servico.id_Servico}"/>
                     </p:button>
-                    <p:commandButton  icon="ui-icon-trash" title="Remover"
-                                      actionListener="#{cadastroServicoBean.excluir(servico)}"
-                                      ajax="false" onclick="if(!confirm('Confirma a exclusão do serviço #{servico.nome_Servico} ?')) return false">
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusao.show()"
+                                     process="@this" update=":frmConsultaServico:exclusaoDialog">
+                        <f:setPropertyActionListener target="#{pesquisaServicoBean.servicoSelecionado}"
+                                                     value="#{cliente}"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
+             
+             <p:confirmDialog header="Exclusao de Serviço" message="Tem certeza que deseja excluir o serviço?"
+                             widgetVar="exclusao" id="exclusaoDialog">
+                <p:button value="Não" onclick="exclusao.hide(); return false;" />
+                <p:commandButton value="Sim" oncomplete="exclusao.hide();"
+                                 action="#{pesquisaServicoBean.excluir()}" update=":frmConsultaServico:servicoTable"/>
+            </p:confirmDialog>
+             
         </h:form>
     </ui:define>
 </ui:composition>

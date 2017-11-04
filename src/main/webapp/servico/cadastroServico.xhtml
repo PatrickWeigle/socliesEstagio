@@ -18,37 +18,38 @@
         <f:metadata>
             <f:viewParam name="servico" value="#{cadastroServicoBean.servico}"/>
         </f:metadata>
-        <h:form>
+        <h:form id="frm">
 
 
 
-            <p:messages autoUpdate="true"/>
+            <p:messages autoUpdate="false" id="mensagemServico" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                 action="#{cadastroServicoBean.salvar()}"/>
+                                 action="#{cadastroServicoBean.salvar()}" update="frm"
+                                 process="@this inclusaoServicoPanel"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">
-                <p:panel header="Serviço">
-                    <div class="coluna1-3">
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Serviço" for="nome"/>
-                            <p:inputText id="nome" size="40" maxlength="100"  
-                                         value="#{cadastroServicoBean.servico.nome_Servico}" 
-                                         required="true"/>
-                        </div>
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Valor" for="valorServico"/>
-                            <p:inputText id="valorServico" size="40" maxlength="100"  
-                                         value="#{cadastroServicoBean.servico.valor_Servico}" 
-                                         required="true"/>
+                <h:panelGroup id="inclusaoServicoPanel">
+                    <p:panel header="Serviço">
+                        <div class="coluna1-3">
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Serviço" for="nome"/>
+                                <p:inputText id="nome" size="40" maxlength="100"  
+                                             value="#{cadastroServicoBean.servico.nome_Servico}" />
+                            </div>
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Valor" for="valorServico"/>
+                                <p:inputText id="valorServico" size="40" maxlength="100"  
+                                             value="#{cadastroServicoBean.servico.valor_Servico}" />
+                            </div>
+
                         </div>
 
-                    </div>
-
-                </p:panel>
+                    </p:panel>
+                </h:panelGroup>
 
             </div> </h:form>
     </ui:define>

@@ -28,30 +28,26 @@ public class ServicoConverter implements Converter {
     }
 
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        if (value == null || value.isEmpty()) {
-            return null;
+    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
+       Servico retorno = null;
+        
+        /* veio alguma coisa */
+        if(string != null){
+            Long id = new Long(string);
+            // buscando no banco de dados 
+            retorno = repoServicos.retornaPorID(id);
         }
-
-        if (!value.matches("\\d+")) {
-            throw new ConverterException("O valor não é ID válido: " + value);
-        }
-
-        Long id = new Long(value);
-        return repoServicos.retornaPorID(id);
+        return retorno;
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o == null) {
-            return null;
-        }
-
-        if (!(o instanceof Servico)) {
-            throw new ConverterException("Esse valor não é uma Pessoa Válida: " + o);
-        }
-
-        Long id = ((Servico) o).getId_Servico();
-        return (id != null) ? String.valueOf(id) : null;
+        /* se tiver algo no object o */
+        if(o != null){
+            Servico servico = (Servico) o;
+            /* retorna a string do id do produto */
+            return servico.getId_Servico()== null ? null : servico.getId_Servico().toString();
+        }    
+        return "";
     }
 }

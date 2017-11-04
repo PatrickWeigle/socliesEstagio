@@ -7,6 +7,7 @@ package br.com.soclies.service;
 
 import br.com.soclies.model.Servico;
 import br.com.soclies.repository.Servicos;
+import br.com.soclies.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -21,11 +22,8 @@ public class CadastroServicoService implements Serializable {
     @Inject
     private Servicos servicos;
 
+    @Transactional
     public Servico salvar(Servico servico) {
         return servicos.guardar(servico);
-    }
-    
-        public void excluir(Servico servico) {
-        servicos.remover(servico);
     }
 }

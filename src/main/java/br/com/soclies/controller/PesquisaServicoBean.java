@@ -7,6 +7,8 @@ package br.com.soclies.controller;
 
 import br.com.soclies.model.Servico;
 import br.com.soclies.repository.Servicos;
+import br.com.soclies.repository.filtros.FiltrosServico;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ViewScoped;
@@ -29,10 +31,58 @@ public class PesquisaServicoBean implements Serializable {
     @Inject
     private Servico servico;
 
-    private List<Servico> servicos;
+    private List<Servico> servicosPesquisados;
+    
+    private Servico servicoSelecionado;
+    
+    private String servicoPesquisado;
+    
+    private FiltrosServico filtroServico;
 
+    public PesquisaServicoBean() {
+        filtroServico = new FiltrosServico();
+    }
+    
+    
+    public Servico getServicoSelecionado() {
+        return servicoSelecionado;
+    }
+
+    public void setServicoSelecionado(Servico servicoSelecionado) {
+        this.servicoSelecionado = servicoSelecionado;
+    }
+
+    public FiltrosServico getFiltroServico() {
+        return filtroServico;
+    }
+
+    public String getServicoPesquisado() {
+        return servicoPesquisado;
+    }
+
+    public void setServicoPesquisado(String servicoPesquisado) {
+        this.servicoPesquisado = servicoPesquisado;
+    }
+
+    public List<Servico> getServicosPesquisados() {
+        return servicosPesquisados;
+    }
+
+    public void setServicosPesquisados(List<Servico> servicosPesquisados) {
+        this.servicosPesquisados = servicosPesquisados;
+    }
+    
+    
+    
     public void buscar() {
-        servicos = repoServicos.getbuscados();
+        servicosPesquisados = repoServicos.getbuscados(filtroServico);
+    }
+    
+    public void excluir(){
+        repoServicos.remover(servicoSelecionado);
+        servicosPesquisados.remove(servicoSelecionado);
+        FacesUtil.addInfoMessage("Servico Removido com Sucesso");
+                
     }
 
     public Servico getServico() {
@@ -41,14 +91,6 @@ public class PesquisaServicoBean implements Serializable {
 
     public void setServico(Servico servico) {
         this.servico = servico;
-    }
-
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
     }
 
 

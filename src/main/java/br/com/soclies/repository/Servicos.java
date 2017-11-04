@@ -6,14 +6,19 @@
 package br.com.soclies.repository;
 
 import br.com.soclies.model.Servico;
+import br.com.soclies.repository.filtros.FiltrosServico;
+import br.com.soclies.service.NegocioException;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -27,34 +32,39 @@ public class Servicos implements Serializable {
     private EntityManager manager;
 
     public Servico guardar(Servico servico) {
-        EntityTransaction transa = manager.getTransaction();
-        transa.begin();
         servico = manager.merge(servico);
-        transa.commit();
         return servico;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Servico> getbuscados() {
+    public List<Servico> getbuscados(FiltrosServico filtrados) {
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Servico.class);
-//        criteria.add(Restrictions.ilike("nome_Cliente", servico.getNome_Cliente(),MatchMode.ANYWHERE));
-
+        if(StringUtils.isNotBlank(filtrados.getServico())){
+            criteria.add(Restrictions.ilike("nome_Servico", filtrados.getServico(), MatchMode.ANYWHERE));
+        }
         return criteria.addOrder(Order.asc("nome_Servico")).list();
     }
 
     public void remover(Servico servico) {
-        EntityTransaction et = manager.getTransaction();
-        et.begin();
-
-        servico = manager.find(Servico.class, servico.getId_Servico());
-        manager.remove(servico);
-
-        et.commit();
+        try {
+            servico = retornaPorID(servico.getId_Servico());
+            manager.remove(servico);
+            manager.flush();
+        } catch (Exception e) {
+            throw new NegocioException("Servico não pode ser excluido!");
+        }
+        
     }
 
     public Servico retornaPorID(Long id) {
         return manager.find(Servico.class, id);
+    }
+    
+    public List<Servico> porNome(String servico){
+        return this.manager.createQuery("from Servico "+ "where upper(nome_Servico) like :nome_Servico",
+                Servico.class).setParameter("nome_Servico", servico.toUpperCase() + "%").getResultList();
+    
     }
 
 }

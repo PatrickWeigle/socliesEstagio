@@ -7,6 +7,7 @@ package br.com.soclies.controller;
 
 import br.com.soclies.model.Servico;
 import br.com.soclies.service.CadastroServicoService;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -26,6 +27,10 @@ public class CadastroServicoBean implements Serializable {
     @Inject
     private CadastroServicoService cadastroServicoService;
 
+    public CadastroServicoBean() {
+        limparCampos();
+    }
+    
     public Servico getServico() {
         return servico;
     }
@@ -38,10 +43,12 @@ public class CadastroServicoBean implements Serializable {
 
     public void salvar() {
         this.servico = cadastroServicoService.salvar(this.servico);
-        System.out.println("Salvo com Sucesso");
+        FacesUtil.addInfoMessage("Serviço salvo com sucesso!");
+        limparCampos();
     }
     
-        public void excluir(Servico servico){
-        cadastroServicoService.excluir(servico);
+    public void limparCampos(){
+        this.servico = new Servico();
     }
+     
 }

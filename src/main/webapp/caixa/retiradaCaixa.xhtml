@@ -14,29 +14,35 @@
             </div>
 
         </div>
-        <h:form>
+        <h:form id="frm">
 
-            <p:messages autoUpdate="true"/>
+            <p:messages autoUpdate="flase" id="mensagemSangria" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                 action="#{cadastroSangriaCaixa.teste()}"/>
+                                 action="#{cadastroSangriaCaixaBean.salvar()}" update="frm mensagemSangria"
+                                 process="@this inclusaoSangriaPanel"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">
-                <p:panel header="Dados Pessoais">
-                    <div class="coluna1-3">
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Valor" for="valor"/>
-                            <p:inputText id="valor" size="40" maxlength="100"  value="#{cadastroSangriaCaixa.caixa.valor_Entrada}" required="true"/>
+                <h:panelGroup id="inclusaoSangriaPanel">
+                    <p:panel header="Sangria">
+                        <div class="coluna1-3">
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Valor" for="valor"/>
+                                <p:inputText id="valor" size="40" maxlength="100"  value="#{cadastroSangriaCaixaBean.caixa.valor_Entrada}"/>
+
+                                <p:outputLabel value="Observação" for="observacao"/>
+                                <p:inputTextarea id="observacao" style="width: 90%" rows="5" cols="30"
+                                                 value="#{cadastroSangriaCaixaBean.caixa.observacao}"/>
+                            </div>
 
                         </div>
-        
-                    </div>
-                    
 
-                </p:panel>
+
+                    </p:panel>
+                </h:panelGroup>
 
             </div>
 

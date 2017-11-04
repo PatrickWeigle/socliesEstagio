@@ -51,8 +51,9 @@
                             </div>
                             <div class="campo-cadastro">
                                 <p:outputLabel value="CPF" for="cpf"/>
-                                <p:inputText id="cpf" size="40" maxlength="100"  
-                                             value="#{cadastroClienteBean.cliente.cpf_cliente}"/>
+                                <p:inputMask id="cpf" size="40" maxlength="100"  
+                                             value="#{cadastroClienteBean.cliente.cpf_cliente}"
+                                             mask="999.999.999-99"/>
                             </div>
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Email" for="email"/>
@@ -86,14 +87,16 @@
                             </div>
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Telefone" for="telefone"/>
-                                <p:inputText id="telefone" size="40" maxlength="100"  
-                                             value="#{cadastroClienteBean.cliente.telefone_Cliente}"/>
+                                <p:inputMask id="telefone" size="40" maxlength="100"  
+                                             value="#{cadastroClienteBean.cliente.telefone_Cliente}"
+                                             mask="(99) 9999-9999"/>
 
                             </div>
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Celular" for="celular"/>
-                                <p:inputText id="celular" size="40" maxlength="100"  
-                                             value="#{cadastroClienteBean.cliente.celular_Cliente}"/>
+                                <p:inputMask id="celular" size="40" maxlength="100"  
+                                             value="#{cadastroClienteBean.cliente.celular_Cliente}"
+                                             mask="(99) 99999-9999"/>
                             </div>
                         </div>
 

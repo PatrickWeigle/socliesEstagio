@@ -13,6 +13,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -37,6 +42,7 @@ public class Servico implements Serializable {
         this.id_Servico = id_Servico;
     }
 
+    @NotBlank @Size(max = 150)
     @Column(name = "nome_Servico", nullable = false, length = 150)
     public String getNome_Servico() {
         return nome_Servico;
@@ -46,6 +52,7 @@ public class Servico implements Serializable {
         this.nome_Servico = nome_Servico;
     }
 
+    @NotNull @DecimalMin("00.00")
     @Column(name = "valor_Servico", nullable = false, precision = 10, scale = 2)
     public BigDecimal getValor_Servico() {
         return valor_Servico;

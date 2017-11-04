@@ -7,6 +7,7 @@ package br.com.soclies.service;
 
 import br.com.soclies.model.Caixa;
 import br.com.soclies.repository.SangriasCaixa;
+import br.com.soclies.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -20,11 +21,8 @@ public class CadastroSangriaCaixaService implements Serializable{
     @Inject
     SangriasCaixa sangriasCaixa;
     
+    @Transactional
     public Caixa salvar(Caixa caixa){
         return sangriasCaixa.guardar(caixa);
-    }
-    
-    public void excluir(Caixa caixa){
-        sangriasCaixa.remover(caixa);
     }
 }

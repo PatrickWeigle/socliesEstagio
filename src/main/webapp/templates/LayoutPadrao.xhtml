@@ -21,7 +21,7 @@ and open the template in the editor.
         <header>
             <div style="float:left">
                 <h:link outcome="/home">
-                    <h:graphicImage library="imagens" name="logo.png"/>
+                    <h:graphicImage library="imagens" name="logo2.png"/>
                 </h:link>
             </div>
             <div style="float: right; margin-right: 30px; height: 30px; margin-top: 3px;">
@@ -48,16 +48,16 @@ and open the template in the editor.
                             <p:menuitem value="Listar Servicos" outcome="/servico/listarServicos"/>
                         </p:submenu>
 
-                        <p:submenu label="Actions" style="margin-right: 3px">
-                            <p:submenu label="Ajax" icon="ui-icon-refresh">
-                                <p:menuitem value="Save"  icon="ui-icon-disk" />
-                                <p:menuitem value="Update"  icon="ui-icon-arrowrefresh-1-w" />
-                            </p:submenu>
-                            <p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-                                <p:menuitem value="Delete"  icon="ui-icon-close" ajax="false"/>
-                            </p:submenu>
+                        <p:submenu label="Caixa" style="margin-right: 3px">
+                            <p:menuitem value="Caixa" outcome="/caixa/caixa"/>
+                            <p:menuitem value="Retirada de Caixa" outcome="/caixa/retiradaCaixa"/>
                         </p:submenu>
-                        <p:menuitem value="Quit" url="http://www.primefaces.org" icon="ui-icon-close" />
+                        
+                        <p:submenu label="Pedido" style="margin-right: 3px">
+                            <p:menuitem value="Novo Pedido"/>
+                            <p:menuitem value="Pedidos"/>
+                        </p:submenu>
+                        <p:menuitem value="Sair" icon="ui-icon-close" />
                     </p:menubar>
                 </h:form>
             </div>

@@ -30,7 +30,7 @@
                                      update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:button value="Novo" icon="ui-icon-document" outcome="/cliente/cadastroCliente"/>
+                    <p:button value="Novo Cliente" icon="ui-icon-plusthick" outcome="/cliente/cadastroCliente"/>
                 </p:toolbarGroup>
             </p:toolbar>
 
@@ -86,7 +86,7 @@
                              widgetVar="exclusao" id="exclusaoDialog">
                 <p:button value="Não" onclick="exclusao.hide(); return false;" />
                 <p:commandButton value="Sim" oncomplete="exclusao.hide();"
-                                 action="#{pesquisaClienteBean.excluir}" update=":frmConsulta:clienteTable"/>
+                                 action="#{pesquisaClienteBean.excluir()}" update=":frmConsulta:clienteTable"/>
             </p:confirmDialog>
 
         </h:form>

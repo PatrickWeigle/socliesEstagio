@@ -8,6 +8,7 @@ package br.com.soclies.controller;
 import br.com.soclies.model.Caixa;
 import br.com.soclies.model.TipoEntrada;
 import br.com.soclies.service.CadastroSangriaCaixaService;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -19,7 +20,7 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class CadastroSangriaCaixa implements Serializable{
+public class CadastroSangriaCaixaBean implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject
@@ -27,6 +28,11 @@ public class CadastroSangriaCaixa implements Serializable{
     
     @Inject
     CadastroSangriaCaixaService cadastroSangriaCaixaService;
+
+    public CadastroSangriaCaixaBean() {
+        limparCampos();
+    }
+    
 
     public Caixa getCaixa() {
         return caixa;
@@ -39,14 +45,11 @@ public class CadastroSangriaCaixa implements Serializable{
     public void salvar(){
         caixa.setTipo_entrada_Caixa(TipoEntrada.SANGRIA);
         this.caixa = cadastroSangriaCaixaService.salvar(caixa);
-        System.out.println("SALVO COM SUCESSO");
+        FacesUtil.addInfoMessage("Sangria salva com sucesso!");
+        limparCampos();
     }
     
-    public void excluir(){
-        cadastroSangriaCaixaService.excluir(caixa);
-    }
-    
-    public void teste(){
-        throw new RuntimeException("ERRO DE EXCEÇÂO");
+    private void limparCampos(){
+        this.caixa = new Caixa();
     }
 }

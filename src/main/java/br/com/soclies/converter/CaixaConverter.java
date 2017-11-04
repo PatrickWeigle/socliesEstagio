@@ -28,30 +28,26 @@ public class CaixaConverter implements Converter {
     }
 
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        if (value == null || value.isEmpty()) {
-            return null;
+    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
+         Caixa retorno = null;
+        
+        /* veio alguma coisa */
+        if(string != null){
+            Long id = new Long(string);
+            // buscando no banco de dados 
+            retorno = repoSCaixas.retornaPorID(id);
         }
-
-        if (!value.matches("\\d+")) {
-            throw new ConverterException("O valor não é ID válido: " + value);
-        }
-
-        Long id = new Long(value);
-        return repoSCaixas.retornaPorID(id);
+        return retorno;
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o == null) {
-            return null;
-        }
-
-        if (!(o instanceof Caixa)) {
-            throw new ConverterException("Esse valor não é uma Pessoa Válida: " + o);
-        }
-
-        Long id = ((Caixa) o).getId_Caixa();
-        return (id != null) ? String.valueOf(id) : null;
+        /* se tiver algo no object o */
+        if(o != null){
+            Caixa caixa = (Caixa) o;
+            /* retorna a string do id do produto */
+            return caixa.getId_Caixa()== null ? null : caixa.getId_Caixa().toString();
+        }    
+        return "";
     }
 }

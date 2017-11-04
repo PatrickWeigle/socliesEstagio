@@ -29,33 +29,11 @@ public class SangriasCaixa implements Serializable {
     private EntityManager manager;
 
     public Caixa guardar(Caixa caixa) {
-        EntityTransaction transa = manager.getTransaction();
-        transa.begin();
         caixa = manager.merge(caixa);
-        transa.commit();
         return caixa;
     }
 
-    @SuppressWarnings("unchecked")
-    public List<Caixa> getbuscados(String pesquisa) {
-        Session session = manager.unwrap(Session.class);
-        Criteria criteria = session.createCriteria(Caixa.class);
-        if (pesquisa != null && !pesquisa.equals(" ")) {
-            criteria.add(Restrictions.ilike("nome_Cliente", pesquisa, MatchMode.ANYWHERE));
-        }
-        return criteria.addOrder(Order.asc("nome_Cliente")).list();
-    }
-
-    public void remover(Caixa caixa) {
-        EntityTransaction et = manager.getTransaction();
-        et.begin();
-
-        caixa = manager.find(Caixa.class, caixa.getId_Caixa());
-        manager.remove(caixa);
-
-        et.commit();
-    }
-
+    
     public Caixa retornaPorID(Long id) {
         return manager.find(Caixa.class, id);
     }
