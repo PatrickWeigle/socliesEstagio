@@ -18,38 +18,41 @@
         <f:metadata>
             <f:viewParam name="cliente" value="#{cadastroProdutoBean.produto}"/>
         </f:metadata>
-        <h:form>
+        <h:form id="frmProduto">
 
-            <p:messages autoUpdate="true"/>
+            <p:messages autoUpdate="false" id="mensagemProduto" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
-                                 action="#{cadastroProdutoBean.salvar()}"/>
+                                 action="#{cadastroProdutoBean.salvar()}" update="frmProduto mensagemProduto"
+                                 process="@this inclusaoProdutoPanel"/>
                 <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">
-                <p:panel header="Produto">
-                    <div class="coluna1-3">
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Produto" for="produto"/>
-                            <p:inputText id="produto" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.nome_Produto}" required="true"/>
+                <h:panelGroup id="inclusaoProdutoPanel">
+                    <p:panel header="Produto">
+                        <div class="coluna1-3">
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Produto" for="produto"/>
+                                <p:inputText id="produto" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.nome_Produto}"/>
 
+                            </div>
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Quantidade" for="quantidade"/>
+                                <p:inputText id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" size="40" maxlength="100" />
+
+                            </div>
+                            <div class="campo-cadastro">
+                                <p:outputLabel value="Valor unitario" for="valorUnitario"/>
+                                <p:inputText id="valorUnitario" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.valor_Produto}"/>
+
+                            </div>
                         </div>
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Quantidade" for="quantidade"/>
-                            <p:inputText id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" size="40" maxlength="100" />
-
-                        </div>
-                        <div class="campo-cadastro">
-                            <p:outputLabel value="Valor unitario" for="valorUnitario"/>
-                            <p:inputText id="valorUnitario" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.valor_Produto}"/>
-
-                        </div>
-                    </div>
 
 
-                </p:panel>
+                    </p:panel>
+                </h:panelGroup>
 
             </div>
 

@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -38,7 +42,8 @@ public class Produto implements Serializable {
         this.id_produto = id_produto;
     }
 
-    @Column(name = "nome_Produto", nullable = true, length = 150)
+    @NotBlank
+    @Column(name = "nome_Produto", nullable = false, length = 150)
     public String getNome_Produto() {
         return nome_Produto;
     }
@@ -47,7 +52,8 @@ public class Produto implements Serializable {
         this.nome_Produto = nome_Produto;
     }
 
-    @Column(name = "valor_Produto", precision = 10, scale = 2, nullable = true)
+    @NotNull @DecimalMin("00.00")
+    @Column(name = "valor_Produto", precision = 10, scale = 2, nullable = false)
     public BigDecimal getValor_Produto() {
         return valor_Produto;
     }

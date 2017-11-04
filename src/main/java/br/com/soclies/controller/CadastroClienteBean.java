@@ -46,10 +46,6 @@ public class CadastroClienteBean implements Serializable {
         FacesUtil.addInfoMessage("Cliente adicionado com sucesso");
         limparCampos();
     }
-    
-        public void excluir(Cliente cliente){
-        cadastroClienteService.excluir(cliente);
-    }
         
     private void limparCampos(){
         this.cliente = new Cliente();

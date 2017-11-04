@@ -7,6 +7,7 @@ package br.com.soclies.service;
 
 import br.com.soclies.model.Produto;
 import br.com.soclies.repository.Produtos;
+import br.com.soclies.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -21,11 +22,8 @@ public class CadastroProdutoService implements Serializable {
     @Inject
     private Produtos produtos;
 
+    @Transactional
     public Produto salvar(Produto produto) {
         return produtos.guardar(produto);
-    }
-    
-    public void excluir(Produto produto){
-        produtos.remover(produto);
     }
 }

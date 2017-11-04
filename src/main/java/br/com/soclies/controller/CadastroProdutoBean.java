@@ -7,8 +7,8 @@ package br.com.soclies.controller;
 
 import br.com.soclies.model.Produto;
 import br.com.soclies.service.CadastroProdutoService;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,6 +27,10 @@ public class CadastroProdutoBean implements Serializable {
     @Inject
     private CadastroProdutoService cadastroProdutoService;
 
+    public CadastroProdutoBean() {
+        limparCampos();
+    }
+
     public Produto getProduto() {
         return produto;
     }
@@ -37,10 +41,11 @@ public class CadastroProdutoBean implements Serializable {
 
     public void salvar() {
         this.produto = cadastroProdutoService.salvar(this.produto);
-        System.out.println("Salvo produto com Sucesso");
+        FacesUtil.addInfoMessage("Produto adicionado com sucesso!");
+        limparCampos();
     }
-
-    public void excluir(Produto produto) {
-        cadastroProdutoService.excluir(produto);
+    
+    private void limparCampos(){
+        this.produto = new Produto();
     }
 }

@@ -7,6 +7,8 @@ package br.com.soclies.controller;
 
 import br.com.soclies.model.Cliente;
 import br.com.soclies.repository.Clientes;
+import br.com.soclies.repository.filtros.FiltrosCliente;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
@@ -32,10 +34,37 @@ public class PesquisaClienteBean implements Serializable {
     @Inject
     private Cliente cliente;
 
-    private List<Cliente> clientes;
+    private List<Cliente> clientesPesquisados;
+    
+    private FiltrosCliente filtroCliente;
+    private Cliente clienteSelecionado;
+
+    public PesquisaClienteBean() {
+        filtroCliente = new FiltrosCliente();
+    }
+    
+    
+
+    public FiltrosCliente getFiltroCliente() {
+        return filtroCliente;
+    }
+
+    public Cliente getClienteSelecionado() {
+        return clienteSelecionado;
+    }
+
+    public void setClienteSelecionado(Cliente clienteSelecionado) {
+        this.clienteSelecionado = clienteSelecionado;
+    }
 
     public void buscar() {
-        clientes = repositorioClientes.getbuscados(nomePesquisado);
+        clientesPesquisados = repositorioClientes.getbuscados(filtroCliente);
+    }
+    
+    public void excluir(){
+        repositorioClientes.remover(clienteSelecionado);
+        clientesPesquisados.remove(clienteSelecionado);
+        FacesUtil.addInfoMessage("Cliente removido com sucesso");
     }
     
 
@@ -55,12 +84,12 @@ public class PesquisaClienteBean implements Serializable {
         this.cliente = cliente;
     }
 
-    public List<Cliente> getClientes() {
-        return clientes;
+    public List<Cliente> getClientesPesquisados () {
+        return clientesPesquisados;
     }
 
-    public void setClientes(List<Cliente> clientes) {
-        this.clientes = clientes;
+    public void setClientesPesquisados (List<Cliente> clientes) {
+        this.clientesPesquisados = clientes;
     }
 
 }

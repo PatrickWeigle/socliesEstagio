@@ -24,11 +24,12 @@ public class CadastroClienteService implements Serializable {
 
     @Transactional
     public Cliente salvar(Cliente cliente) {
-        
+        Cliente existente = clientes.verificaCPF(cliente.getCpf_cliente());
+        if(existente != null && !existente.equals(cliente)){
+            throw new NegocioException("Ja existem um cliente com o mesmo CPF");
+        }
         return clientes.guardar(cliente);
     }
     
-        public void excluir(Cliente cliente) {
-        clientes.remover(cliente);
-    }
+    
 }

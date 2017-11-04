@@ -29,29 +29,24 @@ public class ProdutoConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext fc, UIComponent uic, String value) {
-        if (value == null || value.isEmpty()) {
-            return null;
+        Produto retorno = null;
+        
+        if(value != null){
+            Long id = new Long(value);
+            retorno = repoProdutos.retornaPorID(id);
         }
-
-        if (!value.matches("\\d+")) {
-            throw new ConverterException("O valor não é ID válido: " + value);
-        }
-
-        Long id = new Long(value);
-        return repoProdutos.retornaPorID(id);
+        return retorno;
     }
 
     @Override
     public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o == null) {
-            return null;
+        
+        if(o != null){
+            Produto produto = (Produto) o;
+            
+            return produto.getId_produto() == null ? null : produto.getId_produto().toString();
         }
-
-        if (!(o instanceof Produto)) {
-            throw new ConverterException("Esse valor não é uma Pessoa Válida: " + o);
-        }
-
-        Long id = ((Produto) o).getId_produto();
-        return (id != null) ? String.valueOf(id) : null;
+        
+        return "";
     }
 }

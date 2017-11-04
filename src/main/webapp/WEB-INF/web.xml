@@ -28,7 +28,7 @@
     <!-- Configuração dos temas do PrimeFaces -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>bootstrap</param-value>
+        <param-value>delta</param-value>
     </context-param>
 
     <!-- Servlet do JSF e mapeamento de URLs -->
