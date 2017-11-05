@@ -54,7 +54,9 @@
                     <h:outputText value="#{produto.quantidade_Produto}" />
                 </p:column>
                 <p:column headerText="Valor" style="text-align: left; width: 70px">
-                    <h:outputText value="#{produto.valor_Produto}" />
+                    <h:outputText value="#{produto.valor_Produto}" >
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
                 </p:column>
                 <p:column style="width:25px;text-align: center">
                     <p:button outcome="/produto/cadastroProduto" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">

@@ -6,6 +6,7 @@
 package br.com.soclies.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -24,23 +26,36 @@ import javax.persistence.Table;
 public class Servico_Pedido implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private int id_Servico_Pedido;
+    private Long id_Servico_Pedido;
     private Servico servico;
     private Pedido pedido;
-    private int quantidade_Servico;
+    private BigDecimal valor_unitario = BigDecimal.ZERO;
+    private Integer quantidade_Servico = 1;
 
     @Id
     @GeneratedValue
-    public int getId_Servico_Pedido() {
+    public Long getId_Servico_Pedido() {
         return id_Servico_Pedido;
     }
 
-    public void setId_Servico_Pedido(int id_Servico_Pedido) {
+    public void setId_Servico_Pedido(Long id_Servico_Pedido) {
         this.id_Servico_Pedido = id_Servico_Pedido;
     }
 
+    
+    @Column(name = "valor_unitario",  precision = 10, scale = 2)
+    public BigDecimal getValor_unitario() {
+        return valor_unitario;
+    }
+
+    public void setValor_unitario(BigDecimal valor_unitario) {
+        this.valor_unitario = valor_unitario;
+    }
+    
+    
+
     @ManyToOne
-    @JoinColumn(name = "servico", nullable = false)
+    @JoinColumn(name = "servico_id", nullable = false)
     public Servico getId_Servico() {
         return servico;
     }
@@ -60,21 +75,18 @@ public class Servico_Pedido implements Serializable {
     }
 
     @Column(name = "quantidade_Servico")
-    public int getQuantidade_Servico() {
+    public Integer getQuantidade_Servico() {
         return quantidade_Servico;
     }
 
-    public void setQuantidade_Servico(int quantidade_Servico) {
+    public void setQuantidade_Servico(Integer quantidade_Servico) {
         this.quantidade_Servico = quantidade_Servico;
     }
 
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 67 * hash + this.id_Servico_Pedido;
-        hash = 67 * hash + Objects.hashCode(this.servico);
-        hash = 67 * hash + Objects.hashCode(this.pedido);
-        hash = 67 * hash + this.quantidade_Servico;
+        hash = 37 * hash + Objects.hashCode(this.id_Servico_Pedido);
         return hash;
     }
 
@@ -90,19 +102,23 @@ public class Servico_Pedido implements Serializable {
             return false;
         }
         final Servico_Pedido other = (Servico_Pedido) obj;
-        if (this.id_Servico_Pedido != other.id_Servico_Pedido) {
-            return false;
-        }
-        if (this.quantidade_Servico != other.quantidade_Servico) {
-            return false;
-        }
-        if (!Objects.equals(this.servico, other.servico)) {
-            return false;
-        }
-        if (!Objects.equals(this.pedido, other.pedido)) {
+        if (!Objects.equals(this.id_Servico_Pedido, other.id_Servico_Pedido)) {
             return false;
         }
         return true;
+    }
+
+   
+  
+    
+    @Transient
+    public BigDecimal getValorTotal(){
+        return this.getValor_unitario().multiply(new BigDecimal(this.getQuantidade_Servico()));
+    }
+    
+    @Transient
+    public boolean isServicoAssociado(){
+        return this.getId_Servico() != null && this.getId_Servico().getId_Servico() != null;
     }
 
 }

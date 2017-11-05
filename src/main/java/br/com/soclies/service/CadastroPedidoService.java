@@ -7,6 +7,8 @@ package br.com.soclies.service;
 
 import br.com.soclies.model.Pedido;
 import br.com.soclies.repository.Pedidos;
+import br.com.soclies.util.jpa.Transactional;
+import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import javax.faces.application.FacesMessage;
@@ -24,13 +26,14 @@ public class CadastroPedidoService implements Serializable {
     @Inject
     private Pedidos pedidos;
 
+    @Transactional
     public Pedido salvar(Pedido pedido) {
         if (pedido.isNovo()) {
             pedido.setData_pedido(new Date());
         }
+        pedido.recalcularValorTotal();
         if (pedido.getItensPedido().isEmpty()) {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Pedido deve possuir pelo menos 1 item!!!", ""));
-
+            throw new NegocioException("Pedido deve possuir pelo um serviço!");
         }
         //Metodo para verificar se pedido tem valor negativo
         pedido = this.pedidos.guardar(pedido);

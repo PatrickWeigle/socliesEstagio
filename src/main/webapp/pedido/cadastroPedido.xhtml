@@ -5,8 +5,14 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-    <ui:define name="titulo">Pedido</ui:define>
+
     <ui:define name="corpo">
+        <ui:define name="titulo">Pedido</ui:define>
+        
+        <f:metadata>
+            <f:event listener="#{cadastroPedidoBean.inicializar}" type="preRenderView"/>
+        </f:metadata>
+
         <h:form id="formCadastro">
             <ui:include src="/WEB-INF/template/pedido/botoesPedido.xhtml"/>
             <ui:include src="/WEB-INF/template/pedido/formularioPedido.xhtml"/>
@@ -19,7 +25,7 @@
                 </p:tab>
 
             </p:tabView>
-            
+
 
 
         </h:form>

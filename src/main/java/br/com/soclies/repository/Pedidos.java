@@ -15,12 +15,18 @@ import javax.persistence.EntityManager;
  * @author patrickweigle
  */
 public class Pedidos implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
 
     @Inject
     private EntityManager manager;
     
     public Pedido guardar(Pedido pedido){
         return this.manager.merge(pedido);
+    }
+    
+    public Pedido retornaPorId(Long id){
+        return manager.find(Pedido.class, id);
     }
     
 }

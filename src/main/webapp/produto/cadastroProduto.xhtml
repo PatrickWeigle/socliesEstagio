@@ -41,11 +41,15 @@
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Quantidade" for="quantidade"/>
                                 <p:inputText id="quantidade" value="#{cadastroProdutoBean.produto.quantidade_Produto}" size="40" maxlength="100" />
+                                            
 
                             </div>
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Valor unitario" for="valorUnitario"/>
-                                <p:inputText id="valorUnitario" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.valor_Produto}"/>
+                                <p:inputText id="valorUnitario" size="40" maxlength="100"  value="#{cadastroProdutoBean.produto.valor_Produto}"
+                                             styleClass="moeda">
+                                <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </p:inputText>
 
                             </div>
                         </div>
