@@ -1,0 +1,83 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Caixa</ui:define>
+    <ui:define name="corpo">
+
+        <f:metadata>
+            <f:event listener="#{pesquisaCaixaBean.pesquisar()}" type="preRenderView"/>
+        </f:metadata>
+
+        <h:form id="frmConsultaCaixa">
+
+            <h1>Caixa</h1>
+
+            <p:messages autoUpdate="true" closable="true"/>
+
+
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{pesquisaCaixaBean.pesquisar()}"
+                                     update="@form"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Sangria" icon="ui-icon-plusthick" outcome="/caixa/retiradaCaixa"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+
+
+                <p:outputLabel value="Data: "  />
+                <h:panelGroup>
+
+                    <p:inputMask id="dataIni" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataInicio}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputMask>
+                    à
+                    <p:inputMask id="dataFim" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataFim}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputMask>
+
+                </h:panelGroup>
+
+                <p:outputLabel value="Tipo de entrada" for="tipoEntrada"/>
+
+                <p:selectOneMenu id="tipoEntrada" value="#{pesquisaCaixaBean.filtrosCaixa.tipoEntrada}" >
+                    <f:selectItem itemLabel="Tipo de entrada"/>
+                    <f:selectItems value="#{pesquisaCaixaBean.tipoEntrada}" var="tipoEntrada"
+                                   itemValue="#{tipoEntrada}" itemLabel="#{tipoEntrada.descricao}"/>
+                </p:selectOneMenu>
+
+            </p:panelGrid>
+
+            <p:dataTable id="caixaTable" value="#{pesquisaCaixaBean.caixasPesquisados}"
+                         var="caixa" style="margin-top: 25px" emptyMessage="Nenhum entrada de caixa encontrado."
+                         rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+                <p:column headerText="Codigo" style="text-align: left; width: 20px">
+                    <h:outputText value="#{caixa.id_Caixa}" />
+                </p:column>
+                <p:column headerText="Data" style="text-align: left; width: 100px">
+                    <h:outputText value="#{caixa.data_Caixa}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Tipo de Entrada" style="text-align: left; width: 100px">
+                    <h:outputText value="#{caixa.tipo_entrada_Caixa}" />
+                </p:column>
+                <p:column headerText="Valor" style="text-align: left; width: 80px">
+                    <h:outputText value="#{caixa.valor_Entrada}" >
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

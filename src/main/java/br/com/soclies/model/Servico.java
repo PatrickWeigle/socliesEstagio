@@ -52,7 +52,7 @@ public class Servico implements Serializable {
         this.nome_Servico = nome_Servico;
     }
 
-    @NotNull @DecimalMin("00.00")
+    @NotNull
     @Column(name = "valor_Servico", nullable = false, precision = 10, scale = 2)
     public BigDecimal getValor_Servico() {
         return valor_Servico;

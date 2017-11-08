@@ -1,0 +1,79 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+     <ui:define name="titulo">Sangrias</ui:define>
+    <ui:define name="corpo">
+
+        <f:metadata>
+            <f:event listener="#{pesquisaCaixaBean.pesquisar()}" type="preRenderView"/>
+        </f:metadata>
+        <h:form id="frmConsultaServico">
+
+            <h1>Serviços</h1>
+            
+             <p:messages autoUpdate="true" closable="true" />
+             
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup >
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{pesquisaServicoBean.buscar()}"
+                                     update="@form"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button outcome="/servico/cadastroServico" value="Novo Serviço" icon="ui-icon-plusthick"/>
+                    
+                </p:toolbarGroup>
+                
+            </p:toolbar>
+             
+             <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+
+                <p:outputLabel value="Serviço" for="servico"/>
+                <p:inputText id="servico" size="20" value="#{pesquisaServicoBean.filtroServico.servico}" />
+                
+            </p:panelGrid>
+             
+             <p:dataTable id="servicoTable" value="#{pesquisaServicoBean.servicosPesquisados}"
+                          var="servico" style="margin-top: 25px" emptyMessage="Nenhum Servico encontrado"
+                          rows="10" paginator="true" paginatorAlwaysVisible="false"
+                          paginatorPosition="bottom">
+                 
+                <p:column headerText="Codigo" style="text-align: left; width: 25px">
+                    <h:outputText value="#{servico.id_Servico}" />
+                </p:column>
+                 
+                <p:column headerText="Serviço" style="text-align: left; width: 250px">
+                    <h:outputText value="#{servico.nome_Servico}" />
+                </p:column>
+                 
+                <p:column headerText="Valor" style="text-align: left; width: 70px">
+                    <h:outputText value="#{servico.valor_Servico}" />
+                </p:column>
+                 
+                <p:column style="width:25px; text-align: center">
+                    <p:button outcome="/servico/cadastroServico" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
+                        <f:param name="servico" value="#{servico.id_Servico}"/>
+                    </p:button>
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusao.show()"
+                                     process="@this" update=":frmConsultaServico:exclusaoDialog">
+                        <f:setPropertyActionListener target="#{pesquisaServicoBean.servicoSelecionado}"
+                                                     value="#{cliente}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+             
+             <p:confirmDialog header="Exclusao de Serviço" message="Tem certeza que deseja excluir o serviço?"
+                             widgetVar="exclusao" id="exclusaoDialog">
+                <p:button value="Não" onclick="exclusao.hide(); return false;" />
+                <p:commandButton value="Sim" oncomplete="exclusao.hide();"
+                                 action="#{pesquisaServicoBean.excluir()}" update=":frmConsultaServico:servicoTable"/>
+            </p:confirmDialog>
+             
+        </h:form>
+    </ui:define>
+</ui:composition>

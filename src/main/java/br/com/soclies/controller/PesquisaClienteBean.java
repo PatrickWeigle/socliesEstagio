@@ -56,18 +56,7 @@ public class PesquisaClienteBean implements Serializable {
     public void setClienteSelecionado(Cliente clienteSelecionado) {
         this.clienteSelecionado = clienteSelecionado;
     }
-
-    public void buscar() {
-        clientesPesquisados = repositorioClientes.getbuscados(filtroCliente);
-    }
     
-    public void excluir(){
-        repositorioClientes.remover(clienteSelecionado);
-        clientesPesquisados.remove(clienteSelecionado);
-        FacesUtil.addInfoMessage("Cliente removido com sucesso");
-    }
-    
-
     public String getNomePesquisado() {
         return nomePesquisado;
     }
@@ -91,5 +80,18 @@ public class PesquisaClienteBean implements Serializable {
     public void setClientesPesquisados (List<Cliente> clientes) {
         this.clientesPesquisados = clientes;
     }
+
+    public void buscar() {
+        clientesPesquisados = repositorioClientes.getbuscados(filtroCliente);
+    }
+    
+    public void excluir(){
+        repositorioClientes.remover(clienteSelecionado);
+        clientesPesquisados.remove(clienteSelecionado);
+        FacesUtil.addInfoMessage("Cliente removido com sucesso");
+    }
+    
+
+    
 
 }

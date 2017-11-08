@@ -5,8 +5,8 @@
  */
 package br.com.soclies.service;
 
-import br.com.soclies.model.Caixa;
-import br.com.soclies.repository.Caixas;
+import br.com.soclies.model.Agenda;
+import br.com.soclies.repository.Agendas;
 import br.com.soclies.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
@@ -15,14 +15,14 @@ import javax.inject.Inject;
  *
  * @author patrickweigle
  */
-public class CadastroSangriaCaixaService implements Serializable{
+public class CadastroAgendaService implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject
-    Caixas sangriasCaixa;
+    private Agendas repoAgendas;
     
     @Transactional
-    public Caixa salvar(Caixa caixa){
-        return sangriasCaixa.guardar(caixa);
+    public Agenda salvar(Agenda agenda){
+        return repoAgendas.guardar(agenda);
     }
 }

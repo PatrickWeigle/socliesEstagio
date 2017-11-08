@@ -1,0 +1,91 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Pedidos</ui:define>
+    <ui:define name="corpo">
+
+        <f:metadata>
+            <f:event listener="#{pesquisaPedidoBean.pesquisar()}" type="preRenderView"/>
+        </f:metadata>
+
+        <h:form id="frmConsultaPedido">
+
+            <h1>Produtos</h1>
+
+            <p:messages autoUpdate="true" closable="true"/>
+
+
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{pesquisaPedidoBean.pesquisar()}"
+                                     update="@form"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Novo" icon="ui-icon-plusthick" outcome="/pedido/cadastroPedido"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <p:panelGrid columns="4" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+
+                <p:outputLabel value="Nº Pedido: " />
+                <h:panelGroup>
+
+                    <p:inputText id="nPedidoIni" size="10" value="#{pesquisaPedidoBean.filtrosPedidos.numeroDe}" />
+                    à
+                    <p:inputText id="nPedidoFim" size="10" value="#{pesquisaPedidoBean.filtrosPedidos.numeroAte}" />
+
+                </h:panelGroup>
+
+                <p:outputLabel value="Data: "  />
+                <h:panelGroup>
+
+                    <p:inputText id="dataIni" size="10" value="#{pesquisaPedidoBean.filtrosPedidos.dataInicio}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputText>
+                    à
+                    <p:inputText id="dataFim" size="10" value="#{pesquisaPedidoBean.filtrosPedidos.dataFim}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputText>
+
+                </h:panelGroup>
+
+                <p:outputLabel value="Cliente:"/>
+                <p:inputText id="nome" size="30" value="#{pesquisaPedidoBean.filtrosPedidos.nomeCliente}" />
+
+            </p:panelGrid>
+
+            <p:dataTable id="pedidoTable" value="#{pesquisaPedidoBean.pedidosPesquisados}"
+                         var="pedido" style="margin-top: 25px" emptyMessage="Nenhum produto encontrado."
+                         rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+                <p:column headerText="Codigo" style="text-align: left; width: 20px">
+                    <h:outputText value="#{pedido.id_Pedido}" />
+                </p:column>
+                <p:column headerText="Data" style="text-align: left; width: 100px">
+                    <h:outputText value="#{pedido.data_pedido}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Cliente" style="text-align: left; width: 600px">
+                    <h:outputText value="#{pedido.id_cliente.nome_Cliente}" />
+                </p:column>
+                <p:column headerText="Valor" style="text-align: left; width: 80px">
+                    <h:outputText value="#{pedido.total_Pedido}" >
+                        <f:convertNumber type="currency"/>
+                    </h:outputText>
+                </p:column>
+                <p:column style="width:25px;text-align: center">
+                    <p:button outcome="/pedido/cadastroPedido" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
+                        <f:param name="pedido" value="#{pedido.id_Pedido}"/>
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

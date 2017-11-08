@@ -7,7 +7,7 @@ package br.com.soclies.converter;
 
 import br.com.soclies.util.cdi.CDIServiceLocator;
 import br.com.soclies.model.Caixa;
-import br.com.soclies.repository.SangriasCaixa;
+import br.com.soclies.repository.Caixas;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -21,10 +21,10 @@ import javax.faces.convert.FacesConverter;
 @FacesConverter(forClass = Caixa.class)
 public class CaixaConverter implements Converter {
 
-    private SangriasCaixa repoSCaixas;
+    private Caixas repoSCaixas;
 
     public CaixaConverter() {
-        this.repoSCaixas = CDIServiceLocator.getBean(SangriasCaixa.class);
+        this.repoSCaixas = CDIServiceLocator.getBean(Caixas.class);
     }
 
     @Override

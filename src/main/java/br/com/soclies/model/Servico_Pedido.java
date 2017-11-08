@@ -8,6 +8,7 @@ package br.com.soclies.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -54,7 +55,7 @@ public class Servico_Pedido implements Serializable {
     
     
 
-    @ManyToOne
+    @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "servico_id", nullable = false)
     public Servico getId_Servico() {
         return servico;

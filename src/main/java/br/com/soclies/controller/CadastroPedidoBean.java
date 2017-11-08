@@ -5,21 +5,25 @@
  */
 package br.com.soclies.controller;
 
+import br.com.soclies.model.Caixa;
 import br.com.soclies.model.Cliente;
 import br.com.soclies.model.FormaDePagamento;
 import br.com.soclies.model.Pedido;
 import br.com.soclies.model.Servico;
 import br.com.soclies.model.Servico_Pedido;
+import br.com.soclies.model.TipoEntrada;
 import br.com.soclies.repository.Clientes;
+import br.com.soclies.repository.Caixas;
 import br.com.soclies.repository.Servicos;
 import br.com.soclies.service.CadastroPedidoService;
+import br.com.soclies.service.CadastroSangriaCaixaService;
 import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.apache.commons.lang3.StringUtils;
 
 /**
  *
@@ -41,6 +45,15 @@ public class CadastroPedidoBean implements Serializable {
     private Pedido pedido;
 
     @Inject
+    private Caixa caixa;
+
+    @Inject
+    private CadastroSangriaCaixaService caixaService;
+
+    @Inject
+    Caixas repoCaixa;
+
+    @Inject
     private CadastroPedidoService cadastroPedidoService;
 
     private Servico servicoLinhaEditavel;
@@ -54,8 +67,17 @@ public class CadastroPedidoBean implements Serializable {
     public void salvar() {
         this.pedido.removerItemVazio();
         try {
+
             this.pedido = this.cadastroPedidoService.salvar(this.pedido);
             FacesUtil.addInfoMessage("Pedido adicionado com sucesso");
+            caixa.setPedido(pedido);
+            caixa.setData_Caixa(new Date());
+            caixa.setTipo_entrada_Caixa(TipoEntrada.PEDIDO);
+            caixa.setValor_Entrada(pedido.getTotal_Pedido());
+            this.caixa = this.caixaService.salvar(this.caixa);
+            FacesUtil.addInfoMessage("CAIXA ADICIONADO");
+
+            limpar();
         } finally {
             this.pedido.adicionarItemVazio();
         }
@@ -98,6 +120,14 @@ public class CadastroPedidoBean implements Serializable {
         this.pedido = pedido;
     }
 
+    public Caixa getCaixa() {
+        return caixa;
+    }
+
+    public void setCaixa(Caixa caixa) {
+        this.caixa = caixa;
+    }
+
     public List<Cliente> completarCliente(String nome) {
         return this.repoClientes.porNome(nome);
     }
@@ -120,6 +150,7 @@ public class CadastroPedidoBean implements Serializable {
     public void carregarServicoPorID() {
         if (this.id != null) {
             this.servicoLinhaEditavel = this.repoServicos.retornaPorID(id);
+            this.carregarServicoLinhaEditavel();
         }
     }
 
@@ -151,7 +182,7 @@ public class CadastroPedidoBean implements Serializable {
         Servico_Pedido servico = this.pedido.getItensPedido().get(0);
         if (servicoLinhaEditavel != null) {
             if (this.existeItemComServico(this.servicoLinhaEditavel)) {
-                FacesUtil.addInfoMessage("Esse item já existe no pedido");
+                FacesUtil.addErrorMessage("Esse item já existe no pedido");
             } else {
                 servico.setId_Servico(this.servicoLinhaEditavel);
                 servico.setValor_unitario(this.servicoLinhaEditavel.getValor_Servico());

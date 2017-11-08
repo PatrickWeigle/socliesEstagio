@@ -10,5 +10,15 @@ package br.com.soclies.model;
  * @author patrickweigle
  */
 public enum TipoEntrada {
-        PRODUTO,PEDIDO,SANGRIA
+    PRODUTO("Produto"), PEDIDO("Pedido"), SANGRIA("Sangria");
+
+    private String descricao;
+
+    private TipoEntrada(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
 }

@@ -10,7 +10,7 @@ package br.com.soclies.model;
  * @author patrickweigle
  */
 public enum FormaDePagamento {
-    DINHEIRO("dinheiro"), CARTAO_CREDITO("Cartão de Crédito"), CARTAO_DEBITO("Cartão de Débito"),
+    DINHEIRO("Dinheiro"), CARTAO_CREDITO("Cartão de Crédito"), CARTAO_DEBITO("Cartão de Débito"),
     DUPLICATA("Duplicata"), CHEQUE("Cheque");
 
     private String descricao;

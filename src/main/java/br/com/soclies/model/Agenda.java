@@ -5,6 +5,7 @@
  */
 package br.com.soclies.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -24,8 +25,9 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "tab_Agenda")
-public class Agenda {
+public class Agenda implements Serializable{
 
+    private static final long serialVersionUID = 1L;
     private Long id_Agenda;
     private Cliente cliente;
     private Date horario_Agenda;

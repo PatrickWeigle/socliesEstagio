@@ -5,7 +5,6 @@
  */
 package br.com.soclies.repository.filtros;
 
-import br.com.soclies.model.TipoEntrada;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,13 +12,31 @@ import java.util.Date;
  *
  * @author patrickweigle
  */
-public class FiltrosCaixa implements Serializable {
-
+public class FiltrosPedido implements Serializable{
+    
     private static final long serialVersionUID = 1L;
-
+    
+    private Long numeroDe;
+    private Long numeroAte;
     private Date dataInicio;
     private Date dataFim;
-    private TipoEntrada tipoEntrada;
+    private String nomeCliente;
+
+    public Long getNumeroDe() {
+        return numeroDe;
+    }
+
+    public void setNumeroDe(Long numeroDe) {
+        this.numeroDe = numeroDe;
+    }
+
+    public Long getNumeroAte() {
+        return numeroAte;
+    }
+
+    public void setNumeroAte(Long numeroAte) {
+        this.numeroAte = numeroAte;
+    }
 
     public Date getDataInicio() {
         return dataInicio;
@@ -37,14 +54,14 @@ public class FiltrosCaixa implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public TipoEntrada getTipoEntrada() {
-        return tipoEntrada;
+    public String getNomeCliente() {
+        return nomeCliente;
     }
 
-    public void setTipoEntrada(TipoEntrada tipoEntrada) {
-        this.tipoEntrada = tipoEntrada;
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
     }
     
     
-
+    
 }

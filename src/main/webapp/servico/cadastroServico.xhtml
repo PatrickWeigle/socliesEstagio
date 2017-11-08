@@ -28,7 +28,7 @@
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
                                  action="#{cadastroServicoBean.salvar()}" update="frm"
                                  process="@this inclusaoServicoPanel"/>
-                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+                <p:button value="Cancelar" icon="ui-icon-cancel" outcome="/servico/cadastroServico"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">
@@ -43,7 +43,10 @@
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Valor" for="valorServico"/>
                                 <p:inputText id="valorServico" size="40" maxlength="100"  
-                                             value="#{cadastroServicoBean.servico.valor_Servico}" />
+                                             value="#{cadastroServicoBean.servico.valor_Servico}"
+                                             styleClass="moeda">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </p:inputText>
                             </div>
 
                         </div>

@@ -24,10 +24,10 @@ public class CadastroSangriaCaixaBean implements Serializable{
     private static final long serialVersionUID = 1L;
     
     @Inject
-    Caixa caixa;
+    private Caixa caixa;
     
     @Inject
-    CadastroSangriaCaixaService cadastroSangriaCaixaService;
+    private CadastroSangriaCaixaService cadastroSangriaCaixaService;
 
     public CadastroSangriaCaixaBean() {
         limparCampos();
