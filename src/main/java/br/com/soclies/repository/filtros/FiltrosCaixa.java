@@ -19,7 +19,7 @@ public class FiltrosCaixa implements Serializable {
 
     private Date dataInicio;
     private Date dataFim;
-    private TipoEntrada tipoEntrada;
+    private String tipoEntrada;
 
     public Date getDataInicio() {
         return dataInicio;
@@ -37,11 +37,11 @@ public class FiltrosCaixa implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public TipoEntrada getTipoEntrada() {
+    public String getTipoEntrada() {
         return tipoEntrada;
     }
 
-    public void setTipoEntrada(TipoEntrada tipoEntrada) {
+    public void setTipoEntrada(String tipoEntrada) {
         this.tipoEntrada = tipoEntrada;
     }
     

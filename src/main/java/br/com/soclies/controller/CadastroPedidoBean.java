@@ -75,7 +75,6 @@ public class CadastroPedidoBean implements Serializable {
             caixa.setTipo_entrada_Caixa(TipoEntrada.PEDIDO);
             caixa.setValor_Entrada(pedido.getTotal_Pedido());
             this.caixa = this.caixaService.salvar(this.caixa);
-            FacesUtil.addInfoMessage("CAIXA ADICIONADO");
 
             limpar();
         } finally {

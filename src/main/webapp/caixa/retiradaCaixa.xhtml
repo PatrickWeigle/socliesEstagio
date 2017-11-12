@@ -5,12 +5,12 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-    <ui:define name="titulo">Novo Cliente</ui:define>
+    <ui:define name="titulo">Sangria</ui:define>
     <ui:define name="corpo">
 
         <div style="margin-top: 20px; display:ruby-text-container;">
             <div class="titulo-pagina">
-                <h1>Cadastro de Cliente</h1>            
+                <h1>Nova Sangria</h1>            
             </div>
 
         </div>
@@ -31,7 +31,10 @@
                         <div class="coluna1-3">
                             <div class="campo-cadastro">
                                 <p:outputLabel value="Valor" for="valor"/>
-                                <p:inputText id="valor" size="40" maxlength="100"  value="#{cadastroSangriaCaixaBean.caixa.valor_Entrada}"/>
+                                <p:inputText id="valor" size="40" maxlength="100"  value="#{cadastroSangriaCaixaBean.caixa.valor_Entrada}"
+                                             styleClass="moeda">
+                                    <f:convertNumber maxFractionDigits="2" minFractionDigits="2"/>
+                                </p:inputText>
 
                                 <p:outputLabel value="Observação" for="observacao"/>
                                 <p:inputTextarea id="observacao" style="width: 90%" rows="5" cols="30"

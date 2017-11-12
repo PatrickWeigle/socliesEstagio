@@ -9,9 +9,9 @@
     <ui:define name="corpo">
 
         <f:metadata>
-            <f:event listener="#{pesquisaCaixaBean.pesquisar()}" type="preRenderView"/>
+            <f:event listener="#{pesquisaCaixaBean.pesquisarSangrias()}" type="preRenderView"/>
         </f:metadata>
-        <h:form id="frmConsultaServico">
+        <h:form id="frmConsultaCaixa">
 
             <h1>Serviços</h1>
             
@@ -20,11 +20,11 @@
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup >
                     <p:commandButton value="Pesquisar" icon="ui-icon-search"
-                                     action="#{pesquisaServicoBean.buscar()}"
+                                     action="#{pesquisaCaixaBean.pesquisarSangrias()}"
                                      update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
-                    <p:button outcome="/servico/cadastroServico" value="Novo Serviço" icon="ui-icon-plusthick"/>
+                    <p:button outcome="/caixa/retiradaCaixa" value="Sangria" icon="ui-icon-plusthick"/>
                     
                 </p:toolbarGroup>
                 
@@ -33,45 +33,55 @@
              <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
                          columnClasses="rotulo, campo" >
 
-                <p:outputLabel value="Serviço" for="servico"/>
-                <p:inputText id="servico" size="20" value="#{pesquisaServicoBean.filtroServico.servico}" />
+               <p:outputLabel value="Data: "  />
+                <h:panelGroup>
+
+                    <p:inputMask id="dataIni" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataInicio}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputMask>
+                    à
+                    <p:inputMask id="dataFim" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataFim}" mask="99/99/9999">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </p:inputMask>
+
+                </h:panelGroup>
                 
             </p:panelGrid>
              
-             <p:dataTable id="servicoTable" value="#{pesquisaServicoBean.servicosPesquisados}"
-                          var="servico" style="margin-top: 25px" emptyMessage="Nenhum Servico encontrado"
+             <p:dataTable id="sangriaTable" value="#{pesquisaCaixaBean.caixasPesquisados}"
+                          var="sangria" style="margin-top: 25px" emptyMessage="Nenhum Servico encontrado"
                           rows="10" paginator="true" paginatorAlwaysVisible="false"
                           paginatorPosition="bottom">
                  
                 <p:column headerText="Codigo" style="text-align: left; width: 25px">
-                    <h:outputText value="#{servico.id_Servico}" />
+                    <h:outputText value="#{caixa.id_Caixa}" />
                 </p:column>
                  
-                <p:column headerText="Serviço" style="text-align: left; width: 250px">
-                    <h:outputText value="#{servico.nome_Servico}" />
+                <p:column headerText="Data" style="text-align: left; width: 250px">
+                    <h:outputText value="#{caixa.data_Caixa}" />
                 </p:column>
                  
                 <p:column headerText="Valor" style="text-align: left; width: 70px">
-                    <h:outputText value="#{servico.valor_Servico}" />
+                    <h:outputText value="#{caixa.valor_Entrada}" />
                 </p:column>
                  
                 <p:column style="width:25px; text-align: center">
-                    <p:button outcome="/servico/cadastroServico" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
-                        <f:param name="servico" value="#{servico.id_Servico}"/>
+                    <p:button outcome="/caixa/retiradaCaixa" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
+                        <f:param name="sangria" value="#{caixa.id_Caixa}"/>
                     </p:button>
                     <p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusao.show()"
-                                     process="@this" update=":frmConsultaServico:exclusaoDialog">
-                        <f:setPropertyActionListener target="#{pesquisaServicoBean.servicoSelecionado}"
-                                                     value="#{cliente}"/>
+                                     process="@this" update=":frmConsultaCaixa:exclusaoDialog">
+                        <f:setPropertyActionListener target="#{pesquisaCaixaBean.caixaSelecionado}"
+                                                     value="#{caixa}"/>
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
              
-             <p:confirmDialog header="Exclusao de Serviço" message="Tem certeza que deseja excluir o serviço?"
+             <p:confirmDialog header="Exclusao de Sangria" message="Tem certeza que deseja excluir a sangria?"
                              widgetVar="exclusao" id="exclusaoDialog">
                 <p:button value="Não" onclick="exclusao.hide(); return false;" />
                 <p:commandButton value="Sim" oncomplete="exclusao.hide();"
-                                 action="#{pesquisaServicoBean.excluir()}" update=":frmConsultaServico:servicoTable"/>
+                                 action="#{pesquisaCaixaBean.remover()}" update=":frmConsultaCaixa:sangriaTable"/>
             </p:confirmDialog>
              
         </h:form>

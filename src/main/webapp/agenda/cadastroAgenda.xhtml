@@ -6,69 +6,105 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-    <ui:define name="titulo">Novo Produto</ui:define>
+    <ui:define name="titulo">AGENDA</ui:define>
+
     <ui:define name="corpo">
+
+        <f:metadata>
+            <f:event listener="#{pesquisaAgendaBean.buscar()}" type="preRenderView"/>
+        </f:metadata>
+
+
         <h:form>
-            <p:growl id="messages" showDetail="true" />
 
-            <h:panelGrid columnClasses="rotulo, campo" width="100%">
-                <h3 style="margin-top: 0">Editable Schedule</h3>
-                <p:schedule id="schedule" value="#{pesquisaAgendaBean.agenda}" widgetVar="myschedule" timeZone="GMT+2">
+            <p:messages autoUpdate="false"  closable="true"/>
+            <h:panelGrid width="100%" >
+                <h3 style="margin-top: 0">Agenda</h3>
+                <p:schedule id="schedule" value="#{pesquisaAgendaBean.listagem}"
+                            timeZone="America/Sao_Paulo" locale="pt">
 
-                    <p:ajax event="dateSelect" listener="#{pesquisaAgendaBean.agenda.horario_Agenda}" update="eventDetails" oncomplete="PF('eventDialog').show();" />
-
+                    <p:ajax event="dateSelect"  oncomplete="dialogo.show();" 
+                            listener="#{cadastroAgendaBean.capturaData}" 
+                            update=":frmCadstroAgenda:panelDialog"/>
                 </p:schedule>
 
             </h:panelGrid>
-
-            <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">
-                <h:panelGrid id="eventDetails" columns="2">
-                    <p:outputLabel for="title" value="Titles:" />
-                    <p:inputText id="title" value="#{scheduleView.event.title}" required="true" />
-
-                    <p:outputLabel for="from" value="From:" />
-                    <p:calendar id="from" value="#{scheduleView.event.startDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
-
-                    <p:outputLabel for="to" value="To:" />
-                    <p:calendar id="to" value="#{scheduleView.event.endDate}" timeZone="GMT+2" pattern="dd/MM/yyyy HH:mm"/>
-
-                    <p:outputLabel for="allDay" value="All Day:" />
-                    <h:selectBooleanCheckbox id="allDay" value="#{scheduleView.event.allDay}" />
-
-                    <p:commandButton type="reset" value="Reset" />
-                    <p:commandButton id="addButton" value="Save" actionListener="#{scheduleView.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-                </h:panelGrid>
-            </p:dialog>    
         </h:form>
 
-        <script type="text/javascript">
-            PrimeFaces.locales['tr'] = {
-                closeText: 'kapat',
-                prevText: 'geri',
-                nextText: 'ileri',
-                currentText: 'bugün',
-                monthNames: ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
-                    'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'],
-                monthNamesShort: ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz',
-                    'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'],
-                dayNames: ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'],
-                dayNamesShort: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
-                dayNamesMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
-                weekHeader: 'Hf',
-                firstDay: 1,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: '',
-                month: 'Ay',
-                week: 'Hafta',
-                day: 'Gün',
-                allDayText: 'Tüm Gün'
-            };
-        </script>
-        <style type="text/css">
-            .value {
-                width: 1000px;
-            }
-        </style>
+        <p:dialog widgetVar="dialogo" header="Agendamento" visible="false"
+                  resizable="false" draggable="false" modal="true">
+            <h:form id="frmCadstroAgenda">
+
+                <h:panelGrid columns="2" id="panelDialog">
+
+                    <p:outputLabel for="dataIni" value="Inicio Consulta:" />
+                    <p:calendar id="dataIni" value="#{cadastroAgendaBean.agenda.horario_Agenda}"
+                                pattern="dd/MM/yyyy HH:mm:ss" >
+                        <f:convertDateTime locale="pt_BR"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="dataFim" value="Termino Consulta:" />
+                    <p:calendar id="dataFim" value="#{cadastroAgendaBean.agenda.horario_Agenda_Termino}"
+                                pattern="dd/MM/yyyy HH:mm:ss" >
+                        <f:convertDateTime locale="pt_BR"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="cliente" value="Cliente:"/>
+                    <p:autoComplete id="cliente" dropdown="true" size="40" value="#{cadastroAgendaBean.agenda.cliente}" 
+                                    completeMethod="#{cadastroAgendaBean.completarCliente}" 
+                                    var="cliente" itemLabel="#{cliente.nome_Cliente}"
+                                    itemValue="#{cliente}" forceSelection="true"/>
+
+                    <p:outputLabel for="observacao" value="Observação:"/>
+                    <p:inputTextarea rows="5" cols="20" id="observacao" style="width: 100%" 
+                                     value="#{cadastroAgendaBean.agenda.observacao_agenda}"/>
+
+
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <p:commandButton value="Salvar" action="#{cadastroAgendaBean.salvar()}"
+                                     oncomplete="PF('dialogo').hide();"/>
+                </h:panelGrid>
+            </h:form>
+            <script type="text/javascript">
+                PrimeFaces.locales['pt'] = {
+                    closeText: 'Fechar',
+                    prevText: 'Anterior',
+                    nextText: 'Próximo',
+                    currentText: 'Começo',
+                    monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                    monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                    dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                    dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                    weekHeader: 'Semana',
+                    firstDay: 1,
+                    isRTL: false,
+                    showMonthAfterYear: false,
+                    yearSuffix: '',
+                    timeOnlyTitle: 'Só Horas',
+                    timeText: 'Tempo',
+                    hourText: 'Hora',
+                    minuteText: 'Minuto',
+                    secondText: 'Segundo',
+                    currentText: 'Data Atual',
+                    ampm: false,
+                    month: 'Mês',
+                    week: 'Semana',
+                    day: 'Dia',
+                    allDayText: 'Todo Dia'
+
+                };
+            </script>
+            <style type="text/css">
+                .value {
+                    width: 1000px;
+                }
+            </style>
+
+        </p:dialog>    
     </ui:define>
 </ui:composition>
+
+

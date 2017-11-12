@@ -31,6 +31,7 @@ public class Agenda implements Serializable{
     private Long id_Agenda;
     private Cliente cliente;
     private Date horario_Agenda;
+    private Date horario_Agenda_Termino;
     private String observacao_agenda;
 
     @Id
@@ -74,10 +75,20 @@ public class Agenda implements Serializable{
         this.observacao_agenda = observacao_agenda;
     }
 
+    public Date getHorario_Agenda_Termino() {
+        return horario_Agenda_Termino;
+    }
+
+    public void setHorario_Agenda_Termino(Date horario_Agenda_Termino) {
+        this.horario_Agenda_Termino = horario_Agenda_Termino;
+    }
+    
+    
+
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 83 * hash + Objects.hashCode(this.id_Agenda);
+        hash = 37 * hash + Objects.hashCode(this.id_Agenda);
         return hash;
     }
 
@@ -98,5 +109,7 @@ public class Agenda implements Serializable{
         }
         return true;
     }
+
+   
 
 }

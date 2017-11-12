@@ -53,11 +53,16 @@ and open the template in the editor.
                     <p:submenu label="Caixa" style="margin-right: 3px">
                         <p:menuitem value="Caixa" outcome="/caixa/listarCaixa"/>
                         <p:menuitem value="Retirada de Caixa" outcome="/caixa/retiradaCaixa"/>
+                        <p:menuitem value="Listar retiradas" outcome="/caixa/listarRetiradas"/>
                     </p:submenu>
 
                     <p:submenu label="Pedido" style="margin-right: 3px">
                         <p:menuitem value="Novo Pedido" outcome="/pedido/cadastroPedido"/>
                         <p:menuitem value="Pedidos" outcome="/pedido/listarPedidos"/>
+                    </p:submenu>
+                    <p:submenu label="Agenda" style="margin-right: 3px">
+                        <p:menuitem value="Agenda" outcome="/agenda/cadastroAgenda"/>
+                        <p:menuitem value="Agendamentos" outcome="/agenda/listarAgenda"/>
                     </p:submenu>
                     <p:menuitem value="Sair" icon="ui-icon-close" />
                 </p:menubar>

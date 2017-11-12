@@ -30,7 +30,7 @@ public class Produto implements Serializable {
     private Long id_produto;
     private String nome_Produto;
     private BigDecimal valor_Produto;
-    private int quantidade_Produto;
+    private int quantidade_Produto = 0;
 
     @Id
     @GeneratedValue

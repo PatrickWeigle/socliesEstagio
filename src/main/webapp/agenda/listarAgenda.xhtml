@@ -1,0 +1,135 @@
+<ui:composition template="/templates/LayoutPadrao.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                >
+    <ui:define name="titulo">Agendamentos</ui:define>
+
+    <ui:define name="corpo">
+
+        <!-- chamando metodos antes da pagina ser renderizada -->
+        <f:metadata>
+
+            <f:event listener="#{pesquisaAgendaBean.buscar()}" type="preRenderView"/>
+        </f:metadata>
+
+        <!-- tudo dentro de um formulario -->
+        <h:form id="frmConsulta">
+            <h1>Agendamentos</h1>
+
+            <!-- habilitando mensagens de erro -->
+            <p:messages autoUpdate="true" closable="true" />
+
+            <!-- barra de ferramentas, onde ficara os botÃµes -->
+            <p:toolbar style="margin-top: 20px">
+                <p:toolbarGroup>
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search"
+                                     action="#{pesquisaAgendaBean.buscar()}"
+                                     update="@form"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Novo Agendamento" icon="ui-icon-plusthick" outcome="/agenda/cadastroAgenda"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+
+            <!-- painel com informacÃ§oes, seria o filtro da pesquisa -->
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+
+                <p:outputLabel value="Nome" for="nome"/>
+                <p:inputText id="nome" size="20" value="#{pesquisaClienteBean.filtroCliente.nome}" />
+
+
+
+            </p:panelGrid>
+
+            <!-- tabela com a pesquisa retornada, sera populado com dados da lista "produtosFiltrados" -->
+            <!-- para ediÃ§Ã£o, passamos o f:param onde o parametro ficara visivel na URL do navegador -->
+            <p:dataTable id="agendaTable" value="#{pesquisaAgendaBean.agendasPesquisados}" 
+                         var="agenda" style="margin-top: 25px" emptyMessage="Nenhum agendamento encontrado."
+                         rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+                <p:column headerText="Código" style="text-align: left; width: 50px">
+                    <h:outputText value="#{agenda.id_Agenda}" />
+                </p:column>
+
+                <p:column headerText="Cliente" style="text-align: left; width: 250px">
+                    <h:outputText value="#{agenda.cliente.nome_Cliente}" />
+                </p:column>
+
+                <p:column headerText="Inicio" style="width: 100px; text-align: left">
+                    <h:outputText value="#{agenda.horario_Agenda}" />                    
+                </p:column>
+
+                <p:column headerText="Termino" style="width: 100px; text-align: left">
+                    <h:outputText value="#{agenda.horario_Agenda_Termino}" />                    
+                </p:column>
+
+                <p:column style="text-align: center; width: 25px">
+                    <p:commandButton oncomplete="dialogo.show();" icon="ui-icon-pencil" title="Editar"
+                                     update=":frmCadstroAgenda:panelDialog">
+                        <f:setPropertyActionListener target="#{cadastroAgendaBean.agenda}" value="#{agenda}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusao.show()"
+                                     process="@this" update=":frmConsulta:exclusaoDialog">
+                        <f:setPropertyActionListener target="#{pesquisaAgendaBean.remover()}"
+                                                     value="#{agenda}"/>
+                    </p:commandButton>
+                </p:column>
+
+
+
+            </p:dataTable>
+
+            <p:confirmDialog header="Exclusao de Agendamento" message="Tem certeza que deseja excluir o agendamento?"
+                             widgetVar="exclusao" id="exclusaoDialog">
+                <p:button value="Não" onclick="exclusao.hide(); return false;" />
+                <p:commandButton value="Sim" oncomplete="exclusao.hide();"
+                                 action="#{pesquisaClienteBean.excluir()}" update=":frmConsulta:agendaTable"/>
+            </p:confirmDialog>
+
+        </h:form>
+
+        <p:dialog widgetVar="dialogo" header="Agendamento" visible="false"
+                  resizable="false" draggable="false" modal="true" >
+            <h:form id="frmCadstroAgenda">
+
+                <h:panelGrid columns="2" id="panelDialog">
+
+                    <p:outputLabel for="dataIni" value="Inicio Consulta:" />
+                    <p:calendar id="dataIni" value="#{cadastroAgendaBean.agenda.horario_Agenda}"
+                                pattern="dd/MM/yyyy HH:mm:ss" >
+                        <f:convertDateTime locale="pt_BR"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="dataFim" value="Termino Consulta:" />
+                    <p:calendar id="dataFim" value="#{cadastroAgendaBean.agenda.horario_Agenda_Termino}"
+                                pattern="dd/MM/yyyy HH:mm:ss" >
+                        <f:convertDateTime locale="pt_BR"/>
+                    </p:calendar>
+
+                    <p:outputLabel for="cliente" value="Cliente:"/>
+                    <p:autoComplete id="cliente" dropdown="true" size="40" value="#{cadastroAgendaBean.agenda.cliente}" 
+                                    completeMethod="#{cadastroAgendaBean.completarCliente}" 
+                                    var="cliente" itemLabel="#{cliente.nome_Cliente}"
+                                    itemValue="#{cliente}" forceSelection="true"/>
+
+                    <p:outputLabel for="observacao" value="Observação:"/>
+                    <p:inputTextarea rows="5" cols="20" id="observacao" style="width: 100%" 
+                                     value="#{cadastroAgendaBean.agenda.observacao_agenda}"/>
+
+
+
+                </h:panelGrid>
+                <h:panelGrid>
+                    <p:commandButton value="Salvar" action="#{cadastroAgendaBean.salvar()}"
+                                     oncomplete="dialogo'.hide();"/>
+                </h:panelGrid>
+            </h:form>
+
+        </p:dialog> 
+
+    </ui:define>
+</ui:composition>
