@@ -5,6 +5,7 @@
  */
 package br.com.soclies.repository.filtros;
 
+import br.com.soclies.model.FormaDePagamento;
 import br.com.soclies.model.TipoEntrada;
 import java.io.Serializable;
 import java.util.Date;
@@ -19,7 +20,8 @@ public class FiltrosCaixa implements Serializable {
 
     private Date dataInicio;
     private Date dataFim;
-    private String tipoEntrada;
+    private TipoEntrada tipoEntrada;
+    private FormaDePagamento formaPagamento;
 
     public Date getDataInicio() {
         return dataInicio;
@@ -37,13 +39,23 @@ public class FiltrosCaixa implements Serializable {
         this.dataFim = dataFim;
     }
 
-    public String getTipoEntrada() {
+    public TipoEntrada getTipoEntrada() {
         return tipoEntrada;
     }
 
-    public void setTipoEntrada(String tipoEntrada) {
+    public void setTipoEntrada(TipoEntrada tipoEntrada) {
         this.tipoEntrada = tipoEntrada;
     }
+
+    public FormaDePagamento getFormaPagamento() {
+        return formaPagamento;
+    }
+
+    public void setFormaPagamento(FormaDePagamento formaPagamento) {
+        this.formaPagamento = formaPagamento;
+    }
+    
+    
     
     
 

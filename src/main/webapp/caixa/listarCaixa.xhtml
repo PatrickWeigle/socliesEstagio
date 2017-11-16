@@ -30,7 +30,7 @@
                 </p:toolbarGroup>
             </p:toolbar>
 
-            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+            <p:panelGrid columns="4" id="painel" style="width: 100%; margin-top: 20px"
                          columnClasses="rotulo, campo" >
 
 
@@ -47,12 +47,20 @@
 
                 </h:panelGroup>
 
-                <p:outputLabel value="Tipo de entrada" for="tipoEntrada"/>
 
-                <p:selectOneMenu id="tipoEntrada" value="#{pesquisaCaixaBean.filtrosCaixa.tipoEntrada}" >
+                <p:outputLabel value="Tipo de entrada: " for="tipoEntrada" style="margin-right: -50px"/>
+                <p:selectOneMenu id="tipoEntrada" value="#{pesquisaCaixaBean.filtrosCaixa.tipoEntrada}" 
+                                 style="">
                     <f:selectItem itemLabel="Tipo de entrada"/>
-                    <f:selectItems value="#{pesquisaCaixaBean.tipoEntrada}" var="tipoEntrada"
+                    <f:selectItems value="#{pesquisaCaixaBean.tipoEntrada()}" var="tipoEntrada"
                                    itemValue="#{tipoEntrada}" itemLabel="#{tipoEntrada.descricao}"/>
+                </p:selectOneMenu>
+
+                <p:outputLabel value="Forma de Pagamento: " for="formaPagamento" style="margin-right: -50px"/>
+                <p:selectOneMenu id="formaPagamento" value="#{pesquisaCaixaBean.filtrosCaixa.formaPagamento}" >
+                    <f:selectItem itemLabel="Forma de Pagamento"/>
+                    <f:selectItems value="#{pesquisaCaixaBean.formaPagamento}" var="formaPagamento"
+                                   itemValue="#{formaPagamento}" itemLabel="#{formaPagamento.descricao}"/>
                 </p:selectOneMenu>
 
             </p:panelGrid>
@@ -72,11 +80,21 @@
                 <p:column headerText="Tipo de Entrada" style="text-align: left; width: 100px">
                     <h:outputText value="#{caixa.tipo_entrada_Caixa}" />
                 </p:column>
+                <p:column headerText="Forma de pagamento" style="text-align: left; width: 70px">
+                    <h:outputLabel value="#{caixa.pedido.pagamento_Pedido.descricao}"/>
+                </p:column>
                 <p:column headerText="Valor" style="text-align: left; width: 80px">
                     <h:outputText value="#{caixa.valor_Entrada}" >
                         <f:convertNumber type="currency"/>
                     </h:outputText>
                 </p:column>
+
+                <p:columnGroup type="footer">                     
+                    <p:row>                         
+                        <p:column footerText="Total:" colspan="4" style="text-align:right" />                         
+                        <p:column footerText="#{pesquisaCaixaBean.valorTotal}"  style="text-align:left" />   
+                    </p:row>                 
+                </p:columnGroup>
             </p:dataTable>
         </h:form>
     </ui:define>

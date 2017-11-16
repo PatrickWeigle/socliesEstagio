@@ -5,66 +5,73 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 >
-     <ui:define name="titulo">Sangrias</ui:define>
+    <ui:define name="titulo">Sangrias</ui:define>
     <ui:define name="corpo">
 
         <f:metadata>
-            <f:event listener="#{pesquisaCaixaBean.pesquisarSangrias()}" type="preRenderView"/>
+            <f:event listener="#{pesquisaCaixaBean.pesquisarSangria()}" type="preRenderView"/>
         </f:metadata>
         <h:form id="frmConsultaCaixa">
 
             <h1>Serviços</h1>
-            
-             <p:messages autoUpdate="true" closable="true" />
-             
+
+            <p:messages autoUpdate="true" closable="true" />
+
             <p:toolbar style="margin-top: 20px">
                 <p:toolbarGroup >
                     <p:commandButton value="Pesquisar" icon="ui-icon-search"
-                                     action="#{pesquisaCaixaBean.pesquisarSangrias()}"
+                                     action="#{pesquisaCaixaBean.pesquisarSangria()}"
                                      update="@form"/>
                 </p:toolbarGroup>
                 <p:toolbarGroup align="right">
                     <p:button outcome="/caixa/retiradaCaixa" value="Sangria" icon="ui-icon-plusthick"/>
-                    
+
                 </p:toolbarGroup>
-                
+
             </p:toolbar>
-             
-             <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
                          columnClasses="rotulo, campo" >
 
-               <p:outputLabel value="Data: "  />
+                <p:outputLabel value="Data: "  />
                 <h:panelGroup>
 
-                    <p:inputMask id="dataIni" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataInicio}" mask="99/99/9999">
+                    <p:inputMask id="dataIni" size="10" value="#{pesquisaCaixaBean.filtrosCaixaSangria.dataInicio}" mask="99/99/9999">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:inputMask>
                     à
-                    <p:inputMask id="dataFim" size="10" value="#{pesquisaCaixaBean.filtrosCaixa.dataFim}" mask="99/99/9999">
+                    <p:inputMask id="dataFim" size="10" value="#{pesquisaCaixaBean.filtrosCaixaSangria.dataFim}" mask="99/99/9999">
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </p:inputMask>
 
                 </h:panelGroup>
-                
+
             </p:panelGrid>
-             
-             <p:dataTable id="sangriaTable" value="#{pesquisaCaixaBean.caixasPesquisados}"
-                          var="sangria" style="margin-top: 25px" emptyMessage="Nenhum Servico encontrado"
-                          rows="10" paginator="true" paginatorAlwaysVisible="false"
-                          paginatorPosition="bottom">
-                 
+
+            <p:dataTable id="sangriaTable" value="#{pesquisaCaixaBean.caixasPesquisadosSangria}"
+                         var="caixa" style="margin-top: 25px" emptyMessage="Nenhuma Sangria encontrado"
+                         rows="10" paginator="true" paginatorAlwaysVisible="false"
+                         paginatorPosition="bottom">
+
                 <p:column headerText="Codigo" style="text-align: left; width: 25px">
                     <h:outputText value="#{caixa.id_Caixa}" />
+
                 </p:column>
-                 
-                <p:column headerText="Data" style="text-align: left; width: 250px">
-                    <h:outputText value="#{caixa.data_Caixa}" />
+
+                <p:column headerText="Data" style="text-align: left; width: 70px">
+                    <h:outputText value="#{caixa.data_Caixa}" >
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
                 </p:column>
-                 
+
                 <p:column headerText="Valor" style="text-align: left; width: 70px">
                     <h:outputText value="#{caixa.valor_Entrada}" />
                 </p:column>
-                 
+                
+                <p:column headerText="Observação" style="text-align: left; width: 250px">
+                    <h:outputLabel value="#{caixa.observacao}"/>
+                </p:column>
+
                 <p:column style="width:25px; text-align: center">
                     <p:button outcome="/caixa/retiradaCaixa" style="margin-right: 5px" icon="ui-icon-pencil" title="Editar">
                         <f:param name="sangria" value="#{caixa.id_Caixa}"/>
@@ -76,14 +83,14 @@
                     </p:commandButton>
                 </p:column>
             </p:dataTable>
-             
-             <p:confirmDialog header="Exclusao de Sangria" message="Tem certeza que deseja excluir a sangria?"
+
+            <p:confirmDialog header="Exclusao de Sangria" message="Tem certeza que deseja excluir a sangria?"
                              widgetVar="exclusao" id="exclusaoDialog">
                 <p:button value="Não" onclick="exclusao.hide(); return false;" />
                 <p:commandButton value="Sim" oncomplete="exclusao.hide();"
                                  action="#{pesquisaCaixaBean.remover()}" update=":frmConsultaCaixa:sangriaTable"/>
             </p:confirmDialog>
-             
+
         </h:form>
     </ui:define>
 </ui:composition>

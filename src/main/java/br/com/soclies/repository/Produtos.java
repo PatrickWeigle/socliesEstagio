@@ -36,36 +36,46 @@ public class Produtos implements Serializable {
         produto = manager.merge(produto);
         return produto;
     }
-    
+
     @SuppressWarnings("unchecked")
-    public List<Produto> getbuscados(FiltrosProdutos filtrados){
+    public List<Produto> getbuscados(FiltrosProdutos filtrados) {
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Produto.class);
-        if(StringUtils.isNotBlank(filtrados.getProduto())){
+        if (StringUtils.isNotBlank(filtrados.getProduto())) {
             criteria.add(Restrictions.ilike("nome_Produto", filtrados.getProduto(), MatchMode.ANYWHERE));
         }
         return criteria.addOrder(Order.asc("nome_Produto")).list();
     }
-    
-        @Transactional
-        public void remover(Produto produto) {
-            
-            try {
-                produto = retornaPorID(produto.getId_produto());
-                manager.remove(produto);
-                manager.flush();
-            } catch (PersistenceException e) {
-                throw new NegocioException("Produto não pode ser excluido");
-            }
+
+    @Transactional
+    public void remover(Produto produto) {
+
+        try {
+            produto = retornaPorID(produto.getId_produto());
+            manager.remove(produto);
+            manager.flush();
+        } catch (PersistenceException e) {
+            throw new NegocioException("Produto não pode ser excluido");
+        }
 
     }
 
     public Produto retornaPorID(Long id) {
         return manager.find(Produto.class, id);
     }
-    
-    public List<Produto> porNome(String produto){
-        return this.manager.createQuery("from Produto "+ "where upper(nome_Produto) like :nome_Produto",
+
+    public List<Produto> porNome(String produto) {
+        return this.manager.createQuery("from Produto " + "where upper(nome_Produto) like :nome_Produto",
                 Produto.class).setParameter("nome_Produto", produto.toUpperCase() + "%").getResultList();
+    }
+
+    public Produto retornoProduto(Long id) {
+        try {
+            return this.manager.createQuery("from Produto where id_Produto =:id_Produto",
+                    Produto.class).setParameter("id_Produto", id).getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
+
     }
 }

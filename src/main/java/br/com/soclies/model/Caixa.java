@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
+import javax.persistence.Transient;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 
@@ -36,7 +37,7 @@ public class Caixa implements Serializable {
     private Pedido pedido;
     private Date data_Caixa;
     private BigDecimal valor_Entrada;
-    private TipoEntrada Tipo_entrada_Caixa;
+    private TipoEntrada tipo_entrada_Caixa;
     private String observacao;
 
     @Id
@@ -81,14 +82,14 @@ public class Caixa implements Serializable {
     }
 
     @NotNull
-    @Column(name = "tipo_Entrada_Caixa", nullable = false)
+    @Column(name = "tipo_entrada_Caixa", nullable = false)
     @Enumerated(EnumType.STRING)
     public TipoEntrada getTipo_entrada_Caixa() {
-        return Tipo_entrada_Caixa;
+        return tipo_entrada_Caixa;
     }
 
     public void setTipo_entrada_Caixa(TipoEntrada Tipo_entrada_Caixa) {
-        this.Tipo_entrada_Caixa = Tipo_entrada_Caixa;
+        this.tipo_entrada_Caixa = Tipo_entrada_Caixa;
     }
 
     @Column(name = "observacao_Caixa", columnDefinition = "text")
@@ -99,6 +100,9 @@ public class Caixa implements Serializable {
     public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
+    
+
+  
     
     
 

@@ -53,6 +53,10 @@ public class PesquisaAgendaBean implements Serializable {
         listagem = new DefaultScheduleModel();
         listagem.addEvent(new DefaultScheduleEvent("Champions League Match", new Date(), new Date()));
     }
+    
+    public void pesquisar(){
+        agendasPesquisados = repoAgendas.getBuscados(filtrosAgenda);
+    }
 
     public ScheduleModel getListagem() {
         return listagem;
@@ -76,6 +80,14 @@ public class PesquisaAgendaBean implements Serializable {
 
     public void setAgendaSelecionado(Agenda agendaSelecionado) {
         this.agendaSelecionado = agendaSelecionado;
+    }
+
+    public FiltrosAgenda getFiltrosAgenda() {
+        return filtrosAgenda;
+    }
+
+    public void setFiltrosAgenda(FiltrosAgenda filtrosAgenda) {
+        this.filtrosAgenda = filtrosAgenda;
     }
     
     

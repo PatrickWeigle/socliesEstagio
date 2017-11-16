@@ -5,32 +5,15 @@
          id="WebApp_ID" version="3.0">
     
     <!-- Configurando data e hora para o padrao UTC -->
-    <context-param>
-        <param-name>javax.faces.DATATIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
-        <param-value>true</param-value>
-    </context-param>
+  
+    
+   
     
     <!-- configurando a pagina inicial do projeto -->
     <welcome-file-list>
         <welcome-file>home.xhtml</welcome-file>
     </welcome-file-list>
     
-    <!-- configurando o projeto para receber os beans CDI do WELD -->
-    <listener>
-        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
-    </listener>
-
-    <resource-env-ref>
-        <resource-env-ref-name>BeanManager</resource-env-ref-name>
-        <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
-    </resource-env-ref>
-    
-    <!-- Configuração dos temas do PrimeFaces -->
-    <context-param>
-        <param-name>primefaces.THEME</param-name>
-        <param-value>delta</param-value>
-    </context-param>
-
     <!-- Servlet do JSF e mapeamento de URLs -->
     <servlet>
         <servlet-name>Faces Servlet</servlet-name>
@@ -41,5 +24,51 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+        
+    <!-- Configuração dos temas do PrimeFaces -->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>afternoon</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.DATATIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    
+    <!-- configurando o projeto para receber os beans CDI do WELD -->
+    <listener>
+        <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
+    </listener>
+    
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
+    
+    
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    
+    <!-- filtro do Spring Security, mapeando todos endereÃ§os para essa aplicaÃ§Ã£o -->
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
    
+
+    <resource-env-ref>
+        <resource-env-ref-name>BeanManager</resource-env-ref-name>
+        <resource-env-ref-type>javax.enterprise.inject.spi.BeanManager</resource-env-ref-type>
+    </resource-env-ref>
+
+
+   
+    
 </web-app>

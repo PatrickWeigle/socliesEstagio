@@ -18,7 +18,7 @@ header {
     padding: 10px 15px;
     margin-bottom: 20px;
     height: 40px;
-    background-color: #ea11ba;
+    background-color: #81e6e6;
     color: #fff;
     box-shadow: 0px 2px 2px #ccc;
 }
@@ -108,4 +108,18 @@ h1 {
 
 .rotulo{
     width: 150px;
+}
+
+.centralizado-horizontalmente{
+    left: 50%;
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.centralizado{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
 }

@@ -14,7 +14,6 @@ import br.com.soclies.service.CadastroSangriaCaixaService;
 import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -42,8 +41,8 @@ public class CadastroProdutoBean implements Serializable {
 
     @Inject
     private Caixa caixa;
-    
-    private BigDecimal total;
+
+    private BigDecimal total = BigDecimal.ZERO;
 
     public CadastroProdutoBean() {
         limparCampos();
@@ -60,8 +59,7 @@ public class CadastroProdutoBean implements Serializable {
     public void salvar() {
         entradaCaixa();
         this.produto = cadastroProdutoService.salvar(this.produto);
-        FacesUtil.addInfoMessage("Produto adicionado com sucesso!");
-        insereCaixa(total);
+        FacesUtil.addInfoMessage("Produto salvo com sucesso!");
         limparCampos();
     }
 
@@ -70,20 +68,13 @@ public class CadastroProdutoBean implements Serializable {
     }
 
     public void entradaCaixa() {
-        Produto compare;
-        if (this.produto.getId_produto() != null) {
-            compare = produtos.retornaPorID(this.produto.getId_produto());
-            int qtdAtual = compare.getQuantidade_Produto();
-            int qtdNova = this.produto.getQuantidade_Produto();
-            if (qtdNova > qtdAtual) {
-                int result = qtdNova - qtdAtual;
-                total.add(this.produto.getValor_Produto().multiply(new BigDecimal(result)));
-            }
-        } else {
-            BigDecimal qtd = new BigDecimal(this.produto.getQuantidade_Produto());
-            System.out.println("Teste");
-            total.add(this.produto.getValor_Produto().multiply(qtd));
+        int qtdnovo = this.produto.getQuantidade_Produto();
+        System.out.println(qtdnovo);
+        if (this.produto.getId_produto() == null) {
+            total = getValorTotal();
+            insereCaixa(total);
         }
+
     }
 
     public void insereCaixa(BigDecimal valor) {
@@ -91,5 +82,9 @@ public class CadastroProdutoBean implements Serializable {
         caixa.setTipo_entrada_Caixa(TipoEntrada.PRODUTO);
         caixa.setValor_Entrada(valor);
         this.caixa = this.caixaService.salvar(caixa);
+    }
+
+    public BigDecimal getValorTotal() {
+        return this.produto.getValor_Produto().multiply(new BigDecimal(this.getProduto().getQuantidade_Produto()));
     }
 }

@@ -17,75 +17,76 @@ and open the template in the editor.
         <title><ui:insert name="titulo">SOCLIES - Sistema para clinica de estética</ui:insert></title>
         <h:outputStylesheet library="css" name="sistema.css"/>
         <h:outputScript library="js" name="jquery.maskMoney.js"/>
-</h:head>
-<h:body>
-    
-    <header>
-        <div style="float:left; margin-top: -4px;">
-            <h:link outcome="/home">
-                <h:graphicImage library="imagens" name="logo4.png"/>
-            </h:link>
+    </h:head>
+    <h:body>
+
+        <header>
+            <div style="float:left; margin-top: -4px;">
+                <h:link outcome="/home">
+                    <h:graphicImage library="imagens" name="logo4.png"/>
+                </h:link>
+            </div>
+            <div style="float: right; margin-right: 30px; height: 30px; margin-top: 3px;">
+               
+
+                <h:form style="display: inline-block">
+
+                    <p:menubar styleClass="menu-sistema" style="float:left;line-height: 90px">
+                        <p:submenu label="Agenda" style="margin-right: 3px">
+                            <p:menuitem value="Agenda" outcome="/agenda/cadastroAgenda"/>
+                            <p:menuitem value="Agendamentos" outcome="/agenda/listarAgenda"/>
+                        </p:submenu>
+
+                        <p:submenu label="Caixa" style="margin-right: 3px">
+                            <p:menuitem value="Caixa" outcome="/caixa/listarCaixa"/>
+                            <p:menuitem value="Retirada de Caixa" outcome="/caixa/retiradaCaixa"/>
+                            <p:menuitem value="Listar retiradas" outcome="/caixa/listarRetiradas"/>
+                        </p:submenu>
+
+                        <p:submenu label="Clientes" style="margin-right: 3px">
+                            <p:menuitem value="Novo Cliente" outcome="/cliente/cadastroCliente" />
+                            <p:menuitem value="Listar Clientes" outcome="/cliente/listarClientes" />
+                        </p:submenu>
+
+                        <p:submenu label="Pedido" style="margin-right: 3px">
+                            <p:menuitem value="Novo Pedido" outcome="/pedido/cadastroPedido"/>
+                            <p:menuitem value="Pedidos" outcome="/pedido/listarPedidos"/>
+                        </p:submenu>
+
+                        <p:submenu label="Produtos" style="margin-right: 3px" >
+                            <p:menuitem value="Novo Produto" outcome="/produto/cadastroProduto" />
+                            <p:menuitem value="Listar Produtos" outcome="/produto/listarProdutos" />
+                        </p:submenu>
+
+                        <p:submenu label="Servicos" style="margin-right: 3px">
+                            <p:menuitem value="Novo Servico" outcome="/servico/cadastroServico" />
+                            <p:menuitem value="Listar Servicos" outcome="/servico/listarServicos"/>
+                        </p:submenu>
+
+                        <p:submenu label="Olá #{seguranca.nomeUsuarioLogado} !" style="margin-left: 45px" >
+                            <p:menuitem value="Sair" icon="ui-icon-close" url="/j_spring_security_logout"/>
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+            </div>
+        </header>
+        <div id="conteudo">
+            <ui:insert name="corpo"/>
         </div>
-        <div style="float: right; margin-right: 30px; height: 30px; margin-top: 3px;">
-            <span style="float: right; margin-left: 60px; color: #010101; margin-top: 10px;">
-                Olá usuário!
+        <p:separator style="margin-top: 50px"/>
+        <footer>
+            Soclies Direitos reservados
+            <br/> Telefone 33363636 
+        </footer>
+        <script>
+            function configMoeda() {
+                $(".moeda").maskMoney({decimal: ",", thousands: ".", allowzero: true});
+            }
+            $(document).ready(function () {
+                configMoeda();
+            });
 
-            </span>
+        </script>
 
-            <h:form style="display: inline-block">
-
-                <p:menubar styleClass="menu-sistema" style="float:left;line-height: 90px">
-                    <p:submenu label="Clientes" style="margin-right: 3px">
-                        <p:menuitem value="Novo Cliente" outcome="/cliente/cadastroCliente" />
-                        <p:menuitem value="Listar Clientes" outcome="/cliente/listarClientes" />
-                    </p:submenu>
-
-                    <p:submenu label="Produtos" style="margin-right: 3px" >
-                        <p:menuitem value="Novo Produto" outcome="/produto/cadastroProduto" />
-                        <p:menuitem value="Listar Produtos" outcome="/produto/listarProdutos" />
-                    </p:submenu>
-
-                    <p:submenu label="Servicos" style="margin-right: 3px">
-                        <p:menuitem value="Novo Servico" outcome="/servico/cadastroServico" />
-                        <p:menuitem value="Listar Servicos" outcome="/servico/listarServicos"/>
-                    </p:submenu>
-
-                    <p:submenu label="Caixa" style="margin-right: 3px">
-                        <p:menuitem value="Caixa" outcome="/caixa/listarCaixa"/>
-                        <p:menuitem value="Retirada de Caixa" outcome="/caixa/retiradaCaixa"/>
-                        <p:menuitem value="Listar retiradas" outcome="/caixa/listarRetiradas"/>
-                    </p:submenu>
-
-                    <p:submenu label="Pedido" style="margin-right: 3px">
-                        <p:menuitem value="Novo Pedido" outcome="/pedido/cadastroPedido"/>
-                        <p:menuitem value="Pedidos" outcome="/pedido/listarPedidos"/>
-                    </p:submenu>
-                    <p:submenu label="Agenda" style="margin-right: 3px">
-                        <p:menuitem value="Agenda" outcome="/agenda/cadastroAgenda"/>
-                        <p:menuitem value="Agendamentos" outcome="/agenda/listarAgenda"/>
-                    </p:submenu>
-                    <p:menuitem value="Sair" icon="ui-icon-close" />
-                </p:menubar>
-            </h:form>
-        </div>
-    </header>
-    <div id="conteudo">
-        <ui:insert name="corpo"/>
-    </div>
-    <p:separator style="margin-top: 50px"/>
-    <footer>
-        Soclies Direitos reservados
-        <br/> Telefone 33363636 
-    </footer>
-    <script>
-        function configMoeda() {
-            $(".moeda").maskMoney({decimal: ",", thousands: ".", allowzero: true});
-        }
-        $(document).ready(function () {
-            configMoeda();
-        });
-
-    </script>
-
-</h:body>
+    </h:body>
 </html>

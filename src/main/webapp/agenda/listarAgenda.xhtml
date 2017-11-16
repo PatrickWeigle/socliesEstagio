@@ -39,7 +39,7 @@
                          columnClasses="rotulo, campo" >
 
                 <p:outputLabel value="Nome" for="nome"/>
-                <p:inputText id="nome" size="20" value="#{pesquisaClienteBean.filtroCliente.nome}" />
+                <p:inputText id="nome" size="20" value="#{pesquisaAgendaBean.filtrosAgenda.nome_Cliente}" />
 
 
 
@@ -60,11 +60,17 @@
                 </p:column>
 
                 <p:column headerText="Inicio" style="width: 100px; text-align: left">
-                    <h:outputText value="#{agenda.horario_Agenda}" />                    
+                    <h:outputText value="#{agenda.horario_Agenda}" >
+                        <f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
+                                           timeZone="America/Sao_Paulo"/>
+                    </h:outputText>                    
                 </p:column>
 
                 <p:column headerText="Termino" style="width: 100px; text-align: left">
-                    <h:outputText value="#{agenda.horario_Agenda_Termino}" />                    
+                    <h:outputText value="#{agenda.horario_Agenda_Termino}" >
+                        <f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
+                                           timeZone="America/Sao_Paulo"/>
+                    </h:outputText>                    
                 </p:column>
 
                 <p:column style="text-align: center; width: 25px">
@@ -74,7 +80,7 @@
                     </p:commandButton>
                     <p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="exclusao.show()"
                                      process="@this" update=":frmConsulta:exclusaoDialog">
-                        <f:setPropertyActionListener target="#{pesquisaAgendaBean.remover()}"
+                        <f:setPropertyActionListener target="#{pesquisaAgendaBean.agendaSelecionado}"
                                                      value="#{agenda}"/>
                     </p:commandButton>
                 </p:column>
@@ -87,7 +93,7 @@
                              widgetVar="exclusao" id="exclusaoDialog">
                 <p:button value="Não" onclick="exclusao.hide(); return false;" />
                 <p:commandButton value="Sim" oncomplete="exclusao.hide();"
-                                 action="#{pesquisaClienteBean.excluir()}" update=":frmConsulta:agendaTable"/>
+                                 action="#{pesquisaAgendaBean.remover()}" update=":frmConsulta:agendaTable"/>
             </p:confirmDialog>
 
         </h:form>
@@ -101,13 +107,11 @@
                     <p:outputLabel for="dataIni" value="Inicio Consulta:" />
                     <p:calendar id="dataIni" value="#{cadastroAgendaBean.agenda.horario_Agenda}"
                                 pattern="dd/MM/yyyy HH:mm:ss" >
-                        <f:convertDateTime locale="pt_BR"/>
                     </p:calendar>
 
                     <p:outputLabel for="dataFim" value="Termino Consulta:" />
                     <p:calendar id="dataFim" value="#{cadastroAgendaBean.agenda.horario_Agenda_Termino}"
                                 pattern="dd/MM/yyyy HH:mm:ss" >
-                        <f:convertDateTime locale="pt_BR"/>
                     </p:calendar>
 
                     <p:outputLabel for="cliente" value="Cliente:"/>

@@ -73,5 +73,6 @@ public class CadastroAgendaBean implements Serializable{
     public void capturaData(SelectEvent dataSelecionada){
         agenda = new Agenda();
         agenda.setHorario_Agenda((Date)dataSelecionada.getObject());
+        agenda.setHorario_Agenda_Termino((Date)dataSelecionada.getObject());
     }
 }
