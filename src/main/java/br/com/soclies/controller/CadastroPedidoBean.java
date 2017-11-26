@@ -5,6 +5,7 @@
  */
 package br.com.soclies.controller;
 
+import br.com.soclies.events.PedidoAlteradoEvento;
 import br.com.soclies.model.Caixa;
 import br.com.soclies.model.Cliente;
 import br.com.soclies.model.FormaDePagamento;
@@ -20,7 +21,10 @@ import br.com.soclies.service.CadastroSangriaCaixaService;
 import br.com.soclies.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -41,7 +45,7 @@ public class CadastroPedidoBean implements Serializable {
     @Inject
     private Servicos repoServicos;
 
-    @Inject
+    @Produces @PedidoEdicao
     private Pedido pedido;
 
     @Inject
@@ -75,8 +79,6 @@ public class CadastroPedidoBean implements Serializable {
             caixa.setTipo_entrada_Caixa(TipoEntrada.PEDIDO);
             caixa.setValor_Entrada(pedido.getTotal_Pedido());
             this.caixa = this.caixaService.salvar(this.caixa);
-
-            limpar();
         } finally {
             this.pedido.adicionarItemVazio();
         }
@@ -191,6 +193,15 @@ public class CadastroPedidoBean implements Serializable {
                 this.pedido.recalcularValorTotal();
             }
         }
+    }
+    
+    public void pedidoAlterado(@Observes PedidoAlteradoEvento evento){
+        this.pedido = evento.getPedido();
+    }
+    
+    public void visualizarRelatorio() {
+       String jrxml = "relatorios/printPedido.jrxml";
+        
     }
 
 }

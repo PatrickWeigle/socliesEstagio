@@ -18,6 +18,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
 
 /**
  *
@@ -112,7 +113,7 @@ public class Cliente implements Serializable {
         this.anamnese_Cliente = anamnese_Cliente;
     }
 
-
+    @CPF
     @Column(name = "cpf_Cliente", unique = true)
     public String getCpf_cliente() {
         return cpf_cliente;

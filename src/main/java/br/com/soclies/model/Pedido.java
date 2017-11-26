@@ -174,13 +174,13 @@ public class Pedido implements Serializable {
     }
 
     public void adicionarItemVazio() {
-        if (this.isNovo()) {
+        
             Servico servico = new Servico();
             Servico_Pedido item = new Servico_Pedido();
             item.setId_Servico(servico);
             item.setPedido(this);
             this.getItensPedido().add(0, item);
-        }
+        
     }
 
     /*Metodo para remover a primeira linha do item de serviço, para deixar editavel

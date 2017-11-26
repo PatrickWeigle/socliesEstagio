@@ -28,7 +28,7 @@
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
                                  action="#{cadastroClienteBean.salvar()}" update="frm mensagemCliente " 
                                  process="@this inclusaoClientePanel inclusaoClientePanel2"/>
-                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+                <p:button value="Cancelar" icon="ui-icon-cancel" title="Cancelar" outcome="/cliente/listarClientes"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">

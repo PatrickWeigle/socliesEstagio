@@ -16,13 +16,13 @@
         </div>
         <h:form id="frm">
 
-            <p:messages autoUpdate="flase" id="mensagemSangria" closable="true"/>
+            <p:messages autoUpdate="false" id="mensagemSangria" closable="true"/>
 
             <div style="float: right" >
                 <p:commandButton style="margin-right: 5px" value="Salvar" icon="ui-icon-disk" title="Salvar" 
                                  action="#{cadastroSangriaCaixaBean.salvar()}" update="frm mensagemSangria"
                                  process="@this inclusaoSangriaPanel"/>
-                <p:commandButton value="Cancelar" icon="ui-icon-cancel" title="Cancelar" disabled="true"/>
+                <p:button value="Cancelar" icon="ui-icon-cancel" title="Cancelar" outcome="/caixa/listarCaixa"/>
             </div>    
 
             <div style="width: 100%; margin-top: 15px">

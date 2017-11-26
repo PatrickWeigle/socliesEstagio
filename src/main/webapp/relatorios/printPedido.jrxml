@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="printPedido" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e8b946dd-1ba6-4068-a60c-72b6bc3c7253">
+	<property name="ireport.zoom" value="1.3636363636363635"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="76"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="d21a9a69-c3a1-41e4-93bb-58f7ef034577"/>
+	<subDataset name="dataset1" uuid="214cf95e-6b5f-493b-828e-050ca8e2ad42"/>
+	<parameter name="numeroPedido" class="java.lang.Long">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tab_Pedido.`id_Pedido` AS tab_Pedido_id_Pedido,
+     tab_Pedido.`data_pedido` AS tab_Pedido_data_pedido,
+     tab_Pedido.`desconto_pedido` AS tab_Pedido_desconto_pedido,
+     tab_Pedido.`observacao_Pedido` AS tab_Pedido_observacao_Pedido,
+     tab_Pedido.`pagamento_pedido` AS tab_Pedido_pagamento_pedido,
+     tab_Pedido.`total_pedido` AS tab_Pedido_total_pedido,
+     tab_Pedido.`id_cliente` AS tab_Pedido_id_cliente,
+     tab_Servico_Pedido.`id_Servico_Pedido` AS tab_Servico_Pedido_id_Servico_Pedido,
+     tab_Servico_Pedido.`quantidade_Servico` AS tab_Servico_Pedido_quantidade_Servico,
+     tab_Servico_Pedido.`valor_unitario` AS tab_Servico_Pedido_valor_unitario,
+     tab_Servico_Pedido.`servico_id` AS tab_Servico_Pedido_servico_id,
+     tab_Servico_Pedido.`pedido_id` AS tab_Servico_Pedido_pedido_id,
+     tab_Cliente.`id_Cliente` AS tab_Cliente_id_Cliente,
+     tab_Cliente.`bairro_cliente` AS tab_Cliente_bairro_cliente,
+     tab_Cliente.`email_Cliente` AS tab_Cliente_email_Cliente,
+     tab_Cliente.`nascimento_cliente` AS tab_Cliente_nascimento_cliente,
+     tab_Cliente.`nome_Cliente` AS tab_Cliente_nome_Cliente,
+     tab_Cliente.`telefone_Cliente` AS tab_Cliente_telefone_Cliente,
+     tab_Servico.`id_Servico` AS tab_Servico_id_Servico,
+     tab_Servico.`nome_Servico` AS tab_Servico_nome_Servico,
+     tab_Cliente.`celular_Cliente` AS tab_Cliente_celular_Cliente
+FROM
+     `tab_Pedido` tab_Pedido INNER JOIN `tab_Servico_Pedido` tab_Servico_Pedido ON tab_Pedido.`id_Pedido` = tab_Servico_Pedido.`pedido_id`
+     INNER JOIN `tab_Cliente` tab_Cliente ON tab_Pedido.`id_cliente` = tab_Cliente.`id_Cliente`
+     INNER JOIN `tab_Servico` tab_Servico ON tab_Servico_Pedido.`servico_id` = tab_Servico.`id_Servico`
+WHERE
+    tab_Pedido.`id_Pedido`  = $P{numeroPedido}]]>
+	</queryString>
+	<field name="tab_Pedido_id_Pedido" class="java.lang.Long"/>
+	<field name="tab_Pedido_data_pedido" class="java.sql.Timestamp"/>
+	<field name="tab_Pedido_desconto_pedido" class="java.math.BigDecimal"/>
+	<field name="tab_Pedido_observacao_Pedido" class="java.lang.String"/>
+	<field name="tab_Pedido_pagamento_pedido" class="java.lang.String"/>
+	<field name="tab_Pedido_total_pedido" class="java.math.BigDecimal"/>
+	<field name="tab_Pedido_id_cliente" class="java.lang.Long"/>
+	<field name="tab_Servico_Pedido_id_Servico_Pedido" class="java.lang.Long"/>
+	<field name="tab_Servico_Pedido_quantidade_Servico" class="java.lang.Integer"/>
+	<field name="tab_Servico_Pedido_valor_unitario" class="java.math.BigDecimal"/>
+	<field name="tab_Servico_Pedido_servico_id" class="java.lang.Long"/>
+	<field name="tab_Servico_Pedido_pedido_id" class="java.lang.Long"/>
+	<field name="tab_Cliente_id_Cliente" class="java.lang.Long"/>
+	<field name="tab_Cliente_bairro_cliente" class="java.lang.String"/>
+	<field name="tab_Cliente_email_Cliente" class="java.lang.String"/>
+	<field name="tab_Cliente_nascimento_cliente" class="java.sql.Date"/>
+	<field name="tab_Cliente_nome_Cliente" class="java.lang.String"/>
+	<field name="tab_Cliente_telefone_Cliente" class="java.lang.String"/>
+	<field name="tab_Servico_id_Servico" class="java.lang.Long"/>
+	<field name="tab_Servico_nome_Servico" class="java.lang.String"/>
+	<field name="tab_Cliente_celular_Cliente" class="java.lang.String"/>
+	<variable name="variable1" class="java.lang.String"/>
+	<variable name="variable2" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="11" width="305" height="20" uuid="e66ba339-12f4-40ec-b556-5962b83dd40e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Rua Johhan Gutemberg, 137 - Jd. Bandeirantes]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="281" y="31" width="91" height="20" uuid="e47a8aed-f9ae-4901-9ac8-03a7e589216a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Londrina - PR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="272" y="51" width="100" height="20" uuid="8548018c-e42e-4be9-99bf-08db7fd2b5ae"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[(43) 33361817]]></text>
+			</staticText>
+			<image>
+				<reportElement x="2" y="0" width="136" height="71" uuid="46cac2cb-2aa4-4574-b88c-2dfe85781596"/>
+				<imageExpression><![CDATA["/home/patrickweigle/Imagens/CarolLogo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="113" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="12" width="53" height="20" uuid="732b78eb-da0e-40b2-b386-bbf807e71a5f"/>
+				<text><![CDATA[Pedido Nº]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="55" y="12" width="83" height="20" uuid="7828e127-b57e-4ba2-a86e-fd73cf820d5b"/>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_id_Pedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="181" y="12" width="100" height="20" uuid="e600a267-8173-49a1-9bb5-98a91d8860ea"/>
+				<text><![CDATA[Data do Pedido:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="281" y="12" width="100" height="20" uuid="f1ce48ea-73c5-4299-b9f3-2064c2e8e569"/>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_data_pedido}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" uuid="ad927bbd-f2a1-4a67-afcd-3bfd6b0baafe"/>
+			</line>
+			<line>
+				<reportElement x="0" y="35" width="555" height="1" uuid="f661b952-30da-4b4a-9db6-1934d163b90b"/>
+			</line>
+			<staticText>
+				<reportElement x="2" y="45" width="43" height="20" uuid="04748904-1640-47ff-9d68-16916ebbf057"/>
+				<text><![CDATA[Cliente:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="45" width="278" height="20" uuid="73a79257-d21c-4b66-a566-8b93b01acd0e"/>
+				<textFieldExpression><![CDATA[$F{tab_Cliente_nome_Cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="67" width="55" height="20" uuid="047f73d7-478c-46d2-bb35-54557f106242"/>
+				<text><![CDATA[Telefone:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="67" width="236" height="20" uuid="9a8df341-7db7-4520-89d6-9bf9fa696755"/>
+				<textFieldExpression><![CDATA[$F{tab_Cliente_telefone_Cliente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="2" y="87" width="55" height="20" uuid="46870f50-8a0f-47dc-ae76-2c97fedbb414"/>
+				<text><![CDATA[Email:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="68" y="87" width="236" height="20" uuid="d6746c0e-243f-4814-a0f8-7d52ce639712"/>
+				<textFieldExpression><![CDATA[$F{tab_Cliente_email_Cliente}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="110" width="555" height="1" uuid="886f235c-f7ee-4e6f-9077-f8d83ac519da"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="2" y="5" width="43" height="20" uuid="291ce373-b66e-41eb-91d8-e60d07d8df72"/>
+				<text><![CDATA[Serviço]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="522" y="5" width="33" height="20" uuid="c1e49777-4a2b-4e05-be31-5e974d58778d"/>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="5" width="61" height="20" uuid="ef0b6038-1cb8-4664-b525-30cfd2006472"/>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="291" y="5" width="81" height="20" uuid="c0252c04-9b15-4dd5-af42-685ec300d607"/>
+				<textElement textAlignment="Right"/>
+				<text><![CDATA[Preço]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="c3cd4237-25da-4fd1-8e53-9b8aebcd1bdf"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="29" splitType="Immediate">
+			<textField>
+				<reportElement x="2" y="3" width="279" height="20" uuid="e0685f35-c3d3-4ad2-92b9-c15eb4ce40a2"/>
+				<textFieldExpression><![CDATA[$F{tab_Servico_nome_Servico}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="291" y="3" width="81" height="20" uuid="5c3ff7d0-0ad9-4d67-a53b-87a9f3a12b92"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tab_Servico_Pedido_valor_unitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="3" width="61" height="20" uuid="ad8c65a5-9ce2-4b04-890e-25606931576e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{tab_Servico_Pedido_quantidade_Servico}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="486" y="3" width="69" height="20" uuid="98a4ad52-a295-4cc4-a221-a05d3bc7d6a8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.math.BigDecimal($F{tab_Servico_Pedido_valor_unitario}.doubleValue()*$F{tab_Servico_Pedido_quantidade_Servico})]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="103" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="d7c31c2a-ea88-4cce-aa22-cb1164967dcf"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="471" y="16" width="84" height="20" uuid="fb4bedc3-6175-4c22-b28d-be36c3356c59"/>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_desconto_pedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="356" y="16" width="100" height="20" uuid="cd81edc0-6e86-436c-bcd7-c0075f6d3ff3"/>
+				<text><![CDATA[Desconto:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="471" y="47" width="84" height="20" uuid="24856d91-103b-4d3c-a907-c641ae71c0d7"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_total_pedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="356" y="47" width="100" height="20" uuid="4dce7f15-ff2b-4cda-9aa3-bb9b1da34454"/>
+				<textElement>
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2" y="16" width="113" height="20" uuid="66b4ad63-8535-439b-8ff0-bbbe53844451"/>
+				<text><![CDATA[Forma de Pagamento]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="125" y="16" width="108" height="20" uuid="6c176770-160a-4076-8ba0-d6b3a43484d3"/>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_pagamento_pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="80" y="47" width="153" height="42" uuid="904d7860-ff25-4c7d-992e-86809f818747"/>
+				<textFieldExpression><![CDATA[$F{tab_Pedido_observacao_Pedido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="47" width="68" height="20" uuid="afd98a6c-9e56-49ba-a81f-4407d7408b55"/>
+				<text><![CDATA[Observação :]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="424" y="0" width="91" height="20" uuid="aa834df0-56ed-44a9-98ea-a110a06bf082"/>
+				<textElement textAlignment="Right">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="0" width="40" height="20" uuid="ae9f8cba-4fa8-4bc1-9f0b-68b0e177c4bf"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

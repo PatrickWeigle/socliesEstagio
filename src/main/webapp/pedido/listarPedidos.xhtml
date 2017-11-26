@@ -4,17 +4,19 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:o="http://omnifaces.org/ui"
                 >
     <ui:define name="titulo">Pedidos</ui:define>
     <ui:define name="corpo">
 
         <f:metadata>
+            <o:viewParam name="pedidosFiltrados" value="#{pesquisaPedidoBean.pedidosPesquisados}"/>
             <f:event listener="#{pesquisaPedidoBean.pesquisar()}" type="preRenderView"/>
         </f:metadata>
 
         <h:form id="frmConsultaPedido">
 
-            <h1>Produtos</h1>
+            <h1>Pedidos</h1>
 
             <p:messages autoUpdate="true" closable="true"/>
 

@@ -29,7 +29,7 @@
     <!-- Configuração dos temas do PrimeFaces -->
     <context-param>
         <param-name>primefaces.THEME</param-name>
-        <param-value>afternoon</param-value>
+        <param-value>cupertino</param-value>
     </context-param>
     <context-param>
         <param-name>javax.faces.DATATIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
