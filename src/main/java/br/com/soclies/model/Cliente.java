@@ -113,8 +113,8 @@ public class Cliente implements Serializable {
         this.anamnese_Cliente = anamnese_Cliente;
     }
 
-    @CPF
-    @Column(name = "cpf_Cliente", unique = true)
+    
+    @Column(name = "cpf_Cliente")
     public String getCpf_cliente() {
         return cpf_cliente;
     }

@@ -11,7 +11,7 @@
     
     <!-- configurando a pagina inicial do projeto -->
     <welcome-file-list>
-        <welcome-file>home.xhtml</welcome-file>
+        <welcome-file>agenda/cadastroAgenda.xhtml</welcome-file>
     </welcome-file-list>
     
     <!-- Servlet do JSF e mapeamento de URLs -->

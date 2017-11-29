@@ -22,7 +22,7 @@ and open the template in the editor.
 
         <header>
             <div style="float:left; margin-top: -4px;">
-                <h:link outcome="/home">
+                <h:link>
                     <h:graphicImage library="imagens" name="logo4.png"/>
                 </h:link>
             </div>
@@ -74,10 +74,7 @@ and open the template in the editor.
             <ui:insert name="corpo"/>
         </div>
         <p:separator style="margin-top: 50px"/>
-        <footer>
-            Soclies Direitos reservados
-            <br/> Telefone 33363636 
-        </footer>
+       
         <script>
             function configMoeda() {
                 $(".moeda").maskMoney({decimal: ",", thousands: ".", allowzero: true});

@@ -71,6 +71,10 @@ public class Clientes implements Serializable {
     }
 
     public Cliente verificaCPF(String cpf_cliente) {
+        System.out.println(cpf_cliente);
+        if(cpf_cliente == ""){
+            return null;
+        }
         try {
             return manager.createQuery("from Cliente where upper(cpf_Cliente) =:"+
                     "cpf_Cliente", Cliente.class).setParameter("cpf_Cliente",cpf_cliente.toUpperCase()).getSingleResult();

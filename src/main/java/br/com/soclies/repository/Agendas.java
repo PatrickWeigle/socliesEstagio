@@ -10,6 +10,7 @@ import br.com.soclies.repository.filtros.FiltrosAgenda;
 import br.com.soclies.service.NegocioException;
 import br.com.soclies.util.jpa.Transactional;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -44,7 +45,10 @@ public class Agendas implements Serializable {
     public List<Agenda> getBuscados(FiltrosAgenda filtros) {
         Session session = manager.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Agenda.class).createAlias("cliente", "c");
-
+        
+//        if(filtros.getDataInicio() == null){
+//            criteria.add(Restrictions.ge("horario_Agenda", new Date()));
+//        }
         if (filtros.getNome_Cliente() != null) {
             criteria.add(Restrictions.ilike("c.nome_Cliente", filtros.getNome_Cliente(), MatchMode.ANYWHERE));
         }
